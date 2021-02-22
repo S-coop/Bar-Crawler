@@ -1,0 +1,104 @@
+package sample;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+public class ConfigurationScreenScene {
+    private Scene configScene;
+    private ToggleGroup difficultyGroup;
+    private ToggleGroup weaponGroup;
+    private TextField usernameTextField;
+    private Text errorMessage;
+    public ConfigurationScreenScene(Stage primaryStage, String[] difficulties, String[] weapons, Button nextScreenButton) {
+        this.usernameTextField = new TextField();
+
+        //create main container:
+        VBox mainVBox = new VBox();
+        this.errorMessage = new Text();
+        this.difficultyGroup = new ToggleGroup();
+        this.weaponGroup = new ToggleGroup();
+
+        //Create arrays for user choices of difficulties and weapons
+        RadioButton[] difficultyButtons = generateToggleGroup(difficultyGroup, difficulties);
+        RadioButton[] weaponButtons = generateToggleGroup(weaponGroup, weapons);
+
+        //vertically align each set of radio buttons
+        VBox difficultyBox = new VBox();
+        addRadioButtonsToPane(difficultyButtons, difficultyBox);
+        VBox weaponBox = new VBox();
+        addRadioButtonsToPane(weaponButtons, weaponBox);
+
+        //place groups of radio buttons next to each other horizontally
+        HBox radioBox = new HBox();
+        radioBox.getChildren().addAll(difficultyBox, weaponBox);
+
+        //craft main alignment
+        mainVBox.getChildren().addAll(usernameTextField, nextScreenButton, errorMessage, radioBox);
+        Scene configScene = new Scene(mainVBox, 300, 275);
+        this.configScene = configScene;
+    }
+
+    public Scene getConfigScene() {
+        return this.configScene;
+    }
+    public String getUsername() {
+        return this.usernameTextField.getText().strip();
+    }
+
+    public Object getDifficultyIndex() {
+        return ((RadioButton) difficultyGroup.getSelectedToggle()).getUserData();
+    }
+
+    public Object getWeaponIndex() {
+        return ((RadioButton) weaponGroup.getSelectedToggle()).getUserData();
+    }
+
+    //Disallow null, empty, whitespace only usernames
+    public boolean validateUsernameString() {
+        String username = getUsername();
+        if (username == null) {
+            errorMessage.setText("cannot have null username");
+            return false;
+        }
+        username = username.strip();
+        if (username == "") { //str was only whitespace characters or empty
+            errorMessage.setText("cannot have empty / whitespace only username");
+            return false;
+        }
+        errorMessage.setText("valid username");
+        return true;
+    }
+
+    //given a string[] of options, generate a radio button for each option
+    //and add them to the toggle group. Also set their UserData to the index
+    //for constant time access of option index.
+    private RadioButton[] generateToggleGroup(ToggleGroup toggleGroup, String[] options) {
+        RadioButton[] buttons = new RadioButton[options.length];
+        for (int i = 0; i < options.length; i++) {
+            RadioButton button = new RadioButton(options[i]);
+            button.setToggleGroup(toggleGroup);
+            button.setUserData(i);
+            buttons[i] = button;
+        }
+        if (buttons.length != 0) {
+            buttons[0].setSelected(true);
+        }
+        return buttons;
+    }
+
+    private void addRadioButtonsToPane(RadioButton[] buttons, Pane pane) {
+        for (RadioButton button : buttons) {
+            pane.getChildren().add(button);
+        }
+    }
+
+}
