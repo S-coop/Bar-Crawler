@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -8,11 +9,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ConfigurationScreenScene {
+    private Font font = Font.loadFont("file:assets/rainyhearts.ttf", 30);
     private Scene configScene;
     private ToggleGroup difficultyGroup;
     private ToggleGroup weaponGroup;
@@ -24,6 +27,7 @@ public class ConfigurationScreenScene {
         //create main container:
         VBox mainVBox = new VBox();
         this.errorMessage = new Text();
+        errorMessage.setFont(font);
         this.difficultyGroup = new ToggleGroup();
         this.weaponGroup = new ToggleGroup();
 
@@ -40,10 +44,12 @@ public class ConfigurationScreenScene {
         //place groups of radio buttons next to each other horizontally
         HBox radioBox = new HBox();
         radioBox.getChildren().addAll(difficultyBox, weaponBox);
+        radioBox.setAlignment(Pos.CENTER);
 
         //craft main alignment
         mainVBox.getChildren().addAll(usernameTextField, nextScreenButton, errorMessage, radioBox);
-        Scene configScene = new Scene(mainVBox, 300, 275);
+        mainVBox.setAlignment(Pos.CENTER);
+        Scene configScene = new Scene(mainVBox, 1920/2, 1080/2);
         this.configScene = configScene;
     }
 

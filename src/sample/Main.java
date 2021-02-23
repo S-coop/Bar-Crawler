@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -18,10 +19,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        String[] difficulties = {"Easy", "!Easy", "!!Easy"};
+        Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        String[] difficulties = {"Sober", "Tipsy", "Drunk"};
         String[] weapons = {"Sword", "Bow", "Broken Bottle"};
         Button configToInitialSceneButton = new Button("Let's go!");
+        configToInitialSceneButton.setFont(textFont);
         ConfigurationScreenScene configScene = new ConfigurationScreenScene(primaryStage, difficulties, weapons, configToInitialSceneButton);
 
         //Set the button action to go from the config screen to Initial Game Screen
