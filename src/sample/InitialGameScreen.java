@@ -1,12 +1,11 @@
 package sample;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -62,19 +61,33 @@ public class InitialGameScreen {
         Text weaponText = new Text(weapons[weapsonsIndex]);
         weaponText.setFont(textFont);
 
-        //add to GridPane
-        GridPane gridPane = new GridPane();
-        gridPane.add(goBack, 0, 540);
-        gridPane.add(usernameText, 0, 0);
+        //add to BorderPane
+
+        HBox borderPane = new HBox();
+
+        //top bar
+        HBox topBar = new HBox();
+        HBox usernameBox = new HBox();
+        HBox moneyBox = new HBox();
+        usernameBox.getChildren().add(usernameText);
+        usernameBox.setAlignment(Pos.BASELINE_LEFT);
+        moneyBox.getChildren().add(moneyText);
+        moneyBox.setAlignment((Pos.BASELINE_RIGHT));
+        topBar.getChildren().setAll(usernameBox, moneyBox);
+        topBar.setAlignment(Pos.TOP_CENTER);
+        //bottom bar
+        HBox bottomBar = new HBox();
+        bottomBar.getChildren().addAll(goBack,weaponText);
+        bottomBar.setAlignment(Pos.BOTTOM_CENTER);
+        borderPane.getChildren().addAll(topBar, bottomBar);
 
         newScreen.getChildren().addAll(
                 new Text("username: " + username),
                 new Text("difficulty: " + difficulties[difficultiesIndex]),
-                new Text("weapon: " + weapons[weapsonsIndex]),
-                moneyText
+                new Text("weapon: " + weapons[weapsonsIndex])
         );
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, gridPane);
+        stackScreen.getChildren().addAll(background, borderPane);
 
         this.initialGameScene = new Scene( stackScreen, 1920/2, 1080/2);
     }

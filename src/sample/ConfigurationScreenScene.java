@@ -23,6 +23,7 @@ public class ConfigurationScreenScene {
     private Text errorMessage;
     public ConfigurationScreenScene(Stage primaryStage, String[] difficulties, String[] weapons, Button nextScreenButton) {
         this.usernameTextField = new TextField();
+        this.usernameTextField.setMaxWidth(300);
 
         //create main container:
         VBox mainVBox = new VBox();
@@ -48,7 +49,7 @@ public class ConfigurationScreenScene {
 
         //craft main alignment
         mainVBox.getChildren().addAll(usernameTextField, nextScreenButton, errorMessage, radioBox);
-        mainVBox.setAlignment(Pos.CENTER);
+        mainVBox.setAlignment(Pos.BOTTOM_CENTER);
         Scene configScene = new Scene(mainVBox, 1920/2, 1080/2);
         this.configScene = configScene;
     }

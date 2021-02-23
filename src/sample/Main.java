@@ -21,12 +21,25 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //welcome screen
+        Button startButt = new Button("Start");
+        startButt.setFont(textFont);
+        WelcomeScreen welcomeScreen = new WelcomeScreen(primaryStage, startButt);
+
+
+        //config scene
         String[] difficulties = {"Sober", "Tipsy", "Drunk"};
         String[] weapons = {"Sword", "Bow", "Broken Bottle"};
         Button configToInitialSceneButton = new Button("Let's go!");
         configToInitialSceneButton.setFont(textFont);
         ConfigurationScreenScene configScene = new ConfigurationScreenScene(primaryStage, difficulties, weapons, configToInitialSceneButton);
 
+        // Welcome Button goes from welcome screen to config scene
+        startButt.setOnAction(actionEvent -> {
+            primaryStage.setTitle("Config Screen");
+            primaryStage.setScene(configScene.getConfigScene());
+            primaryStage.show();
+        });
         //Set the button action to go from the config screen to Initial Game Screen
         //This was not done in the ConfigurationScreenScene to allow the
         //IntialGameScreen object exist within the main "game" class.
@@ -44,8 +57,8 @@ public class Main extends Application {
                 primaryStage.show();
             }
         });
-        primaryStage.setTitle("Config Screen");
-        primaryStage.setScene(configScene.getConfigScene());
+        primaryStage.setTitle("Welcome Screen");
+        primaryStage.setScene(welcomeScreen.getWelcomeScreen());
         primaryStage.show();
 
     }
