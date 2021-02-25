@@ -45,7 +45,7 @@ public class InitialGameScreen {
 
 
 
-        //set money based on difficulty:
+        //set money based on difficulty
         this.money = MONEY_CONSTANT / (difficultiesIndex + 1);
 
         //money display
