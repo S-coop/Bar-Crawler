@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 public class ConfigurationScreenScene {
     private Font font = Font.loadFont("file:assets/rainyhearts.ttf", 30);
+    private Font titleFont = Font.loadFont("file:assets/04B_30__.ttf", 60);
     private Scene configScene;
     private ToggleGroup difficultyGroup;
     private ToggleGroup weaponGroup;
@@ -47,11 +48,21 @@ public class ConfigurationScreenScene {
         radioBox.getChildren().addAll(difficultyBox, weaponBox);
         radioBox.setAlignment(Pos.CENTER);
 
+        //create title
+        Text gameTitle = new Text("Bar Crawler");
+        gameTitle.setFont(titleFont);
+
         //craft main alignment
-        mainVBox.getChildren().addAll(usernameTextField, nextScreenButton, errorMessage, radioBox);
+        mainVBox.getChildren().addAll(gameTitle, usernameTextField, nextScreenButton, errorMessage, radioBox);
         mainVBox.setAlignment(Pos.BOTTOM_CENTER);
         Scene configScene = new Scene(mainVBox, 1920/2, 1080/2);
         this.configScene = configScene;
+
+        //username field design
+        usernameTextField.setPromptText("Enter a username");
+        usernameTextField.setFont(font);
+
+        //configuration buttons design
     }
 
     public Scene getConfigScene() {
@@ -94,6 +105,7 @@ public class ConfigurationScreenScene {
             RadioButton button = new RadioButton(options[i]);
             button.setToggleGroup(toggleGroup);
             button.setUserData(i);
+            button.setFont(font);
             buttons[i] = button;
         }
         if (buttons.length != 0) {
