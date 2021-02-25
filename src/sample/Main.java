@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //welcome screen
         Button startButt = new Button("Start");
         startButt.setFont(textFont);

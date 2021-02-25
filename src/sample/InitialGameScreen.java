@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class InitialGameScreen {
 
-    private Font textFont = Font.loadFont("file:assets/rainyhearts.ttf", 30);
+    private Font textFont = Font.loadFont("file:assets/rainyhearts.ttf", 22);
     private Stage primaryStage;
     private Scene previousScene;
     private String username;
@@ -23,7 +23,7 @@ public class InitialGameScreen {
     private final int MONEY_CONSTANT = 500;
     public InitialGameScreen(Stage primaryStage, Scene previousScene, String username, String[] difficulties, String[] weapons, int difficultiesIndex, int weapsonsIndex) {
         //background image:
-        Image barScene = new Image("file:assets/BarTemplate.png");
+        Image barScene = new Image("file:assets/BarTemplateColor.png");
         ImageView barSceneViewer = new ImageView(barScene);
         barSceneViewer.setFitWidth(1920/2);
         barSceneViewer.setFitHeight(1080/2);
@@ -56,31 +56,38 @@ public class InitialGameScreen {
         //Username display
         Text usernameText = new Text(username);
         usernameText.setFont(textFont);
+        usernameText.setFill(Color.GHOSTWHITE);
 
         //Weapon Display
         Text weaponText = new Text(weapons[weapsonsIndex]);
         weaponText.setFont(textFont);
+        weaponText.setFill(Color.GHOSTWHITE);
 
         //add to BorderPane
-
-        HBox borderPane = new HBox();
+        BorderPane borderPane = new BorderPane();
 
         //top bar
         HBox topBar = new HBox();
         HBox usernameBox = new HBox();
         HBox moneyBox = new HBox();
-        usernameBox.getChildren().add(usernameText);
-        usernameBox.setAlignment(Pos.BASELINE_LEFT);
-        moneyBox.getChildren().add(moneyText);
-        moneyBox.setAlignment((Pos.BASELINE_RIGHT));
-        topBar.getChildren().setAll(usernameBox, moneyBox);
+        Region topSpace = new Region();
+        HBox.setHgrow(topSpace, Priority.ALWAYS);
+        topBar.setPrefWidth(1920/2);
+        topBar.getChildren().setAll(usernameBox, topSpace, moneyBox);
         topBar.setAlignment(Pos.TOP_CENTER);
+        usernameBox.getChildren().add(usernameText);
+        usernameBox.setAlignment(Pos.CENTER_LEFT);
+        moneyBox.getChildren().add(moneyText);
+        moneyBox.setAlignment((Pos.TOP_RIGHT));
+        borderPane.setTop(topBar);
+
         //bottom bar
         HBox bottomBar = new HBox();
-        bottomBar.getChildren().addAll(goBack,weaponText);
+        Region bottomSpace = new Region();
+        HBox.setHgrow(bottomSpace, Priority.ALWAYS);
+        bottomBar.getChildren().addAll(goBack, bottomSpace, weaponText);
         bottomBar.setAlignment(Pos.BOTTOM_CENTER);
-        borderPane.getChildren().addAll(topBar, bottomBar);
-
+        borderPane.setBottom(bottomBar);
         newScreen.getChildren().addAll(
                 new Text("username: " + username),
                 new Text("difficulty: " + difficulties[difficultiesIndex]),
