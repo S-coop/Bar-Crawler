@@ -80,7 +80,7 @@ public class ConfigurationScreenScene {
         return ((RadioButton) weaponGroup.getSelectedToggle()).getUserData();
     }
 
-    //Disallow null, empty, whitespace only usernames
+    //Disallow null, empty, and whitespace only usernames
     public boolean validateUsernameString() {
         String username = getUsername();
         if (username == null) {
