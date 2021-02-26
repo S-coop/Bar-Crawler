@@ -5,7 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,12 +25,30 @@ public class InitialGameScreen {
     private Scene initialGameScene;
     private int money;
     private final int MONEY_CONSTANT = 500;
-    public InitialGameScreen(Stage primaryStage, Scene previousScene, String username, String[] difficulties, String[] weapons, int difficultiesIndex, int weapsonsIndex) {
+
+    /**
+     * Create an InitialGameScreen object.
+     * @param primaryStage the primary stage of the project.
+     * @param previousScene the scene that preceeds this.
+     * @param username the user's inputted username.
+     * @param difficulties the list of all difficulties.
+     * @param weapons the list of all weapons.
+     * @param difficultiesIndex the selected difficulty from the list of
+     *                          difficulties.
+     * @param weaponsIndex the selected weapon from the list of weapons.
+     */
+    public InitialGameScreen(Stage primaryStage,
+                             Scene previousScene,
+                             String username,
+                             String[] difficulties,
+                             String[] weapons,
+                             int difficultiesIndex,
+                             int weaponsIndex) {
         //background image:
         Image barScene = new Image("file:assets/BarTemplateColor.png");
         ImageView barSceneViewer = new ImageView(barScene);
-        barSceneViewer.setFitWidth(1920/2);
-        barSceneViewer.setFitHeight(1080/2);
+        barSceneViewer.setFitWidth(1920 / 2);
+        barSceneViewer.setFitHeight(1080 / 2);
         VBox background = new VBox(barSceneViewer);
 
 
@@ -58,7 +81,7 @@ public class InitialGameScreen {
         usernameText.setFill(Color.GHOSTWHITE);
 
         //Weapon Display
-        Text weaponText = new Text(weapons[weapsonsIndex]);
+        Text weaponText = new Text(weapons[weaponsIndex]);
         weaponText.setFont(textFont);
         weaponText.setFill(Color.GHOSTWHITE);
 
@@ -71,7 +94,7 @@ public class InitialGameScreen {
         HBox moneyBox = new HBox();
         Region topSpace = new Region();
         HBox.setHgrow(topSpace, Priority.ALWAYS);
-        topBar.setPrefWidth(1920/2);
+        topBar.setPrefWidth(1920 / 2);
         topBar.getChildren().setAll(usernameBox, topSpace, moneyBox);
         topBar.setAlignment(Pos.TOP_CENTER);
         usernameBox.getChildren().add(usernameText);
@@ -90,14 +113,18 @@ public class InitialGameScreen {
         newScreen.getChildren().addAll(
                 new Text("username: " + username),
                 new Text("difficulty: " + difficulties[difficultiesIndex]),
-                new Text("weapon: " + weapons[weapsonsIndex])
+                new Text("weapon: " + weapons[weaponsIndex])
         );
         StackPane stackScreen = new StackPane();
         stackScreen.getChildren().addAll(background, borderPane);
 
-        this.initialGameScene = new Scene( stackScreen, 1920/2, 1080/2);
+        this.initialGameScene = new Scene(stackScreen, 1920 / 2, 1080 / 2);
     }
 
+    /**
+     * Return the initialGameScene.
+     * @return the initialGameScene.
+     */
     public Scene getInitialGameScene() {
         return initialGameScene;
     }

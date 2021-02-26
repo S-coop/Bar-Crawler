@@ -21,7 +21,18 @@ public class ConfigurationScreenScene {
     private ToggleGroup weaponGroup;
     private TextField usernameTextField;
     private Text errorMessage;
-    public ConfigurationScreenScene(Stage primaryStage, String[] difficulties, String[] weapons, Button nextScreenButton) {
+
+    /**
+     * Create a ConfigurationScreenScene object.
+     * @param primaryStage the primary stage of the project.
+     * @param difficulties the list of difficulties.
+     * @param weapons the list of weapons.
+     * @param nextScreenButton the button to move onto the next screen.
+     */
+    public ConfigurationScreenScene(Stage primaryStage,
+                                    String[] difficulties,
+                                    String[] weapons,
+                                    Button nextScreenButton) {
         this.usernameTextField = new TextField();
         this.usernameTextField.setMaxWidth(300);
 
@@ -33,7 +44,9 @@ public class ConfigurationScreenScene {
         this.weaponGroup = new ToggleGroup();
 
         //Create arrays for user choices of difficulties and weapons
-        RadioButton[] difficultyButtons = generateToggleGroup(difficultyGroup, difficulties);
+        RadioButton[] difficultyButtons = generateToggleGroup(
+                difficultyGroup,
+                difficulties);
         RadioButton[] weaponButtons = generateToggleGroup(weaponGroup, weapons);
 
         //vertically align each set of radio buttons
@@ -52,9 +65,13 @@ public class ConfigurationScreenScene {
         gameTitle.setFont(titleFont);
 
         //craft main alignment
-        mainVBox.getChildren().addAll(gameTitle, usernameTextField, nextScreenButton, errorMessage, radioBox);
+        mainVBox.getChildren().addAll(gameTitle,
+                usernameTextField,
+                nextScreenButton,
+                errorMessage,
+                radioBox);
         mainVBox.setAlignment(Pos.BOTTOM_CENTER);
-        Scene configScene = new Scene(mainVBox, 1920/2, 1080/2);
+        Scene configScene = new Scene(mainVBox, 1920 / 2, 1080 / 2);
         this.configScene = configScene;
 
         //username field design
@@ -64,22 +81,53 @@ public class ConfigurationScreenScene {
         //configuration buttons design
     }
 
+    /**
+     * get the scene of this object.
+     *
+     * @return the scene that represents this object.
+     */
     public Scene getConfigScene() {
         return this.configScene;
     }
+
+    /**
+     * return the user's inputted username.
+     * @return the user's username.
+     */
     public String getUsername() {
         return this.usernameTextField.getText().strip();
     }
 
+    /**
+     * The index the user selected in the difficulties array passed into the
+     * constructor.
+     *
+     * @return an object that can be casted to Integer that represents the
+     * selected difficulty.
+     */
     public Object getDifficultyIndex() {
-        return ((RadioButton) difficultyGroup.getSelectedToggle()).getUserData();
+        return ((RadioButton) difficultyGroup
+                .getSelectedToggle())
+                .getUserData();
     }
 
+    /**
+     * The index the user selected in the weapons array passed into the
+     * constructor.
+     *
+     * @return an object that can be casted to Integer that represents the
+     * selected weapon.
+     */
     public Object getWeaponIndex() {
         return ((RadioButton) weaponGroup.getSelectedToggle()).getUserData();
     }
 
-    //Disallow null, empty, and whitespace only usernames
+
+    /**
+     *
+     * Disallow null, empty, and whitespace only usernames
+     * @return if the username the user has inputted is valid.
+     */
     public boolean validateUsernameString() {
         String username = getUsername();
         if (username == null) {
@@ -88,17 +136,26 @@ public class ConfigurationScreenScene {
         }
         username = username.strip();
         if (username == "") { //str was only whitespace characters or empty
-            errorMessage.setText("cannot have empty / whitespace only username");
+            errorMessage.setText("cannot have empty / "
+                    + "whitespace only username");
             return false;
         }
         errorMessage.setText("valid username");
         return true;
     }
 
-    //given a string[] of options, generate a radio button for each option
-    //and add them to the toggle group. Also set their UserData to the index
-    //for constant time access of option index.
-    private RadioButton[] generateToggleGroup(ToggleGroup toggleGroup, String[] options) {
+
+    /**
+     * given a string[] of options, generate a radio button for each option
+     * and add them to the toggle group. Also set their UserData to the index
+     * for constant time access of option index.
+     *
+     * @param toggleGroup the toggle group all the radio buttons belong to
+     * @param options the string values of the radio buttons
+     * @return an array of generated radio buttons
+     */
+    private RadioButton[] generateToggleGroup(ToggleGroup toggleGroup,
+                                              String[] options) {
         RadioButton[] buttons = new RadioButton[options.length];
         for (int i = 0; i < options.length; i++) {
             RadioButton button = new RadioButton(options[i]);
@@ -113,6 +170,11 @@ public class ConfigurationScreenScene {
         return buttons;
     }
 
+    /**
+     * All all the buttons from the buttons array to pane.
+     * @param buttons the buttons to be added to pane.
+     * @param pane the pane to add all the buttons to.
+     */
     private void addRadioButtonsToPane(RadioButton[] buttons, Pane pane) {
         for (RadioButton button : buttons) {
             pane.getChildren().add(button);

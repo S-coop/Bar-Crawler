@@ -3,7 +3,7 @@ package main.java;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -14,7 +14,12 @@ public class WelcomeScreen {
     private Scene welcomeScreen;
 
 
-
+    /**
+     * Create a WelcomeScreen object.
+     *
+     * @param primaryStage the primary stage of the project.
+     * @param startButt the button to start the game.
+     */
     public WelcomeScreen(Stage primaryStage, Button startButt) {
         startButt.setAlignment(Pos.BOTTOM_CENTER);
         Text gameTitle = new Text("Bar Crawler");
@@ -22,10 +27,15 @@ public class WelcomeScreen {
         VBox vBox = new VBox();
         vBox.getChildren().addAll(gameTitle, startButt);
         vBox.setAlignment(Pos.CENTER);
-        this.welcomeScreen = new Scene(vBox, 1920/2, 1080/2);
+        this.welcomeScreen = new Scene(vBox, 1920 / 2, 1080 / 2);
         primaryStage.setScene(welcomeScreen);
 
     }
+
+    /**
+     * return the welcome screen.
+     * @return the welcome screen scene object.
+     */
     public Scene getWelcomeScreen() {
         return this.welcomeScreen;
     }

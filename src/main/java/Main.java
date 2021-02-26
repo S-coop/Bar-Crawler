@@ -9,7 +9,7 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //welcome screen:
@@ -23,7 +23,11 @@ public class Main extends Application {
         String[] weapons = {"Sword", "Bow", "Broken Bottle"};
         Button configToInitialSceneButton = new Button("Let's go!");
         configToInitialSceneButton.setFont(textFont);
-        ConfigurationScreenScene configScene = new ConfigurationScreenScene(primaryStage, difficulties, weapons, configToInitialSceneButton);
+        ConfigurationScreenScene configScene = new ConfigurationScreenScene(
+                primaryStage,
+                difficulties,
+                weapons,
+                configToInitialSceneButton);
 
         // Welcome Button goes from welcome screen to config scene
         startButt.setOnAction(actionEvent -> {
@@ -55,6 +59,10 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Main method.
+     * @param args parameters to main method.
+     */
     public static void main(String[] args) {
         launch(args);
     }
