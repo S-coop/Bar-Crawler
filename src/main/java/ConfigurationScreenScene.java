@@ -1,4 +1,4 @@
-package sample;
+package main.java;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ConfigurationScreenScene {

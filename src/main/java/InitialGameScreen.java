@@ -1,4 +1,4 @@
-package sample;
+package main.java;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
