@@ -1,24 +1,15 @@
-package sample;
+package main.java;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //welcome screen:
@@ -32,7 +23,11 @@ public class Main extends Application {
         String[] weapons = {"Sword", "Bow", "Broken Bottle"};
         Button configToInitialSceneButton = new Button("Let's go!");
         configToInitialSceneButton.setFont(textFont);
-        ConfigurationScreenScene configScene = new ConfigurationScreenScene(primaryStage, difficulties, weapons, configToInitialSceneButton);
+        ConfigurationScreenScene configScene = new ConfigurationScreenScene(
+                primaryStage,
+                difficulties,
+                weapons,
+                configToInitialSceneButton);
 
         // Welcome Button goes from welcome screen to config scene
         startButt.setOnAction(actionEvent -> {
@@ -64,6 +59,10 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Main method.
+     * @param args parameters to main method.
+     */
     public static void main(String[] args) {
         launch(args);
     }
