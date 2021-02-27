@@ -143,7 +143,7 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Start");
         write("ethan");
         clickOn("Let's go!");
-        clickOn("Go Back!");
+        clickOn("Go Back");
         verifyThat("Let's go!", NodeMatchers.isNotNull());
     }
 }
