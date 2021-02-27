@@ -7,8 +7,9 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
 import src.view.InitialGameScreen;
-
+import src.view.ConfigurationScreenScene;
 import static org.testfx.api.FxAssert.verifyThat;
+
 
 public class ConfigurationScreenSceneTest extends ApplicationTest {
 
@@ -105,6 +106,7 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Let's go!");
         verifyThat("Sword", NodeMatchers.isNotNull());
    }
+
     @Test
     public void testNullUsername() {
         clickOn("Start");
@@ -120,5 +122,28 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Let's go!");
         verifyThat("Go Back", NodeMatchers.isNotNull());
         verifyThat("Bella", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testStart() {
+        clickOn("Start");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testLetsGo() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        verifyThat("Go Back", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGoBack() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        clickOn("Go Back!");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
     }
 }
