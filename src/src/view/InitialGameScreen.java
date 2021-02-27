@@ -1,4 +1,4 @@
-package main.java;
+package src.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,16 +15,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import src.model.GameModel;
 
 public class InitialGameScreen {
 
     private Font textFont = Font.loadFont("file:assets/rainyhearts.ttf", 22);
-    private Stage primaryStage;
-    private Scene previousScene;
-    private String username;
-    private Scene initialGameScene;
     private int money;
     private final int MONEY_CONSTANT = 500;
+    private Button goBack;
+    private GameModel gameModel;
+    private int width;
+    private int height;
 
     /**
      * Create an InitialGameScreen object.
@@ -37,38 +38,35 @@ public class InitialGameScreen {
      *                          difficulties.
      * @param weaponsIndex the selected weapon from the list of weapons.
      */
-    public InitialGameScreen(Stage primaryStage,
-                             Scene previousScene,
-                             String username,
-                             String[] difficulties,
-                             String[] weapons,
-                             int difficultiesIndex,
-                             int weaponsIndex) {
+    public InitialGameScreen(int width, int height, GameModel gameModel) {
+
+        this.width = width;
+        this.height = height;
+        //ability to return to previous scene:
+        this.goBack = new Button("Go Back");
+        goBack.setFont(textFont);
+
+        //set money based on difficulty
+        this.money = MONEY_CONSTANT / (gameModel.getDifficultyIndex() + 1);
+
+        this.gameModel = gameModel;
+
+    }
+
+    /**
+     * Return the initialGameScene.
+     * @return the initialGameScene.
+     */
+    public Scene getInitialGameScene() {
         //background image:
         Image barScene = new Image("file:assets/BarTemplateColor.png");
         ImageView barSceneViewer = new ImageView(barScene);
-        barSceneViewer.setFitWidth(1920 / 2);
-        barSceneViewer.setFitHeight(1080 / 2);
+        barSceneViewer.setFitWidth(width);
+        barSceneViewer.setFitHeight(height);
         VBox background = new VBox(barSceneViewer);
-
-
-
 
         //main container:
         VBox newScreen = new VBox();
-
-        //ability to return to previous scene:
-        Button goBack = new Button("Go Back");
-        goBack.setFont(textFont);
-        goBack.setOnAction(actionEvent1 -> {
-            primaryStage.setScene(previousScene);
-            primaryStage.show();
-        });
-
-
-
-        //set money based on difficulty
-        this.money = MONEY_CONSTANT / (difficultiesIndex + 1);
 
         //money display
         Text moneyText = new Text("$" + this.money);
@@ -76,12 +74,12 @@ public class InitialGameScreen {
         moneyText.setFill(Color.DARKGOLDENROD);
 
         //Username display
-        Text usernameText = new Text(username);
+        Text usernameText = new Text(gameModel.getUsername());
         usernameText.setFont(textFont);
         usernameText.setFill(Color.GHOSTWHITE);
 
         //Weapon Display
-        Text weaponText = new Text(weapons[weaponsIndex]);
+        Text weaponText = new Text(gameModel.getWeapon());
         weaponText.setFont(textFont);
         weaponText.setFill(Color.GHOSTWHITE);
 
@@ -94,7 +92,7 @@ public class InitialGameScreen {
         HBox moneyBox = new HBox();
         Region topSpace = new Region();
         HBox.setHgrow(topSpace, Priority.ALWAYS);
-        topBar.setPrefWidth(1920 / 2);
+        topBar.setPrefWidth(width);
         topBar.getChildren().setAll(usernameBox, topSpace, moneyBox);
         topBar.setAlignment(Pos.TOP_CENTER);
         usernameBox.getChildren().add(usernameText);
@@ -111,22 +109,18 @@ public class InitialGameScreen {
         bottomBar.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(bottomBar);
         newScreen.getChildren().addAll(
-                new Text("username: " + username),
-                new Text("difficulty: " + difficulties[difficultiesIndex]),
-                new Text("weapon: " + weapons[weaponsIndex])
+                new Text("username: " + gameModel.getUsername()),
+                new Text("difficulty: " + gameModel.getDifficulty()),
+                new Text("weapon: " + gameModel.getWeapon())
         );
         StackPane stackScreen = new StackPane();
         stackScreen.getChildren().addAll(background, borderPane);
 
-        this.initialGameScene = new Scene(stackScreen, 1920 / 2, 1080 / 2);
+        return new Scene(stackScreen, width, height);
     }
 
-    /**
-     * Return the initialGameScene.
-     * @return the initialGameScene.
-     */
-    public Scene getInitialGameScene() {
-        return initialGameScene;
+    public Button getGoBackButton() {
+        return this.goBack;
     }
 }
 

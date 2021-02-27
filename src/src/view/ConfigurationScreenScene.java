@@ -1,4 +1,4 @@
-package main.java;
+package src.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,11 +16,17 @@ import javafx.stage.Stage;
 public class ConfigurationScreenScene {
     private Font font = Font.loadFont("file:assets/rainyhearts.ttf", 30);
     private Font titleFont = Font.loadFont("file:assets/04B_30__.ttf", 60);
+    private Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
     private Scene configScene;
     private ToggleGroup difficultyGroup;
     private ToggleGroup weaponGroup;
     private TextField usernameTextField;
     private Text errorMessage;
+    private Button nextScreenButton;
+    private String[] difficulties;
+    private String[] weapons;
+    private int width;
+    private int height;
 
     /**
      * Create a ConfigurationScreenScene object.
@@ -29,20 +35,38 @@ public class ConfigurationScreenScene {
      * @param weapons the list of weapons.
      * @param nextScreenButton the button to move onto the next screen.
      */
-    public ConfigurationScreenScene(Stage primaryStage,
+    public ConfigurationScreenScene(int width,
+                                    int height,
                                     String[] difficulties,
-                                    String[] weapons,
-                                    Button nextScreenButton) {
+                                    String[] weapons) {
         this.usernameTextField = new TextField();
         this.usernameTextField.setMaxWidth(300);
 
+        this.nextScreenButton = new Button("Let's go!");
+        nextScreenButton.setFont(textFont);
+
         //create main container:
-        VBox mainVBox = new VBox();
         this.errorMessage = new Text();
+
         errorMessage.setFont(font);
         this.difficultyGroup = new ToggleGroup();
         this.weaponGroup = new ToggleGroup();
 
+        this.difficulties = difficulties;
+        this.weapons = weapons;
+
+        this.width = width;
+        this.height = height;
+        //configuration buttons design
+    }
+
+    /**
+     * get the scene of this object.
+     *
+     * @return the scene that represents this object.
+     */
+    public Scene getConfigScene() {
+        VBox mainVBox = new VBox();
         //Create arrays for user choices of difficulties and weapons
         RadioButton[] difficultyButtons = generateToggleGroup(
                 difficultyGroup,
@@ -71,22 +95,12 @@ public class ConfigurationScreenScene {
                 errorMessage,
                 radioBox);
         mainVBox.setAlignment(Pos.BOTTOM_CENTER);
-        Scene configScene = new Scene(mainVBox, 1920 / 2, 1080 / 2);
+        Scene configScene = new Scene(mainVBox, width, height);
         this.configScene = configScene;
 
         //username field design
         usernameTextField.setPromptText("Enter a username");
         usernameTextField.setFont(font);
-
-        //configuration buttons design
-    }
-
-    /**
-     * get the scene of this object.
-     *
-     * @return the scene that represents this object.
-     */
-    public Scene getConfigScene() {
         return this.configScene;
     }
 
@@ -98,6 +112,9 @@ public class ConfigurationScreenScene {
         return this.usernameTextField.getText().strip();
     }
 
+    public Button getNextScreenButton() {
+        return this.nextScreenButton;
+    }
     /**
      * The index the user selected in the difficulties array passed into the
      * constructor.
@@ -135,7 +152,7 @@ public class ConfigurationScreenScene {
             return false;
         }
         username = username.strip();
-        if (username == "") { //str was only whitespace characters or empty
+        if (username.equals("")) { //str was only whitespace characters or empty
             errorMessage.setText("cannot have empty / "
                     + "whitespace only username");
             return false;
