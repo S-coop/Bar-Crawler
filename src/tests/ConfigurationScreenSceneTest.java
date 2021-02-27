@@ -23,4 +23,29 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Start");
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
     }
+
+    @Test
+    public void testDifficulty1() {
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+        verifyThat("$500", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testDifficulty2() {
+        clickOn("Start");
+        write("username");
+        clickOn("Tipsy");
+        clickOn("Let's go!");
+        verifyThat("$250", NodeMatchers.isNotNull());
+    }
+    @Test
+    public void testDifficulty3() {
+        clickOn("Start");
+        write("username");
+        clickOn("Drunk");
+        clickOn("Let's go!");
+        verifyThat("$166", NodeMatchers.isNotNull());
+    }
 }
