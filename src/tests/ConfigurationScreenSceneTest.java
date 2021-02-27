@@ -23,4 +23,36 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Start");
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
     }
+
+    @Test
+    public void testWhitespace() {
+        clickOn("Start");
+        write("  ");
+        clickOn("Let's go!");
+        verifyThat("cannot have empty / whitespace only username", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testFrontWhitespace() {
+        clickOn("Start");
+        write("  my tests");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBackWhitespace() {
+        clickOn("Start");
+        write("my tests  ");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testSurroundWhitespace() {
+        clickOn("Start");
+        write("  my tests  ");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
 }
