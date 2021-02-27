@@ -1,13 +1,10 @@
 package tests;
 
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
-import src.view.InitialGameScreen;
-import src.view.ConfigurationScreenScene;
 import static org.testfx.api.FxAssert.verifyThat;
 
 
@@ -30,7 +27,8 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Start");
         write("  ");
         clickOn("Let's go!");
-        verifyThat("cannot have empty / whitespace only username", NodeMatchers.isNotNull());
+        verifyThat("cannot have empty / whitespace only username",
+                NodeMatchers.isNotNull());
     }
 
     @Test
@@ -57,7 +55,7 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         verifyThat("my tests", NodeMatchers.isNotNull());
     }
   
-  @Test
+    @Test
     public void testDifficulty1() {
         clickOn("Start");
         write("username");
@@ -105,14 +103,15 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         write("Scoops");
         clickOn("Let's go!");
         verifyThat("Sword", NodeMatchers.isNotNull());
-   }
+    }
 
     @Test
     public void testNullUsername() {
         clickOn("Start");
         clickOn("Let's go!");
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
-        verifyThat("cannot have empty / " + "whitespace only username", NodeMatchers.isNotNull());
+        verifyThat("cannot have empty / "
+                + "whitespace only username", NodeMatchers.isNotNull());
     }
 
     @Test
