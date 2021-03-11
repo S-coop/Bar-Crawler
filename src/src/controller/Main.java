@@ -2,10 +2,14 @@ package src.controller;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
 import src.view.InitialGameScreen;
+import src.view.Player;
 import src.view.WelcomeScreen;
 
 public class Main extends Application {
