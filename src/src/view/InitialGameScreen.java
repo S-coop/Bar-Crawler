@@ -14,29 +14,25 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import src.model.GameModel;
 
 public class InitialGameScreen {
 
-    private Font textFont = Font.loadFont("file:assets/rainyhearts.ttf", 22);
+    private Font textFont = Font.loadFont(
+            "file:assets/rainyhearts.ttf", 22);
     private int money;
-    private final int MONEY_CONSTANT = 500;
+    private final int moneyConstant = 500;
     private Button goBack;
     private GameModel gameModel;
     private int width;
     private int height;
 
     /**
-     * Create an InitialGameScreen object.
-     * @param primaryStage the primary stage of the project.
-     * @param previousScene the scene that preceeds this.
-     * @param username the user's inputted username.
-     * @param difficulties the list of all difficulties.
-     * @param weapons the list of all weapons.
-     * @param difficultiesIndex the selected difficulty from the list of
-     *                          difficulties.
-     * @param weaponsIndex the selected weapon from the list of weapons.
+     * Initialize all the variables needed to make an initial game screen.
+     *
+     * @param width width of the window
+     * @param height height of the window
+     * @param gameModel the game model containing player data
      */
     public InitialGameScreen(int width, int height, GameModel gameModel) {
 
@@ -47,7 +43,7 @@ public class InitialGameScreen {
         goBack.setFont(textFont);
 
         //set money based on difficulty
-        this.money = MONEY_CONSTANT / (gameModel.getDifficultyIndex() + 1);
+        this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
 
@@ -119,6 +115,10 @@ public class InitialGameScreen {
         return new Scene(stackScreen, width, height);
     }
 
+    /**
+     * Return the button that returns to the previous screen.
+     * @return the back button.
+     */
     public Button getGoBackButton() {
         return this.goBack;
     }
