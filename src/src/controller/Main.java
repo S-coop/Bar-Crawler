@@ -2,8 +2,6 @@ package src.controller;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
@@ -45,30 +43,30 @@ public class Main extends Application {
                 height,
                 difficulties,
                 weapons);
-        configScene.getNextScreenButton().setOnAction(actionEvent -> goToInitialScreen(configScene));
+        configScene.getNextScreenButton().setOnAction(actionEvent ->
+                goToInitialScreen(configScene));
         mainWindow.setTitle("Config Screen");
         mainWindow.setScene(configScene.getConfigScene());
         mainWindow.show();
     }
 
     private void goToInitialScreen(ConfigurationScreenScene configScene) {
-        //Set the button action to go from the config screen to Initial Game Screen
-        //This was not done in the ConfigurationScreenScene to allow the
-        //IntialGameScreen object exist within the main "game" class.
-            if (configScene.validateUsernameString()) {
-                gameModel.setUsername(configScene.getUsername());
-                gameModel.setDifficulty(difficulties[(Integer) configScene.getDifficultyIndex()]);
-                gameModel.setWeapon(weapons[(Integer) configScene.getWeaponIndex()]);
-                gameModel.setDifficultyIndex((Integer) configScene.getDifficultyIndex());
-                InitialGameScreen initialGameScreen = new InitialGameScreen(
-                       width, height, gameModel);
-                initialGameScreen.getGoBackButton().setOnAction(actionEvent1 -> {
-                    goToConfigScreen();
-                });
-                mainWindow.setTitle("Welcoming Screen");
-                mainWindow.setScene(initialGameScreen.getInitialGameScene());
-                mainWindow.show();
-            }
+        if (configScene.validateUsernameString()) {
+            gameModel.setUsername(configScene.getUsername());
+            gameModel.setDifficulty(difficulties[
+                    (Integer) configScene.getDifficultyIndex()]);
+            gameModel.setWeapon(weapons[
+                    (Integer) configScene.getWeaponIndex()]);
+            gameModel.setDifficultyIndex(
+                    (Integer) configScene.getDifficultyIndex());
+            InitialGameScreen initialGameScreen = new InitialGameScreen(
+                   width, height, gameModel);
+            initialGameScreen.getGoBackButton().setOnAction(actionEvent1 ->
+                goToConfigScreen());
+            mainWindow.setTitle("Welcoming Screen");
+            mainWindow.setScene(initialGameScreen.getInitialGameScene());
+            mainWindow.show();
+        }
     }
     /**
      * Main method.

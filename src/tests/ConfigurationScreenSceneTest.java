@@ -1,14 +1,12 @@
 package tests;
 
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
-import src.view.InitialGameScreen;
-
 import static org.testfx.api.FxAssert.verifyThat;
+
 
 public class ConfigurationScreenSceneTest extends ApplicationTest {
 
@@ -29,7 +27,8 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Start");
         write("  ");
         clickOn("Let's go!");
-        verifyThat("cannot have empty / whitespace only username", NodeMatchers.isNotNull());
+        verifyThat("cannot have empty / whitespace only username",
+                NodeMatchers.isNotNull());
     }
 
     @Test
@@ -56,7 +55,7 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         verifyThat("my tests", NodeMatchers.isNotNull());
     }
   
-  @Test
+    @Test
     public void testDifficulty1() {
         clickOn("Start");
         write("username");
@@ -104,13 +103,15 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         write("Scoops");
         clickOn("Let's go!");
         verifyThat("Sword", NodeMatchers.isNotNull());
-   }
+    }
+
     @Test
     public void testNullUsername() {
         clickOn("Start");
         clickOn("Let's go!");
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
-        verifyThat("cannot have empty / " + "whitespace only username", NodeMatchers.isNotNull());
+        verifyThat("cannot have empty / "
+                + "whitespace only username", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -120,5 +121,28 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Let's go!");
         verifyThat("Go Back", NodeMatchers.isNotNull());
         verifyThat("Bella", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testStart() {
+        clickOn("Start");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testLetsGo() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        verifyThat("Go Back", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGoBack() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        clickOn("Go Back");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
     }
 }
