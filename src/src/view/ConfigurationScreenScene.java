@@ -11,12 +11,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class ConfigurationScreenScene {
     private Font font = Font.loadFont("file:assets/rainyhearts.ttf", 30);
     private Font titleFont = Font.loadFont("file:assets/04B_30__.ttf", 60);
-    private Font textFont = javafx.scene.text.Font.loadFont("file:assets/rainyhearts.ttf", 30);
+    private Font textFont = javafx.scene.text.Font.loadFont(
+            "file:assets/rainyhearts.ttf", 30);
+
     private Scene configScene;
     private ToggleGroup difficultyGroup;
     private ToggleGroup weaponGroup;
@@ -29,11 +30,12 @@ public class ConfigurationScreenScene {
     private int height;
 
     /**
-     * Create a ConfigurationScreenScene object.
-     * @param primaryStage the primary stage of the project.
-     * @param difficulties the list of difficulties.
-     * @param weapons the list of weapons.
-     * @param nextScreenButton the button to move onto the next screen.
+     * Initialize all the variables needed to make a Configuration Screen.
+     *
+     * @param width the width of the window.
+     * @param height the height of the window.
+     * @param difficulties all the possible difficulties.
+     * @param weapons all the possible weapons.
      */
     public ConfigurationScreenScene(int width,
                                     int height,
@@ -61,7 +63,7 @@ public class ConfigurationScreenScene {
     }
 
     /**
-     * get the scene of this object.
+     * create and get the scene of this object.
      *
      * @return the scene that represents this object.
      */
@@ -112,6 +114,10 @@ public class ConfigurationScreenScene {
         return this.usernameTextField.getText().strip();
     }
 
+    /**
+     * Get the button that redirects to the next screen.
+     * @return the redirect button.
+     */
     public Button getNextScreenButton() {
         return this.nextScreenButton;
     }

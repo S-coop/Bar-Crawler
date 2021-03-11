@@ -1,14 +1,12 @@
 package tests;
 
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
-import src.view.InitialGameScreen;
-
 import static org.testfx.api.FxAssert.verifyThat;
+
 
 public class ConfigurationScreenSceneTest extends ApplicationTest {
 
@@ -24,6 +22,63 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
     }
 
+    @Test
+    public void testWhitespace() {
+        clickOn("Start");
+        write("  ");
+        clickOn("Let's go!");
+        verifyThat("cannot have empty / whitespace only username",
+                NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testFrontWhitespace() {
+        clickOn("Start");
+        write("  my tests");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBackWhitespace() {
+        clickOn("Start");
+        write("my tests  ");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testSurroundWhitespace() {
+        clickOn("Start");
+        write("  my tests  ");
+        clickOn("Let's go!");
+        verifyThat("my tests", NodeMatchers.isNotNull());
+    }
+  
+    @Test
+    public void testDifficulty1() {
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+        verifyThat("$500", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testDifficulty2() {
+        clickOn("Start");
+        write("username");
+        clickOn("Tipsy");
+        clickOn("Let's go!");
+        verifyThat("$250", NodeMatchers.isNotNull());
+    }
+    @Test
+    public void testDifficulty3() {
+        clickOn("Start");
+        write("username");
+        clickOn("Drunk");
+        clickOn("Let's go!");
+        verifyThat("$166", NodeMatchers.isNotNull());
+    }
     @Test
     public void selectBrokenBottle() {
         clickOn("Start");
@@ -48,13 +103,15 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         write("Scoops");
         clickOn("Let's go!");
         verifyThat("Sword", NodeMatchers.isNotNull());
-   }
+    }
+
     @Test
     public void testNullUsername() {
         clickOn("Start");
         clickOn("Let's go!");
         verifyThat("Bar Crawler", NodeMatchers.isNotNull());
-        verifyThat("cannot have empty / " + "whitespace only username", NodeMatchers.isNotNull());
+        verifyThat("cannot have empty / "
+                + "whitespace only username", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -64,5 +121,28 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
         clickOn("Let's go!");
         verifyThat("Go Back", NodeMatchers.isNotNull());
         verifyThat("Bella", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testStart() {
+        clickOn("Start");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testLetsGo() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        verifyThat("Go Back", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGoBack() {
+        clickOn("Start");
+        write("ethan");
+        clickOn("Let's go!");
+        clickOn("Go Back");
+        verifyThat("Let's go!", NodeMatchers.isNotNull());
     }
 }

@@ -6,12 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class WelcomeScreen {
     private Font font = Font.loadFont("file:assets/rainyhearts.ttf", 30);
     private Font titleFont = Font.loadFont("file:assets/04B_30__.ttf", 60);
-//    private Scene welcomeScreen;
     private Button startButton;
     private int width;
     private int height;
@@ -25,9 +23,6 @@ public class WelcomeScreen {
         this.width = width;
         this.height = height;
         startButton = new Button("Start");
-
-//        primaryStage.setScene(welcomeScreen);
-
     }
 
     /**

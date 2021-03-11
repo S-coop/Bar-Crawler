@@ -10,6 +10,11 @@
 
 # Exclude *.iml configuration files
 *.iml
+
+#exclude checkstyle files
+cs2340_checks.xml
+run_checkstyle.py
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
