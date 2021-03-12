@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import src.model.GameModel;
 
 
-public class Room {
+public class RoomView {
     private final int moneyConstant = 500;
     private int money;
     private Stage mainWindow;
@@ -27,14 +27,13 @@ public class Room {
     //do we want all the rooms to have the same font or different?
     private int width = 1920 / 2;  //I set this to the same screen size as before but we can change it.
     private int height = 1080 / 2;
-    private boolean hasKey;  //go to player?
     private int enemyCount;
     private boolean openable;
     private boolean hasLeft; //do we even need these 4?  seems like only maze controller would be concerned with this info 
     private boolean hasRight;
     private boolean hasUp;
     private boolean hasDown;
-    private boolean[][] mazePos; //position in the maze
+    private Image background;
 
     /**
      * initialize the variables for the Room screen.
@@ -43,18 +42,19 @@ public class Room {
      * @param gameModel player data (weapon, difficulty, etc)
      * @param mazePos position of room in the maze
      */
-    public Room(int width, int height, GameModel gameModel, boolean[][] mazePos, boolean hasKey, boolean openable) {
+    public RoomView(int width, int height, GameModel gameModel, Image background) {
         //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
-        this.mazePos = mazePos;
         //set money based on difficulty
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
         this.gameModel = gameModel;
-        this.hasKey = hasKey;
         this.enemyCount = 2; //for now
-        this.openable = openable;
+        this.background = background;
+    }
 
+    public RoomView(int width, int height, GameModel gameModel, String backgroundLocation) {
+        this(width, height, gameModel, new Image(backgroundLocation));
     }
 
 
@@ -63,8 +63,8 @@ public class Room {
      * @param maze array which is used to calculate the current position of the room in the maze
      * @param bg background image for the room
      */
-    public Scene RoomScene(boolean[][] maze, Image bg) {
-        ImageView barSceneViewer = new ImageView(bg);
+    public Scene getScene() {
+        ImageView barSceneViewer = new ImageView(background);
         barSceneViewer.setFitWidth(this.width);
         barSceneViewer.setFitHeight(this.height);
         VBox background = new VBox(barSceneViewer);
