@@ -3,6 +3,8 @@ package src.controller;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.model.GameModel;
+import src.view.EndScreen;
 import src.view.MazeView;
 import src.view.PlayerView;
 import src.view.RoomView;
@@ -24,7 +26,7 @@ public class MazeController {
     final double bottomX = 467;
     final double bottomY = 462;
 
-    public MazeController(Stage primaryStage, MazeView mazeView, PlayerView playerView) {
+    public MazeController(Stage primaryStage, MazeView mazeView, PlayerView playerView, GameModel gameModel) {
         mazeView.getCurrent().setVisited(true);
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -70,6 +72,9 @@ public class MazeController {
                     } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4) {
                         //display winScreen
                         System.out.println("yay");
+                        EndScreen endScreen = new EndScreen(1920 / 2 ,1080 / 2, gameModel);
+                        primaryStage.setScene(endScreen.getEndScene());
+                        primaryStage.show();
                     }
                 }
                 //bottom door

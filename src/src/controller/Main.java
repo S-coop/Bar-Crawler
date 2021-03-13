@@ -75,7 +75,7 @@ public class Main extends Application {
                     (double) height / 2, width, height);
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
             PlayerController playerController = new PlayerController(mainWindow, playerView);
-            MazeController mazeController = new MazeController(mainWindow, maze, playerView);
+            MazeController mazeController = new MazeController(mainWindow, maze, playerView, gameModel);
 
             PlayerView player = playerView;
 
