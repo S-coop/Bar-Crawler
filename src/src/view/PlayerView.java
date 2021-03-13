@@ -85,6 +85,14 @@ public class PlayerView {
         this.dy = dy;
     }
 
+    public double getCenterX() {
+        return this.x + this.playerWidth / 2;
+    }
+
+    public double getCenterY() {
+        return this.y + this.playerHeight / 2;
+    }
+
     public void setSprite(Image im) {
         this.imageView.setImage(im);
     }
