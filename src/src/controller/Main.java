@@ -6,10 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import src.model.BackgroundModel;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
 import src.view.InitialGameScreen;
 import src.view.Player;
+import src.view.MazeView;
+import src.view.RoomView;
 import src.view.WelcomeScreen;
 
 public class Main extends Application {
@@ -63,13 +66,28 @@ public class Main extends Application {
                     (Integer) configScene.getWeaponIndex()]);
             gameModel.setDifficultyIndex(
                     (Integer) configScene.getDifficultyIndex());
-            InitialGameScreen initialGameScreen = new InitialGameScreen(
-                   width, height, gameModel);
-            initialGameScreen.getGoBackButton().setOnAction(actionEvent1 ->
-                goToConfigScreen());
-            mainWindow.setTitle("Welcoming Screen");
-            mainWindow.setScene(initialGameScreen.getInitialGameScene());
+//            InitialGameScreen initialGameScreen = new InitialGameScreen(
+//                   width, height, gameModel);
+//            initialGameScreen.getGoBackButton().setOnAction(actionEvent1 ->
+//                goToConfigScreen());
+//            mainWindow.setTitle("Welcoming Screen");
+//            mainWindow.setScene(initialGameScreen.getInitialGameScene());
+//            mainWindow.show();
+            RoomView initialRoom = new RoomView(width, height, gameModel, "file:assets/BarTemplateColor.png");
+            mainWindow.setScene(initialRoom.getScene());
             mainWindow.show();
+            BackgroundModel bg = new BackgroundModel(2);
+            RoomView room2 = new RoomView(width, height, gameModel, bg.getMiddleBackgrounds().get(0));
+            mainWindow.setScene(room2.getScene());
+            mainWindow.show();
+//            RoomView room3 = new RoomView(width, height, gameModel, bg.getTopLeftBackground());
+//            mainWindow.setScene(room3.getScene());
+//            mainWindow.show();
+
+            MazeView maze = new MazeView(width, height, 5, 5, gameModel);
+            mainWindow.setScene(maze.getCurrent().getScene());
+            mainWindow.show();
+
         }
     }
     /**

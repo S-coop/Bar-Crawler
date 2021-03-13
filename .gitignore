@@ -14,6 +14,7 @@
 #exclude checkstyle files
 cs2340_checks.xml
 run_checkstyle.py
+.run_checkstyle.py.un~
 
 # User-specific stuff
 .idea/**/workspace.xml
