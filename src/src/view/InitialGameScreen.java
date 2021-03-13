@@ -22,7 +22,7 @@ public class InitialGameScreen {
     private int width;
     private int height;
     private StackPane stackScreen;
-
+    private PlayerView playerView;
     /**
      * Initialize all the variables needed to make an initial game screen.
      *
@@ -30,7 +30,7 @@ public class InitialGameScreen {
      * @param height height of the window
      * @param gameModel the game model containing player data
      */
-    public InitialGameScreen(int width, int height, GameModel gameModel) {
+    public InitialGameScreen(int width, int height, GameModel gameModel, PlayerView playerView) {
 
         this.width = width;
         this.height = height;
@@ -42,7 +42,7 @@ public class InitialGameScreen {
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
-
+        this.playerView = playerView;
     }
 
     /**
@@ -106,13 +106,10 @@ public class InitialGameScreen {
                 new Text("weapon: " + gameModel.getWeapon())
         );
 
-        Pane playerLayer = new Pane();
-        Image playerImage = new Image("file:assets/AlexFWD.png");
-        Player player = new Player(playerLayer, playerImage, (double) width / 2,
-                (double) height / 2);
+
 
         stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane, playerLayer);
+        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
 
         return new Scene(stackScreen, width, height);
     }
