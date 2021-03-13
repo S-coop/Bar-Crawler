@@ -15,59 +15,64 @@ public class PlayerController {
     public PlayerController(Scene scene, PlayerView player) {
         this.scene = scene;
         this.player = player;
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case W:
-                        player.setDx(0);
-                        player.setDy(-dy);
-//                        System.out.println("up");
-                        break;
-                    case S:
-                        player.setDx(0);
-                        player.setDy(dy);
-
-//                        System.out.println("down");
-                        break;
-                    case A:
-                        player.setDx(-dx);
-                        player.setDy(0);
-
-//                        System.out.println("left");
-                        break;
-                    case D:
-                        player.setDx(dx);
-                        player.setDy(0);
-
-//                        System.out.println("up");
-                        break;
-
-                }
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                player.setDy(0);
-                player.setDx(0);
-
-//                System.out.println("release");
+//        scene.removeEventFilter(KeyEvent, this);
+//        scene.setOnKeyPressed(null);
+//        EventHandler<KeyEvent> keypress =  new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                event.consume();
+//                scene.removeEventFilter(KeyEvent.ANY, this);
 //                switch (event.getCode()) {
-//                    case UP:
-//                        goNorth = false; break;
-//                    case DOWN:
-//                        goSouth = false; break;
-//                    case LEFT:
-//                        goWest  = false; break;
-//                    case RIGHT:
-//                        goEast  = false; break;
-//                    case SHIFT:
-//                        running = false; break;
+//                    case W:
+//                        player.setDx(0);
+//                        player.setDy(-dy);
+//                        System.out.println("up");
+//                        break;
+//                    case S:
+//                        player.setDx(0);
+//                        player.setDy(dy);
+//
+//                        System.out.println("down");
+//                        break;
+//                    case A:
+//                        player.setDx(-dx);
+//                        player.setDy(0);
+//
+//                        System.out.println("left");
+//                        break;
+//                    case D:
+//                        player.setDx(dx);
+//                        player.setDy(0);
+//
+//                        System.out.println("right");
+//                        break;
+//
 //                }
-            }
-        });
+//            }
+//        };
+//        scene.setOnKeyPressed(keypress);
+
+//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                player.setDy(0);
+//                player.setDx(0);
+//
+////                System.out.println("release");
+////                switch (event.getCode()) {
+////                    case UP:
+////                        goNorth = false; break;
+////                    case DOWN:
+////                        goSouth = false; break;
+////                    case LEFT:
+////                        goWest  = false; break;
+////                    case RIGHT:
+////                        goEast  = false; break;
+////                    case SHIFT:
+////                        running = false; break;
+////                }
+//            }
+//        });
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -99,23 +104,23 @@ public class PlayerController {
                 final double bottomX = 467;
                 final double bottomY = 462;
 
-                //right door
-                if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
-                    System.out.println("right door");
-
-                }
-                //left door
-                if (checkBounds(centerX, centerY, leftX, leftY, bufferLeft, bufferLeft)) {
-                    System.out.println("left door");
-                }
-                //top door
-                if (checkBounds(centerX, centerY, topX, topY, bufferTop, bufferTop)) {
-                    System.out.println("top door");
-                }
-                //bottom door
-                if (checkBounds(centerX, centerY, bottomX, bottomY, bufferBottom, bufferBottom)) {
-                    System.out.println("bottom door");
-                }
+//                //right door
+//                if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
+//                    System.out.println("right door");
+//
+//                }
+//                //left door
+//                if (checkBounds(centerX, centerY, leftX, leftY, bufferLeft, bufferLeft)) {
+//                    System.out.println("left door");
+//                }
+//                //top door
+//                if (checkBounds(centerX, centerY, topX, topY, bufferTop, bufferTop)) {
+//                    System.out.println("top door");
+//                }
+//                //bottom door
+//                if (checkBounds(centerX, centerY, bottomX, bottomY, bufferBottom, bufferBottom)) {
+//                    System.out.println("bottom door");
+//                }
                 //right door
 //                System.out.println("(" + player.getCenterX() + "," + player.getCenterY() + ")");
                 player.move();

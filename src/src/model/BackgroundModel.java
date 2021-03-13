@@ -27,7 +27,7 @@ public class BackgroundModel {
         topLeftBackground = new Image("file:assets/Rooms/top_left_corner/goth.png");
         topRightBackground = new Image("file:assets/Rooms/top_right_corner/circus.png");
         bottomLeftBackground = new Image("file:assets/Rooms/bottom_left_corner/arcade.png");
-        bottomRightBackground = new Image("file:assets/Rooms/bottom_left_corner/Hoot.png");
+        bottomRightBackground = new Image("file:assets/Rooms/bottom_right_corner/Hoot.png");
         switch (configuration) {
             case 1 -> topLeftBackground = new Image("file:assets/Rooms/top_left_corner/Final.png");
             case 2 -> topRightBackground = new Image("file:assets/Rooms/top_right_corner/Final.png");

@@ -33,7 +33,11 @@ public class RoomView {
     private boolean hasRight;
     private boolean hasUp;
     private boolean hasDown;
+    private PlayerView playerView;
     private Image background;
+    private boolean visited;
+
+
 
     /**
      * initialize the variables for the Room screen.
@@ -42,7 +46,7 @@ public class RoomView {
      * @param gameModel player data (weapon, difficulty, etc)
      * @param mazePos position of room in the maze
      */
-    public RoomView(int width, int height, GameModel gameModel, Image background) {
+    public RoomView(int width, int height, GameModel gameModel, Image background, PlayerView playerView) {
         //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
@@ -51,10 +55,12 @@ public class RoomView {
         this.gameModel = gameModel;
         this.enemyCount = 2; //for now
         this.background = background;
+        this.playerView = playerView;
+        this.visited = false;
     }
 
-    public RoomView(int width, int height, GameModel gameModel, String backgroundLocation) {
-        this(width, height, gameModel, new Image(backgroundLocation));
+    public RoomView(int width, int height, GameModel gameModel, String backgroundLocation, PlayerView playerView) {
+        this(width, height, gameModel, new Image(backgroundLocation), playerView);
     }
 
 
@@ -117,10 +123,21 @@ public class RoomView {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
+//        StackPane stackScreen = new StackPane();
+//        stackScreen.getChildren().addAll(background, borderPane);
+
+//        return new Scene(stackScreen, width, height);
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane);
+        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
 
         return new Scene(stackScreen, width, height);
+    }
+    public boolean hasVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }
 
