@@ -2,11 +2,15 @@ package src.controller;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import src.model.BackgroundModel;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
 import src.view.InitialGameScreen;
+import src.view.Player;
 import src.view.MazeView;
 import src.view.RoomView;
 import src.view.WelcomeScreen;

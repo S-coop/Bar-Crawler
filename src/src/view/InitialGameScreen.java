@@ -5,12 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -26,6 +21,7 @@ public class InitialGameScreen {
     private GameModel gameModel;
     private int width;
     private int height;
+    private StackPane stackScreen;
 
     /**
      * Initialize all the variables needed to make an initial game screen.
@@ -109,8 +105,14 @@ public class InitialGameScreen {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
-        StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane);
+
+        Pane playerLayer = new Pane();
+        Image playerImage = new Image("file:assets/AlexFWD.png");
+        Player player = new Player(playerLayer, playerImage, (double) width / 2,
+                (double) height / 2);
+
+        stackScreen = new StackPane();
+        stackScreen.getChildren().addAll(background, borderPane, playerLayer);
 
         return new Scene(stackScreen, width, height);
     }
@@ -121,6 +123,13 @@ public class InitialGameScreen {
      */
     public Button getGoBackButton() {
         return this.goBack;
+    }
+
+    /**
+     * Return the StackPane of the InitialGameScreen.
+     */
+    public StackPane getStackScreen() {
+        return stackScreen;
     }
 }
 
