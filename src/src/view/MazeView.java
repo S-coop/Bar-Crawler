@@ -16,6 +16,9 @@ public class MazeView {
 
     private int row;
     private int col;
+
+
+
     private GameModel gameModel;
 
     public MazeView(int width, int height, int rows, int cols, GameModel gameModel, PlayerView playerView) {
@@ -27,10 +30,10 @@ public class MazeView {
 
         maze = new RoomView[rows][cols];
         Random rng = new Random();
-//        BackgroundModel bgModel = new BackgroundModel(rng.nextInt(4) + 1);
+        // BackgroundModel bgModel = new BackgroundModel(rng.nextInt(4) + 1);
 
         BackgroundModel bgModel = new BackgroundModel( 2);
-        //corners
+        // corners
         Image im = bgModel.getTopLeftBackground();
         RoomView rm = new RoomView(width, height, gameModel, im, playerView);
         maze[0][0] = rm;
@@ -82,7 +85,7 @@ public class MazeView {
                 backgroundIndex++;
             }
         }
-        this.row = 2;
+        this.row = 3;
         this.col = 1;
         current = maze[this.row][this.col];
     }
@@ -104,42 +107,50 @@ public class MazeView {
         return row + 1 < rows;
     }
     public RoomView moveRight() {
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         if (col + 1 < cols) {
             col++;
             current = maze[row][col];
         }
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         return current;
     }
 
     public RoomView moveLeft() {
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         if (col - 1 >= 0) {
             col--;
             current = maze[row][col];
         }
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         return current;
     }
 
     public RoomView moveUp() {
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         if (row - 1 >=0) {
             row--;
             current = maze[row][col];
         }
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         return current;
     }
 
     public RoomView moveDown() {
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         if (row + 1 < rows) {
             row++;
             current = maze[row][col];
         }
-        System.out.println("(" + row + "," + col + ")");
+        // System.out.println("(" + row + "," + col + ")");
         return current;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 }

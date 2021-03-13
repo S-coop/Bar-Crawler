@@ -123,10 +123,7 @@ public class RoomView {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
-//        StackPane stackScreen = new StackPane();
-//        stackScreen.getChildren().addAll(background, borderPane);
 
-//        return new Scene(stackScreen, width, height);
         StackPane stackScreen = new StackPane();
         stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
 

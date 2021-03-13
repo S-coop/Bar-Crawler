@@ -67,6 +67,9 @@ public class MazeController {
                         primaryStage.show();
                         playerView.setX(bottomX);
                         playerView.setY(bottomY - bufferBottom - 50);
+                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4) {
+                        //display winScreen
+                        System.out.println("yay");
                     }
                 }
                 //bottom door

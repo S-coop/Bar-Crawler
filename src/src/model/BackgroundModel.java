@@ -34,17 +34,12 @@ public class BackgroundModel {
             case 3 -> bottomLeftBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
             case 4 -> bottomRightBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
         }
-//        File directory = new File("assets/Rooms/mid");
-//        for (File f : directory.listFiles()) {
-////            System.out.println(f.getAbsolutePath());
-//            middleBackgrounds.add(new Image("file:assets/Rooms/mid/" + f.getName()));
-//        }
+
     }
     public ArrayList<Image> generateArrayList(String dir) {
         ArrayList<Image> images = new ArrayList<>();
         File directory = new File(dir);
         for (File f : directory.listFiles()) {
-//            System.out.println(f.getAbsolutePath());
             images.add(new Image("file:" + dir + "/" +  f.getName()));
         }
         //allow for randomization of map
