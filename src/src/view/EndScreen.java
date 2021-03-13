@@ -5,13 +5,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import src.model.GameModel;
 
-public class InitialGameScreen {
+
+public class EndScreen {
 
     private Font textFont = Font.loadFont(
             "file:assets/rainyhearts.ttf", 22);
@@ -21,39 +27,37 @@ public class InitialGameScreen {
     private GameModel gameModel;
     private int width;
     private int height;
-    private StackPane stackScreen;
-    private PlayerView playerView;
+
     /**
-     * Initialize all the variables needed to make an initial game screen.
+     * Initialize all the variables needed to make an exit screen.
      *
      * @param width width of the window
      * @param height height of the window
      * @param gameModel the game model containing player data
      */
-    public InitialGameScreen(int width, int height, GameModel gameModel, PlayerView playerView) {
-
+    public EndScreen(int width, int height, GameModel gameModel) {
         this.width = width;
         this.height = height;
         //ability to return to previous scene:
-        this.goBack = new Button("Go Back");
+        this.goBack = new Button("Do it all again :D");
         goBack.setFont(textFont);
 
         //set money based on difficulty
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
-        this.playerView = playerView;
+
     }
 
     /**
      * Return the initialGameScene.
      * @return the initialGameScene.
      */
-    public Scene getInitialGameScene() {
+    public Scene getEndScene() {
         //background image:
-        Image barScene = new Image("file:assets/BarTemplateColor.png");
+        Image barScene = new Image("file:assets/WinScreen.png");
         ImageView barSceneViewer = new ImageView(barScene);
-        barSceneViewer.setFitWidth(width);
+        barSceneViewer.setFitWidth(this.width);
         barSceneViewer.setFitHeight(height);
         VBox background = new VBox(barSceneViewer);
 
@@ -61,7 +65,7 @@ public class InitialGameScreen {
         VBox newScreen = new VBox();
 
         //money display
-        Text moneyText = new Text("$" + this.money);
+        Text moneyText = new Text(" ");
         moneyText.setFont(textFont);
         moneyText.setFill(Color.DARKGOLDENROD);
 
@@ -71,7 +75,7 @@ public class InitialGameScreen {
         usernameText.setFill(Color.GHOSTWHITE);
 
         //Weapon Display
-        Text weaponText = new Text(gameModel.getWeapon());
+        Text weaponText = new Text(" ");
         weaponText.setFont(textFont);
         weaponText.setFill(Color.GHOSTWHITE);
 
@@ -105,11 +109,8 @@ public class InitialGameScreen {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
-
-
-
-        stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
+        StackPane stackScreen = new StackPane();
+        stackScreen.getChildren().addAll(background, borderPane);
 
         return new Scene(stackScreen, width, height);
     }
@@ -121,12 +122,4 @@ public class InitialGameScreen {
     public Button getGoBackButton() {
         return this.goBack;
     }
-
-    /**
-     * Return the StackPane of the InitialGameScreen.
-     */
-    public StackPane getStackScreen() {
-        return stackScreen;
-    }
 }
-

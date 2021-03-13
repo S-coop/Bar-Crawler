@@ -2,59 +2,77 @@ package src.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import src.model.GameModel;
 
-public class InitialGameScreen {
 
-    private Font textFont = Font.loadFont(
-            "file:assets/rainyhearts.ttf", 22);
-    private int money;
+public class RoomView {
     private final int moneyConstant = 500;
-    private Button goBack;
+    private int money;
+    private Stage mainWindow;
     private GameModel gameModel;
-    private int width;
-    private int height;
-    private StackPane stackScreen;
+    private Font textFont = Font.loadFont(
+        "file:assets/rainyhearts.ttf", 22);
+    //do we want all the rooms to have the same font or different?
+    private int width = 1920 / 2;  //I set this to the same screen size as before but we can change it.
+    private int height = 1080 / 2;
+    private int enemyCount;
+    private boolean openable;
+    private boolean hasLeft; //do we even need these 4?  seems like only maze controller would be concerned with this info 
+    private boolean hasRight;
+    private boolean hasUp;
+    private boolean hasDown;
     private PlayerView playerView;
-    /**
-     * Initialize all the variables needed to make an initial game screen.
-     *
-     * @param width width of the window
-     * @param height height of the window
-     * @param gameModel the game model containing player data
-     */
-    public InitialGameScreen(int width, int height, GameModel gameModel, PlayerView playerView) {
+    private Image background;
+    private boolean visited;
 
+
+
+    /**
+     * initialize the variables for the Room screen.
+     * @param width width of screen
+     * @param height height of screen
+     * @param gameModel player data (weapon, difficulty, etc)
+     * @param mazePos position of room in the maze
+     */
+    public RoomView(int width, int height, GameModel gameModel, Image background, PlayerView playerView) {
+        //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
-        //ability to return to previous scene:
-        this.goBack = new Button("Go Back");
-        goBack.setFont(textFont);
-
         //set money based on difficulty
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
-
         this.gameModel = gameModel;
+        this.enemyCount = 2; //for now
+        this.background = background;
         this.playerView = playerView;
+        this.visited = false;
     }
 
+    public RoomView(int width, int height, GameModel gameModel, String backgroundLocation, PlayerView playerView) {
+        this(width, height, gameModel, new Image(backgroundLocation), playerView);
+    }
+
+
     /**
-     * Return the initialGameScene.
-     * @return the initialGameScene.
+     * Returns the scene of the room
+     * @param maze array which is used to calculate the current position of the room in the maze
+     * @param bg background image for the room
      */
-    public Scene getInitialGameScene() {
-        //background image:
-        Image barScene = new Image("file:assets/BarTemplateColor.png");
-        ImageView barSceneViewer = new ImageView(barScene);
-        barSceneViewer.setFitWidth(width);
-        barSceneViewer.setFitHeight(height);
+    public Scene getScene() {
+        ImageView barSceneViewer = new ImageView(background);
+        barSceneViewer.setFitWidth(this.width);
+        barSceneViewer.setFitHeight(this.height);
         VBox background = new VBox(barSceneViewer);
 
         //main container:
@@ -97,7 +115,7 @@ public class InitialGameScreen {
         HBox bottomBar = new HBox();
         Region bottomSpace = new Region();
         HBox.setHgrow(bottomSpace, Priority.ALWAYS);
-        bottomBar.getChildren().addAll(goBack, bottomSpace, weaponText);
+        bottomBar.getChildren().addAll(bottomSpace, weaponText);
         bottomBar.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(bottomBar);
         newScreen.getChildren().addAll(
@@ -106,27 +124,17 @@ public class InitialGameScreen {
                 new Text("weapon: " + gameModel.getWeapon())
         );
 
-
-
-        stackScreen = new StackPane();
+        StackPane stackScreen = new StackPane();
         stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
 
         return new Scene(stackScreen, width, height);
     }
-
-    /**
-     * Return the button that returns to the previous screen.
-     * @return the back button.
-     */
-    public Button getGoBackButton() {
-        return this.goBack;
+    public boolean hasVisited() {
+        return visited;
     }
 
-    /**
-     * Return the StackPane of the InitialGameScreen.
-     */
-    public StackPane getStackScreen() {
-        return stackScreen;
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }
 
