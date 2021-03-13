@@ -5,12 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -26,7 +21,8 @@ public class InitialGameScreen {
     private GameModel gameModel;
     private int width;
     private int height;
-
+    private StackPane stackScreen;
+    private PlayerView playerView;
     /**
      * Initialize all the variables needed to make an initial game screen.
      *
@@ -34,7 +30,7 @@ public class InitialGameScreen {
      * @param height height of the window
      * @param gameModel the game model containing player data
      */
-    public InitialGameScreen(int width, int height, GameModel gameModel) {
+    public InitialGameScreen(int width, int height, GameModel gameModel, PlayerView playerView) {
 
         this.width = width;
         this.height = height;
@@ -46,7 +42,7 @@ public class InitialGameScreen {
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
-
+        this.playerView = playerView;
     }
 
     /**
@@ -109,8 +105,11 @@ public class InitialGameScreen {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
-        StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane);
+
+
+
+        stackScreen = new StackPane();
+        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
 
         return new Scene(stackScreen, width, height);
     }
@@ -121,6 +120,13 @@ public class InitialGameScreen {
      */
     public Button getGoBackButton() {
         return this.goBack;
+    }
+
+    /**
+     * Return the StackPane of the InitialGameScreen.
+     */
+    public StackPane getStackScreen() {
+        return stackScreen;
     }
 }
 

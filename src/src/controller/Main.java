@@ -1,11 +1,19 @@
 package src.controller;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import src.model.BackgroundModel;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
 import src.view.InitialGameScreen;
+import src.view.MazeView;
+import src.view.PlayerView;
+import src.view.RoomView;
 import src.view.WelcomeScreen;
 import src.view.EndScreen;
 
@@ -60,12 +68,18 @@ public class Main extends Application {
                     (Integer) configScene.getWeaponIndex()]);
             gameModel.setDifficultyIndex(
                     (Integer) configScene.getDifficultyIndex());
-            InitialGameScreen initialGameScreen = new InitialGameScreen(
-                    width, height, gameModel);
-            initialGameScreen.getGoBackButton().setOnAction(actionEvent1 ->
-                    goToConfigScreen());
-            mainWindow.setTitle("Welcoming Screen");
-            mainWindow.setScene(initialGameScreen.getInitialGameScene());
+
+            Pane playerLayer = new Pane();
+            Image playerImage = new Image("file:assets/AlexFWD.png");
+            PlayerView playerView = new PlayerView(playerLayer, playerImage, (double) width / 2,
+                    (double) height / 2, width, height);
+            MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
+            PlayerController playerController = new PlayerController(mainWindow, playerView);
+            MazeController mazeController = new MazeController(mainWindow, maze, playerView);
+
+            PlayerView player = playerView;
+
+            mainWindow.setScene(maze.getCurrent().getScene());
             mainWindow.show();
         }
     }
