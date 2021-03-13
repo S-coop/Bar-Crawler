@@ -15,6 +15,7 @@ import src.view.MazeView;
 import src.view.PlayerView;
 import src.view.RoomView;
 import src.view.WelcomeScreen;
+import src.view.EndScreen;
 
 public class Main extends Application {
     private Stage mainWindow;
@@ -82,6 +83,25 @@ public class Main extends Application {
             mainWindow.show();
         }
     }
+
+        private void goToEndScreen(ConfigurationScreenScene configScene) {
+            if (configScene.validateUsernameString()) {
+                gameModel.setUsername(configScene.getUsername());
+                gameModel.setDifficulty(difficulties[
+                        (Integer) configScene.getDifficultyIndex()]);
+                gameModel.setWeapon(weapons[
+                        (Integer) configScene.getWeaponIndex()]);
+                gameModel.setDifficultyIndex(
+                        (Integer) configScene.getDifficultyIndex());
+                EndScreen endScreen = new EndScreen(
+                        width, height, gameModel);
+                endScreen.getGoBackButton().setOnAction(actionEvent1 ->
+                        goToConfigScreen());
+                mainWindow.setTitle("YOU WIN!");
+                mainWindow.setScene(endScreen.getEndScene());
+                mainWindow.show();
+            }
+        }
     /**
      * Main method.
      * @param args parameters to main method.
