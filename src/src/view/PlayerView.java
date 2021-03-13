@@ -19,6 +19,11 @@ public class PlayerView {
     private double width;
     private double height;
 
+    private final double playerWidth = 76 /2;
+    private final double playerHeight = 156 / 2;
+    private final double topBoarder = 76 / 2;
+    private final double leftBoarder = 76 / 2;
+
     /**
      * Player constructor.
      */
@@ -80,11 +85,14 @@ public class PlayerView {
         this.dy = dy;
     }
 
+    public void setSprite(Image im) {
+        this.imageView.setImage(im);
+    }
     public void move() {
-        if(0 <= x && x < width && 0 <= y && y < height) {
-            x += dx;
-            y += dy;
-        }
+        if(0 + leftBoarder <= x  + dx && x + dx < width - playerWidth - leftBoarder)
+        x += dx;
+        if( 0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder)
+        y += dy;
     }
 
     public void updateUI() {

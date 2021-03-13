@@ -21,23 +21,23 @@ public class PlayerController {
                 switch (event.getCode()) {
                     case W:
                         player.setDx(0);
-                        player.setDy(dy);
+                        player.setDy(-dy);
                         System.out.println("up");
                         break;
                     case S:
                         player.setDx(0);
-                        player.setDy(-dy);
+                        player.setDy(dy);
 
                         System.out.println("down");
                         break;
                     case A:
-                        player.setDx(dx);
+                        player.setDx(-dx);
                         player.setDy(0);
 
                         System.out.println("left");
                         break;
                     case D:
-                        player.setDx(-dx);
+                        player.setDx(dx);
                         player.setDy(0);
 
                         System.out.println("up");
