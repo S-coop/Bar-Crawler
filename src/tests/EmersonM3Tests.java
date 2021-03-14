@@ -4,19 +4,10 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
 import src.view.RoomView;
 import src.view.MazeView;
-import static org.testfx.api.FxAssert.verifyThat;
-import src.view.PlayerView;
 import static org.junit.Assert.*;
-
-import org.junit.Test;
-import src.view.PlayerView;
-import src.view.RoomView;
-
-import static org.junit.Assert.assertEquals;
 
 public class EmersonM3Tests extends ApplicationTest {
     private Main controller;
