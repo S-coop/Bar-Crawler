@@ -1,20 +1,13 @@
 package tests;
 
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
-import src.model.BackgroundModel;
 import src.view.PlayerView;
-import src.view.MazeView;
-import src.view.RoomView;
 import javafx.scene.input.KeyCode;
 
 import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
 
 
 public class BellaM3Tests extends ApplicationTest {
