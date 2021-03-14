@@ -3,15 +3,13 @@ package tests;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
 import src.controller.Main;
 import src.view.PlayerView;
 import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
 
 
 public class SalM3Tests extends ApplicationTest {
-   Main controller;
+    private Main controller;
     @Override
     public void start(Stage primaryStage) throws Exception {
         controller = new Main();
