@@ -32,15 +32,15 @@ public class BellaM3Tests extends ApplicationTest {
     private final double topY = 130;
     private final double bottomX = 467;
     private final double bottomY = 462;
-    MazeView mazeView;
     @Override
     public void start(Stage primaryStage) throws Exception {
         controller = new Main();
         controller.start(primaryStage);
     }
-    // verify the door work
+    // verify the right door works
     @Test
-    public void verifyDoor() {
+    public void verifyRightDoor() {
+        System.out.println("verifyRightDoor");
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
@@ -50,8 +50,55 @@ public class BellaM3Tests extends ApplicationTest {
         pV.setY(rightY - bufferRight);
         System.out.println(pV.getX() + ", " + pV.getY());
         push(KeyCode.D);
-        assertEquals(pV.getCenterX(), 136, 0);
-        assertEquals(pV.getCenterY(), 457, 0);
+        assertEquals(pV.getCenterX(), 136, 10);
+        assertEquals(pV.getCenterY(), 457, 10);
     }
-    //very player sprite exists
+    //verify the left door works
+    @Test
+    public void verifyLeftDoor() {
+        System.out.println("verifyLeftDoor");
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+        PlayerView pV = controller.getPlayerView();
+        // //set location to known left door
+        pV.setX(leftX + bufferRight);
+        pV.setY(leftY + bufferRight);
+        push(KeyCode.A);
+        System.out.println(pV.getX() + ", " + pV.getY());
+        assertEquals(pV.getCenterX(), 81, 20);
+        assertEquals(pV.getCenterY(), 309, 20);
+    }
+    // verify the bottom door works
+    @Test
+    public void verifyBottomDoor() {
+        System.out.println("verifyBottomDoor");
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+        PlayerView pV = controller.getPlayerView();
+        // right door
+        pV.setX(bottomX - bufferRight); //set location to known right door
+        pV.setY(bottomY - bufferRight);
+        System.out.println(pV.getX() + ", " + pV.getY());
+        push(KeyCode.S);
+        assertEquals(pV.getCenterX(), 466, 10);
+        assertEquals(pV.getCenterY(), 329, 10);
+    }
+    //verify the left door works
+    @Test
+    public void verifyTopDoor() {
+        System.out.println("verifyTopDoor");
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+        PlayerView pV = controller.getPlayerView();
+        // //set location to known left door
+        pV.setX(topX + bufferRight);
+        pV.setY(topY + bufferRight);
+        push(KeyCode.A);
+        System.out.println(pV.getX() + ", " + pV.getY());
+        assertEquals(pV.getCenterX(), 489, 20);
+        assertEquals(pV.getCenterY(), 189, 20);
+    }
 }
