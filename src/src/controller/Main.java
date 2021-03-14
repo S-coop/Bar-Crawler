@@ -20,6 +20,7 @@ public class Main extends Application {
     private final String[] difficulties = {"Sober", "Tipsy", "Drunk"};
     private final String[] weapons = {"Sword", "Bow", "Broken Bottle"};
     private PlayerView pV;
+    private MazeView mV;
 
 
     @Override
@@ -70,6 +71,7 @@ public class Main extends Application {
                     (double) height / 2, width, height);
             this.pV = playerView; //for testing purposes
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
+            this.mV = maze;
             PlayerController playerController = new PlayerController(mainWindow, playerView);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
@@ -102,6 +104,10 @@ public class Main extends Application {
 
     public PlayerView getPlayerView() {
         return this.pV;
+    }
+
+    public MazeView getMazeView() {
+        return this.mV;
     }
     /**
      * Main method.
