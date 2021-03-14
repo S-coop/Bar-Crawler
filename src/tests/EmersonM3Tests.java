@@ -29,12 +29,24 @@ public class EmersonM3Tests extends ApplicationTest {
 
     @Test
     public void testOldRoomVisited() {
-
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
         //get RoomView from MazeView
         push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
+        push(KeyCode.W);
+        release(KeyCode.W);
         push(KeyCode.A);
         push(KeyCode.W);
         push(KeyCode.W);
@@ -45,8 +57,6 @@ public class EmersonM3Tests extends ApplicationTest {
         push(KeyCode.S);
         RoomView mV = controller.getMazeView().getCurrent();
         assertTrue(mV.hasVisited());
-        //assertEquals(pV.getX(), 100, 0);
-        //assertEquals(pV.getY(), 100, 0);
     }
 
     @Test
@@ -58,8 +68,6 @@ public class EmersonM3Tests extends ApplicationTest {
         //get RoomView from MazeView
         RoomView upRoom = controller.getMazeView().moveUp();
         assertFalse(upRoom.hasVisited());
-        //assertEquals(pV.getX(), 100, 0);
-        //assertEquals(pV.getY(), 100, 0);
     }
 
     @Test
@@ -70,8 +78,6 @@ public class EmersonM3Tests extends ApplicationTest {
         clickOn("Let's go!");
         RoomView mV = controller.getMazeView().getCurrent();
         assertNotNull(mV);
-        //assertEquals(pV.getX(), 100, 0);
-        //assertEquals(pV.getY(), 100, 0);
     }
 
     @Test
@@ -82,7 +88,5 @@ public class EmersonM3Tests extends ApplicationTest {
         clickOn("Let's go!");
         MazeView mV = controller.getMazeView();
         assertNotNull(mV);
-        //assertEquals(pV.getX(), 100, 0);
-        //assertEquals(pV.getY(), 100, 0);
     }
 }
