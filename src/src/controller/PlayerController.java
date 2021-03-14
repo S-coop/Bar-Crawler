@@ -2,18 +2,16 @@ package src.controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import src.view.PlayerView;
 
 public class PlayerController {
-    PlayerView player;
-    Stage stage;
-    double dx = 1;
-    double dy = 1;
+    private PlayerView player;
+    private Stage stage;
+    private double dx = 1;
+    private double dy = 1;
+
     public PlayerController(Stage stage, PlayerView player) {
         this.stage = stage;
         this.player = player;
@@ -47,7 +45,8 @@ public class PlayerController {
 
                         System.out.println("right");
                         break;
-
+                    default:
+                        break;
                 }
             }
         });

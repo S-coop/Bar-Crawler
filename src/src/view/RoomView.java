@@ -25,11 +25,14 @@ public class RoomView {
     private Font textFont = Font.loadFont(
         "file:assets/rainyhearts.ttf", 22);
     //do we want all the rooms to have the same font or different?
-    private int width = 1920 / 2;  //I set this to the same screen size as before but we can change it.
+    //I set this to the same screen size as before but we can change it.
+
+    private int width = 1920 / 2;
     private int height = 1080 / 2;
     private int enemyCount;
     private boolean openable;
-    private boolean hasLeft; //do we even need these 4?  seems like only maze controller would be concerned with this info 
+    //do we even need these 4?  seems like only maze controller would be concerned with this info
+    private boolean hasLeft;
     private boolean hasRight;
     private boolean hasUp;
     private boolean hasDown;
@@ -44,9 +47,14 @@ public class RoomView {
      * @param width width of screen
      * @param height height of screen
      * @param gameModel player data (weapon, difficulty, etc)
-     * @param mazePos position of room in the maze
+     * @param background the background of the room
+     * @param playerView the visual data of the player to display
      */
-    public RoomView(int width, int height, GameModel gameModel, Image background, PlayerView playerView) {
+    public RoomView(int width,
+                    int height,
+                    GameModel gameModel,
+                    Image background,
+                    PlayerView playerView) {
         //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
@@ -59,15 +67,18 @@ public class RoomView {
         this.visited = false;
     }
 
-    public RoomView(int width, int height, GameModel gameModel, String backgroundLocation, PlayerView playerView) {
+    public RoomView(int width,
+                    int height,
+                    GameModel gameModel,
+                    String backgroundLocation,
+                    PlayerView playerView) {
         this(width, height, gameModel, new Image(backgroundLocation), playerView);
     }
 
 
     /**
      * Returns the scene of the room
-     * @param maze array which is used to calculate the current position of the room in the maze
-     * @param bg background image for the room
+     * @return the generated scene
      */
     public Scene getScene() {
         ImageView barSceneViewer = new ImageView(background);

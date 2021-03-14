@@ -17,11 +17,24 @@ public class MazeView {
     private int row;
     private int col;
 
-
-
     private GameModel gameModel;
 
-    public MazeView(int width, int height, int rows, int cols, GameModel gameModel, PlayerView playerView) {
+    /**
+     * Construct a visual Maze of RoomViews.
+      * @param width width of a room.
+     * @param height height of a room.
+     * @param rows number of rows in a maze.
+     * @param cols number of cols in a maze.
+     * @param gameModel the gamemodel with game data.
+     * @param playerView the visual player data.
+     */
+    public MazeView(int width,
+                    int height,
+                    int rows,
+                    int cols,
+                    GameModel gameModel,
+                    PlayerView playerView) {
+
         this.width = width;
         this.height = height;
         this.rows = rows;
@@ -32,7 +45,7 @@ public class MazeView {
         Random rng = new Random();
         // BackgroundModel bgModel = new BackgroundModel(rng.nextInt(4) + 1);
 
-        BackgroundModel bgModel = new BackgroundModel( 2);
+        BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
         RoomView rm = new RoomView(width, height, gameModel, im, playerView);
@@ -101,7 +114,7 @@ public class MazeView {
         return col - 1 >= 0;
     }
     public boolean canMoveUp() {
-        return row - 1 >=0;
+        return row - 1 >= 0;
     }
     public boolean canMoveDown() {
         return row + 1 < rows;
@@ -128,7 +141,7 @@ public class MazeView {
 
     public RoomView moveUp() {
         // System.out.println("(" + row + "," + col + ")");
-        if (row - 1 >=0) {
+        if (row - 1 >= 0) {
             row--;
             current = maze[row][col];
         }

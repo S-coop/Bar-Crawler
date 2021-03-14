@@ -1,7 +1,5 @@
 package src.model;
 
-import javafx.scene.image.Image;
-
 public class GameModel {
     private String username;
     private String difficulty;

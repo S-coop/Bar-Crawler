@@ -1,19 +1,14 @@
 package src.controller;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import src.model.BackgroundModel;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
-import src.view.InitialGameScreen;
 import src.view.MazeView;
 import src.view.PlayerView;
-import src.view.RoomView;
 import src.view.WelcomeScreen;
 import src.view.EndScreen;
 
@@ -75,7 +70,8 @@ public class Main extends Application {
                     (double) height / 2, width, height);
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
             PlayerController playerController = new PlayerController(mainWindow, playerView);
-            MazeController mazeController = new MazeController(mainWindow, maze, playerView, gameModel);
+            MazeController mazeController =
+                    new MazeController(mainWindow, maze, playerView, gameModel);
 
             PlayerView player = playerView;
 
@@ -84,24 +80,24 @@ public class Main extends Application {
         }
     }
 
-        private void goToEndScreen(ConfigurationScreenScene configScene) {
-            if (configScene.validateUsernameString()) {
-                gameModel.setUsername(configScene.getUsername());
-                gameModel.setDifficulty(difficulties[
-                        (Integer) configScene.getDifficultyIndex()]);
-                gameModel.setWeapon(weapons[
-                        (Integer) configScene.getWeaponIndex()]);
-                gameModel.setDifficultyIndex(
-                        (Integer) configScene.getDifficultyIndex());
-                EndScreen endScreen = new EndScreen(
-                        width, height, gameModel);
-                endScreen.getGoBackButton().setOnAction(actionEvent1 ->
-                        goToConfigScreen());
-                mainWindow.setTitle("YOU WIN!");
-                mainWindow.setScene(endScreen.getEndScene());
-                mainWindow.show();
-            }
+    private void goToEndScreen(ConfigurationScreenScene configScene) {
+        if (configScene.validateUsernameString()) {
+            gameModel.setUsername(configScene.getUsername());
+            gameModel.setDifficulty(difficulties[
+                    (Integer) configScene.getDifficultyIndex()]);
+            gameModel.setWeapon(weapons[
+                    (Integer) configScene.getWeaponIndex()]);
+            gameModel.setDifficultyIndex(
+                    (Integer) configScene.getDifficultyIndex());
+            EndScreen endScreen = new EndScreen(
+                    width, height, gameModel);
+            endScreen.getGoBackButton().setOnAction(actionEvent1 ->
+                    goToConfigScreen());
+            mainWindow.setTitle("YOU WIN!");
+            mainWindow.setScene(endScreen.getEndScene());
+            mainWindow.show();
         }
+    }
     /**
      * Main method.
      * @param args parameters to main method.
