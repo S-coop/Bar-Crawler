@@ -19,7 +19,7 @@ public class Main extends Application {
     private final int height = 1080 / 2;
     private final String[] difficulties = {"Sober", "Tipsy", "Drunk"};
     private final String[] weapons = {"Sword", "Bow", "Broken Bottle"};
-
+    private PlayerView pV;
 
 
     @Override
@@ -68,6 +68,7 @@ public class Main extends Application {
             Image playerImage = new Image("file:assets/AlexFWD.png");
             PlayerView playerView = new PlayerView(playerLayer, playerImage, (double) width / 2,
                     (double) height / 2, width, height);
+            this.pV = playerView; //for testing purposes
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
             PlayerController playerController = new PlayerController(mainWindow, playerView);
             MazeController mazeController =
@@ -97,6 +98,10 @@ public class Main extends Application {
             mainWindow.setScene(endScreen.getEndScene());
             mainWindow.show();
         }
+    }
+
+    public PlayerView getPlayerView() {
+        return this.pV;
     }
     /**
      * Main method.

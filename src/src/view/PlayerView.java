@@ -64,7 +64,9 @@ public class PlayerView {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if (0 + leftBoarder <= x  && x  < width - playerWidth - leftBoarder) {
+            this.x = x;
+        }
     }
 
     public double getY() {
@@ -72,7 +74,9 @@ public class PlayerView {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if (0 + topBoarder <= y  && y  < height - playerHeight - topBoarder) {
+            this.y = y;
+        }
     }
 
     public double getDx() {
