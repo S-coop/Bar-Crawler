@@ -42,6 +42,7 @@ public class MazeController {
                     System.out.println("right door");
                     if (mazeView.canMoveRight()) {
                         RoomView newRoom = mazeView.moveRight();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
@@ -54,6 +55,7 @@ public class MazeController {
                     System.out.println("left door");
                     if (mazeView.canMoveLeft()) {
                         RoomView newRoom = mazeView.moveLeft();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
@@ -66,6 +68,7 @@ public class MazeController {
                     if (mazeView.canMoveUp()) {
                         System.out.println("top door");
                         RoomView newRoom = mazeView.moveUp();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
@@ -84,6 +87,7 @@ public class MazeController {
                     System.out.println("bottom door");
                     if (mazeView.canMoveDown()) {
                         RoomView newRoom = mazeView.moveDown();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
