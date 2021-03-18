@@ -26,6 +26,7 @@ public class MazeController {
     private final double bottomX = 467;
     private final double bottomY = 462;
 
+    private boolean atExit = false;
     public MazeController(Stage primaryStage,
                           MazeView mazeView,
                           PlayerView playerView,
@@ -74,9 +75,10 @@ public class MazeController {
                         primaryStage.show();
                         playerView.setX(bottomX);
                         playerView.setY(bottomY - bufferBottom - 50);
-                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4) {
+                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4 && !atExit) {
                         //display winScreen
                         System.out.println("yay");
+                        atExit = true;
                         EndScreen endScreen = new EndScreen(1920 / 2, 1080 / 2, gameModel);
                         primaryStage.setScene(endScreen.getEndScene());
                         primaryStage.show();
