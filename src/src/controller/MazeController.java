@@ -26,6 +26,7 @@ public class MazeController {
     private final double bottomX = 467;
     private final double bottomY = 462;
 
+    private boolean atExit = false;
     public MazeController(Stage primaryStage,
                           MazeView mazeView,
                           PlayerView playerView,
@@ -42,6 +43,7 @@ public class MazeController {
                     System.out.println("right door");
                     if (mazeView.canMoveRight()) {
                         RoomView newRoom = mazeView.moveRight();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
@@ -54,6 +56,7 @@ public class MazeController {
                     System.out.println("left door");
                     if (mazeView.canMoveLeft()) {
                         RoomView newRoom = mazeView.moveLeft();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
@@ -66,14 +69,16 @@ public class MazeController {
                     if (mazeView.canMoveUp()) {
                         System.out.println("top door");
                         RoomView newRoom = mazeView.moveUp();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
                         playerView.setX(bottomX);
                         playerView.setY(bottomY - bufferBottom - 50);
-                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4) {
+                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4 && !atExit) {
                         //display winScreen
                         System.out.println("yay");
+                        atExit = true;
                         EndScreen endScreen = new EndScreen(1920 / 2, 1080 / 2, gameModel);
                         primaryStage.setScene(endScreen.getEndScene());
                         primaryStage.show();
@@ -84,6 +89,7 @@ public class MazeController {
                     System.out.println("bottom door");
                     if (mazeView.canMoveDown()) {
                         RoomView newRoom = mazeView.moveDown();
+                        newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
                         primaryStage.setScene(sc);
                         primaryStage.show();
