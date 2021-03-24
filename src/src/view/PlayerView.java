@@ -103,6 +103,10 @@ public class PlayerView {
         return this.y + this.playerHeight / 2;
     }
 
+    public ImageView getImageView() {
+        return this.imageView;
+    }
+
     public void setSprite(Image im) {
         this.imageView.setImage(im);
     }
