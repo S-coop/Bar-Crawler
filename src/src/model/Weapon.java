@@ -1,2 +1,5 @@
-package src.model;public enum weapon {
+package src.model;
+
+public enum Weapon {
+    SWORD, GUN, BOTTLE;
 }
