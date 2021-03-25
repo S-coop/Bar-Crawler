@@ -14,7 +14,7 @@ public class MonsterController {
     private double dx = 1;
     private double dy = 1;
 
-    public MonsterController (Stage stage, PlayerView player, MonsterView monster) {
+    public MonsterController(Stage stage, PlayerView player, MonsterView monster) {
         this.stage = stage;
         this.player = player;
         this.monster = monster;

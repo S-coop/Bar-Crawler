@@ -22,10 +22,10 @@ public class MonsterView {
     private static double width = 1920 / 2;
     private static double height = 1080 / 2;
 
-    private static final double playerWidth = 76 / 2;
-    private static final double playerHeight = 156 / 2;
-    private static final double topBoarder = 76 / 2;
-    private static final double leftBoarder = 76 / 2;
+    private static final double PLAYER_WIDTH = 76 / 2;
+    private static final double PLAYER_HEIGHT = 156 / 2;
+    private static final double TOP_BOARDER = 76 / 2;
+    private static final double LEFT_BOARDER = 76 / 2;
 
     private boolean movable;
 
@@ -71,7 +71,7 @@ public class MonsterView {
     }
 
     public void setX(double x) {
-        if (0 + leftBoarder <= x  && x  < width - playerWidth - leftBoarder) {
+        if (0 + LEFT_BOARDER <= x  && x  < width - PLAYER_WIDTH - LEFT_BOARDER) {
             this.x = x;
         }
     }
@@ -81,7 +81,7 @@ public class MonsterView {
     }
 
     public void setY(double y) {
-        if (0 + topBoarder <= y  && y  < height - playerHeight - topBoarder) {
+        if (0 + TOP_BOARDER <= y  && y  < height - PLAYER_HEIGHT - TOP_BOARDER) {
             this.y = y;
         }
     }
@@ -103,11 +103,11 @@ public class MonsterView {
     }
 
     public double getCenterX() {
-        return this.x + this.playerWidth / 2;
+        return this.x + this.PLAYER_WIDTH / 2;
     }
 
     public double getCenterY() {
-        return this.y + this.playerHeight / 2;
+        return this.y + this.PLAYER_HEIGHT / 2;
     }
 
     public ImageView getImageView() {
@@ -127,10 +127,10 @@ public class MonsterView {
 
     public void move() {
         if (movable) {
-            if (0 + leftBoarder <= x + dx && x + dx < width - playerWidth - leftBoarder) {
+            if (0 + LEFT_BOARDER <= x + dx && x + dx < width - PLAYER_WIDTH - LEFT_BOARDER) {
                 x += dx;
             }
-            if (0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder) {
+            if (0 + TOP_BOARDER <= y + dy && y + dy < height - PLAYER_HEIGHT - TOP_BOARDER) {
                 y += dy;
             }
         }
@@ -140,13 +140,20 @@ public class MonsterView {
         imageView.relocate(x, y);
     }
 
-    public static ArrayList<MonsterView> generateMonsterViews(int num, Pane layer, ArrayList<Image> sprites) {
+    public static ArrayList<MonsterView> generateMonsterViews(
+            int num,
+            Pane layer,
+            ArrayList<Image> sprites) {
+
         // can edit to add in dmg and weapon parameters, or a monster model object.
         ArrayList<MonsterView> monsters = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < num; i++) {
-            int x = (int) (rand.nextInt((int) (width - 2 * leftBoarder - playerWidth)) + leftBoarder);
-            int y = (int) (rand.nextInt((int) (height - 2 * topBoarder - playerHeight)) + topBoarder);
+            int x = (int)
+                    (rand.nextInt((int) (width - 2 * LEFT_BOARDER - PLAYER_WIDTH)) + LEFT_BOARDER);
+            int y = (int)
+                    (rand.nextInt((int) (height - 2 * TOP_BOARDER - PLAYER_HEIGHT)) + TOP_BOARDER);
+
             int sprite = rand.nextInt(sprites.size());
             MonsterView monster = new MonsterView(layer, sprites.get(sprite), x, y, width, height);
             monsters.add(monster);
