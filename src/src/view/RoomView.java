@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -15,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import src.model.GameModel;
+
+import java.util.ArrayList;
 
 
 public class RoomView {
@@ -40,7 +43,7 @@ public class RoomView {
     private Image background;
     private boolean visited;
 
-
+    private ArrayList<MonsterView> monsterViews;
 
     /**
      * initialize the variables for the Room screen.
@@ -54,7 +57,8 @@ public class RoomView {
                     int height,
                     GameModel gameModel,
                     Image background,
-                    PlayerView playerView) {
+                    PlayerView playerView,
+                    ArrayList<MonsterView> monsterViews) {
         //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
@@ -65,14 +69,17 @@ public class RoomView {
         this.background = background;
         this.playerView = playerView;
         this.visited = false;
+
+        this.monsterViews = monsterViews;
     }
 
     public RoomView(int width,
                     int height,
                     GameModel gameModel,
                     String backgroundLocation,
-                    PlayerView playerView) {
-        this(width, height, gameModel, new Image(backgroundLocation), playerView);
+                    PlayerView playerView,
+                    ArrayList<MonsterView> monsterViews) {
+        this(width, height, gameModel, new Image(backgroundLocation), playerView, monsterViews);
     }
 
 
@@ -136,7 +143,13 @@ public class RoomView {
         );
 
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer());
+
+        // generate layer of monsters
+        Pane monsterLayer = new Pane();
+        for (MonsterView m : monsterViews) {
+            monsterLayer.getChildren().add(m.getImageView());
+        }
+        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer(), monsterLayer);
 
         return new Scene(stackScreen, width, height);
     }
@@ -146,6 +159,14 @@ public class RoomView {
 
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    public ArrayList<MonsterView> getMonsterViews() {
+        return monsterViews;
+    }
+
+    public void setMonsterViews(ArrayList<MonsterView> monsterViews) {
+        this.monsterViews = monsterViews;
     }
 }
 

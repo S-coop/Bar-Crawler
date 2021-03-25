@@ -76,8 +76,6 @@ public class Main extends Application {
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
 
-            PlayerView player = playerView;
-
             mainWindow.setScene(maze.getCurrent().getScene());
             mainWindow.show();
         }

@@ -4,7 +4,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class PlayerView {
+import java.util.ArrayList;
+import java.util.Random;
+
+public class MonsterView {
     private Image sprite;
     private ImageView imageView;
 
@@ -16,13 +19,15 @@ public class PlayerView {
     private double dx;
     private double dy;
 
-    private double width;
-    private double height;
+    private static double width = 1920 / 2;
+    private static double height = 1080 / 2;
 
-    private final double playerWidth = 76 / 2;
-    private final double playerHeight = 156 / 2;
-    private final double topBoarder = 76 / 2;
-    private final double leftBoarder = 76 / 2;
+    private static final double playerWidth = 76 / 2;
+    private static final double playerHeight = 156 / 2;
+    private static final double topBoarder = 76 / 2;
+    private static final double leftBoarder = 76 / 2;
+
+    private boolean movable;
 
     /**
      * Player visual data constructor
@@ -33,7 +38,7 @@ public class PlayerView {
      * @param w the width of the game
      * @param h the height of the game
      */
-    public PlayerView(Pane layer, Image sprite, double x, double y, double w, double h) {
+    public MonsterView(Pane layer, Image sprite, double x, double y, double w, double h) {
         this.layer = layer;
         this.sprite = sprite;
 
@@ -41,12 +46,12 @@ public class PlayerView {
         this.y = y;
 
         this.imageView = new ImageView(sprite);
-//        this.imageView = new ImageView("file:assets/enemies/bouncer.png");
         this.imageView.relocate(x, y);
 
         this.width = w;
         this.height = h;
 
+        this.movable = false;
         addToLayer();
     }
 
@@ -60,6 +65,7 @@ public class PlayerView {
     public Pane getLayer() {
         return this.layer;
     }
+
     public double getX() {
         return x;
     }
@@ -111,16 +117,41 @@ public class PlayerView {
     public void setSprite(Image im) {
         this.imageView.setImage(im);
     }
+
+    public boolean isMovable() {
+        return movable;
+    }
+    public void setMovable(boolean movable) {
+        this.movable = movable;
+    }
+
     public void move() {
-        if (0 + leftBoarder <= x  + dx && x + dx < width - playerWidth - leftBoarder) {
-            x += dx;
-        }
-        if (0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder) {
-            y += dy;
+        if (movable) {
+            if (0 + leftBoarder <= x + dx && x + dx < width - playerWidth - leftBoarder) {
+                x += dx;
+            }
+            if (0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder) {
+                y += dy;
+            }
         }
     }
 
     public void updateUI() {
         imageView.relocate(x, y);
+    }
+
+    public static ArrayList<MonsterView> generateMonsterViews(int num, Pane layer, ArrayList<Image> sprites) {
+        // can edit to add in dmg and weapon parameters, or a monster model object.
+        ArrayList<MonsterView> monsters = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < num; i++) {
+            int x = (int) (rand.nextInt((int) (width - leftBoarder - playerWidth)) + leftBoarder + playerWidth);
+            int y = (int) (rand.nextInt((int) (height - topBoarder - playerHeight)) + topBoarder + playerHeight);
+            int sprite = rand.nextInt(sprites.size());
+            MonsterView monster = new MonsterView(layer, sprites.get(sprite), x, y, width, height);
+            monsters.add(monster);
+        }
+
+        return monsters;
     }
 }
