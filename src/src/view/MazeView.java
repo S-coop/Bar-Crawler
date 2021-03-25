@@ -128,6 +128,8 @@ public class MazeView {
         this.row = 3;
         this.col = 1;
         current = maze[this.row][this.col];
+        current.setVisited(true);
+//        getRight().setVisited(true);
     }
 
     public RoomView getCurrent() {
@@ -192,6 +194,20 @@ public class MazeView {
 
     public int getCol() {
         return col;
+    }
+
+    public RoomView getRight() {
+        return maze[row][col + 1];
+    }
+
+    public RoomView getLeft() {
+        return maze[row][col - 1];
+    }
+    public RoomView getUp() {
+        return maze[row - 1][col];
+    }
+    public RoomView getDown() {
+        return maze[row + 1][col];
     }
 
 }

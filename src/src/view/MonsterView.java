@@ -145,8 +145,8 @@ public class MonsterView {
         ArrayList<MonsterView> monsters = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < num; i++) {
-            int x = (int) (rand.nextInt((int) (width - leftBoarder - playerWidth)) + leftBoarder + playerWidth);
-            int y = (int) (rand.nextInt((int) (height - topBoarder - playerHeight)) + topBoarder + playerHeight);
+            int x = (int) (rand.nextInt((int) (width - 2 * leftBoarder - playerWidth)) + leftBoarder);
+            int y = (int) (rand.nextInt((int) (height - 2 * topBoarder - playerHeight)) + topBoarder);
             int sprite = rand.nextInt(sprites.size());
             MonsterView monster = new MonsterView(layer, sprites.get(sprite), x, y, width, height);
             monsters.add(monster);
