@@ -5,12 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import src.model.Direction;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
 import src.view.MazeView;
 import src.view.PlayerView;
 import src.view.WelcomeScreen;
 import src.view.EndScreen;
+import src.model.Weapon;
 
 public class Main extends Application {
     private Stage mainWindow;
@@ -18,7 +20,7 @@ public class Main extends Application {
     private final int width = 1920 / 2;
     private final int height = 1080 / 2;
     private final String[] difficulties = {"Sober", "Tipsy", "Drunk"};
-    private final String[] weapons = {"Sword", "Bow", "Broken Bottle"};
+    private final String[] weapons = {"Sword", "Gun", "Broken Bottle"};
     private PlayerView pV;
     private MazeView mV;
 
@@ -66,9 +68,27 @@ public class Main extends Application {
                     (Integer) configScene.getDifficultyIndex());
 
             Pane playerLayer = new Pane();
+            //starting sprites
             Image playerImage = new Image("file:assets/AlexFWD.png");
-            PlayerView playerView = new PlayerView(playerLayer, playerImage, (double) width / 2,
-                    (double) height / 2, width, height);
+            Weapon weapon = Weapon.SWORD;
+
+            switch (weapons[(Integer) configScene.getWeaponIndex()]) {
+                case "Sword":
+                    playerImage = new Image("file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
+                    weapon = Weapon.SWORD;
+                    break;
+                case "Gun":
+                    playerImage = new Image("file:assets/alex_sprites/gun/facing_front/standing/gun_front_standing.png");
+                    weapon = Weapon.GUN;
+                    break;
+                case "Broken Bottle" :
+                    playerImage = new Image("file:assets/alex_sprites/broken_bottle/facing_front/standing/bottle_front_standing.png");
+                    weapon = Weapon.BOTTLE;
+                    break;
+            }
+
+            PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,
+                    (double) height / 2, width, height, weapon, Direction.FRONT);
             this.pV = playerView; //for testing purposes
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
             this.mV = maze;
