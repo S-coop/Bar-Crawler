@@ -1,9 +1,14 @@
 package src.view;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import src.model.BackgroundModel;
+import src.model.EnemySpriteModel;
 import src.model.GameModel;
 
+import java.lang.reflect.Array;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MazeView {
@@ -41,49 +46,70 @@ public class MazeView {
         this.cols = cols;
         this.gameModel = gameModel;
 
+        int maxEnemies = 3;
+        int minEnemies = 1;
         maze = new RoomView[rows][cols];
         Random rng = new Random();
+        int randNum = rng.nextInt( maxEnemies - minEnemies) + minEnemies;
+        System.out.println("enemies: " + randNum);
+        Pane layer = new Pane();
+        EnemySpriteModel esm = new EnemySpriteModel();
+        ArrayList<MonsterView> monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
+
+        //        for(Image i : esm.getForwardNeutralSprites()) {
+//            System.out.println(i);
+//        }
         // BackgroundModel bgModel = new BackgroundModel(rng.nextInt(4) + 1);
 
         BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
-        RoomView rm = new RoomView(width, height, gameModel, im, playerView);
+        RoomView rm = new RoomView(width, height, gameModel, im, playerView, monsters);
         maze[0][0] = rm;
 
+        monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
+
         im = bgModel.getTopRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
         maze[0][cols - 1] = rm;
 
+        monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
+
         im = bgModel.getBottomRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
         maze[rows - 1][cols - 1] = rm;
 
+        monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
+
         im = bgModel.getBottomLeftBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
         maze[rows - 1][0] = rm;
 
 
         //generate left/right side
         for (int c = 1; c < cols - 1; c++) {
+            monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
             Image leftImage = bgModel.getTopBackgrounds().get(c - 1);
-            RoomView leftRoom = new RoomView(width, height, gameModel, leftImage, playerView);
+            RoomView leftRoom = new RoomView(width, height, gameModel, leftImage, playerView, monsters);
             maze[0][c] = leftRoom;
 
+            monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
             Image rightImage = bgModel.getBottomBackgrounds().get(c - 1);
-            RoomView rightRoom = new RoomView(width, height, gameModel, rightImage, playerView);
+            RoomView rightRoom = new RoomView(width, height, gameModel, rightImage, playerView, monsters);
             maze[rows - 1][c] = rightRoom;
 
         }
 
         //generate top/bottom
         for (int r = 1; r < rows - 1; r++) {
+            monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
             Image topImage = bgModel.getLeftSideBackgrounds().get(r - 1);
-            RoomView topRoom = new RoomView(width, height, gameModel, topImage, playerView);
+            RoomView topRoom = new RoomView(width, height, gameModel, topImage, playerView, monsters);
             maze[r][0] = topRoom;
 
+            monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
             Image bottomImage = bgModel.getRightSideBackgrounds().get(r - 1);
-            RoomView bottomRoom = new RoomView(width, height, gameModel, bottomImage, playerView);
+            RoomView bottomRoom = new RoomView(width, height, gameModel, bottomImage, playerView, monsters);
             maze[r][cols - 1] = bottomRoom;
 
         }
@@ -92,8 +118,9 @@ public class MazeView {
         int backgroundIndex = 0;
         for (int r = 1; r <= rows - 2; r++) {
             for (int c = 1; c <= cols - 2; c++) {
+                monsters = MonsterView.generateMonsterViews(rng.nextInt( maxEnemies - minEnemies) + minEnemies, layer, esm.getForwardNeutralSprites());
                 Image bg = bgModel.getMiddleBackgrounds().get(backgroundIndex);
-                RoomView room = new RoomView(width, height, gameModel, bg, playerView);
+                RoomView room = new RoomView(width, height, gameModel, bg, playerView, monsters);
                 maze[r][c] = room;
                 backgroundIndex++;
             }
@@ -166,4 +193,5 @@ public class MazeView {
     public int getCol() {
         return col;
     }
+
 }
