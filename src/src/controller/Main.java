@@ -1,19 +1,14 @@
 package src.controller;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import src.model.BackgroundModel;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
-import src.view.InitialGameScreen;
 import src.view.MazeView;
 import src.view.PlayerView;
-import src.view.RoomView;
 import src.view.WelcomeScreen;
 import src.view.EndScreen;
 
@@ -24,7 +19,8 @@ public class Main extends Application {
     private final int height = 1080 / 2;
     private final String[] difficulties = {"Sober", "Tipsy", "Drunk"};
     private final String[] weapons = {"Sword", "Bow", "Broken Bottle"};
-
+    private PlayerView pV;
+    private MazeView mV;
 
 
     @Override
@@ -73,35 +69,44 @@ public class Main extends Application {
             Image playerImage = new Image("file:assets/AlexFWD.png");
             PlayerView playerView = new PlayerView(playerLayer, playerImage, (double) width / 2,
                     (double) height / 2, width, height);
+            this.pV = playerView; //for testing purposes
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
+            this.mV = maze;
             PlayerController playerController = new PlayerController(mainWindow, playerView);
-            MazeController mazeController = new MazeController(mainWindow, maze, playerView, gameModel);
-
-            PlayerView player = playerView;
+            MazeController mazeController =
+                    new MazeController(mainWindow, maze, playerView, gameModel);
 
             mainWindow.setScene(maze.getCurrent().getScene());
             mainWindow.show();
         }
     }
 
-        private void goToEndScreen(ConfigurationScreenScene configScene) {
-            if (configScene.validateUsernameString()) {
-                gameModel.setUsername(configScene.getUsername());
-                gameModel.setDifficulty(difficulties[
-                        (Integer) configScene.getDifficultyIndex()]);
-                gameModel.setWeapon(weapons[
-                        (Integer) configScene.getWeaponIndex()]);
-                gameModel.setDifficultyIndex(
-                        (Integer) configScene.getDifficultyIndex());
-                EndScreen endScreen = new EndScreen(
-                        width, height, gameModel);
-                endScreen.getGoBackButton().setOnAction(actionEvent1 ->
-                        goToConfigScreen());
-                mainWindow.setTitle("YOU WIN!");
-                mainWindow.setScene(endScreen.getEndScene());
-                mainWindow.show();
-            }
+    private void goToEndScreen(ConfigurationScreenScene configScene) {
+        if (configScene.validateUsernameString()) {
+            gameModel.setUsername(configScene.getUsername());
+            gameModel.setDifficulty(difficulties[
+                    (Integer) configScene.getDifficultyIndex()]);
+            gameModel.setWeapon(weapons[
+                    (Integer) configScene.getWeaponIndex()]);
+            gameModel.setDifficultyIndex(
+                    (Integer) configScene.getDifficultyIndex());
+            EndScreen endScreen = new EndScreen(
+                    width, height, gameModel);
+            endScreen.getGoBackButton().setOnAction(actionEvent1 ->
+                    goToConfigScreen());
+            mainWindow.setTitle("YOU WIN!");
+            mainWindow.setScene(endScreen.getEndScene());
+            mainWindow.show();
         }
+    }
+
+    public PlayerView getPlayerView() {
+        return this.pV;
+    }
+
+    public MazeView getMazeView() {
+        return this.mV;
+    }
     /**
      * Main method.
      * @param args parameters to main method.

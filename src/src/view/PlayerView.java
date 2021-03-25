@@ -19,13 +19,19 @@ public class PlayerView {
     private double width;
     private double height;
 
-    private final double playerWidth = 76 /2;
+    private final double playerWidth = 76 / 2;
     private final double playerHeight = 156 / 2;
     private final double topBoarder = 76 / 2;
     private final double leftBoarder = 76 / 2;
 
     /**
-     * Player constructor.
+     * Player visual data constructor
+     * @param layer the layer the player belongs to
+     * @param sprite the player sprite to display
+     * @param x the x location to start
+     * @param y the y location to start
+     * @param w the width of the game
+     * @param h the height of the game
      */
     public PlayerView(Pane layer, Image sprite, double x, double y, double w, double h) {
         this.layer = layer;
@@ -44,7 +50,7 @@ public class PlayerView {
     }
 
     /**
-     * Adds player to layer.
+     * Add the image to a layer.
      */
     public void addToLayer() {
         this.layer.getChildren().add(this.imageView);
@@ -58,7 +64,9 @@ public class PlayerView {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if (0 + leftBoarder <= x  && x  < width - playerWidth - leftBoarder) {
+            this.x = x;
+        }
     }
 
     public double getY() {
@@ -66,7 +74,9 @@ public class PlayerView {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if (0 + topBoarder <= y  && y  < height - playerHeight - topBoarder) {
+            this.y = y;
+        }
     }
 
     public double getDx() {
@@ -93,14 +103,20 @@ public class PlayerView {
         return this.y + this.playerHeight / 2;
     }
 
+    public ImageView getImageView() {
+        return this.imageView;
+    }
+
     public void setSprite(Image im) {
         this.imageView.setImage(im);
     }
     public void move() {
-        if(0 + leftBoarder <= x  + dx && x + dx < width - playerWidth - leftBoarder)
-        x += dx;
-        if( 0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder)
-        y += dy;
+        if (0 + leftBoarder <= x  + dx && x + dx < width - playerWidth - leftBoarder) {
+            x += dx;
+        }
+        if (0 + topBoarder <= y + dy && y + dy < height - playerHeight - topBoarder) {
+            y += dy;
+        }
     }
 
     public void updateUI() {

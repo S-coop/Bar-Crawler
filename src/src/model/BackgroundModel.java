@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BackgroundModel {
-    ArrayList<Image> middleBackgrounds;
-    ArrayList<Image> leftSideBackgrounds;
-    ArrayList<Image> rightSideBackgrounds;
-    ArrayList<Image> bottomBackgrounds;
-    ArrayList<Image> topBackgrounds;
-    Image topLeftBackground;
-    Image topRightBackground;
-    Image bottomLeftBackground;
-    Image bottomRightBackground;
+    private ArrayList<Image> middleBackgrounds;
+    private ArrayList<Image> leftSideBackgrounds;
+    private ArrayList<Image> rightSideBackgrounds;
+    private ArrayList<Image> bottomBackgrounds;
+    private ArrayList<Image> topBackgrounds;
+    private Image topLeftBackground;
+    private Image topRightBackground;
+    private Image bottomLeftBackground;
+    private Image bottomRightBackground;
 
     public BackgroundModel(int configuration) {
         middleBackgrounds = generateArrayList("assets/Rooms/mid");
@@ -29,10 +29,20 @@ public class BackgroundModel {
         bottomLeftBackground = new Image("file:assets/Rooms/bottom_left_corner/arcade.png");
         bottomRightBackground = new Image("file:assets/Rooms/bottom_right_corner/Hoot.png");
         switch (configuration) {
-            case 1 -> topLeftBackground = new Image("file:assets/Rooms/top_left_corner/Final.png");
-            case 2 -> topRightBackground = new Image("file:assets/Rooms/top_right_corner/Final.png");
-            case 3 -> bottomLeftBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
-            case 4 -> bottomRightBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
+        case 1:
+            topLeftBackground = new Image("file:assets/Rooms/top_left_corner/Final.png");
+            break;
+        case 2:
+            topRightBackground = new Image("file:assets/Rooms/top_right_corner/Final.png");
+            break;
+        case 3:
+            bottomLeftBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
+            break;
+        case 4:
+            bottomRightBackground = new Image("file:assets/Rooms/bottom_left_corner/Final.png");
+            break;
+        default:
+            break;
         }
 
     }

@@ -29,6 +29,7 @@ public class InitialGameScreen {
      * @param width width of the window
      * @param height height of the window
      * @param gameModel the game model containing player data
+     * @param playerView the playerview containing visual player data
      */
     public InitialGameScreen(int width, int height, GameModel gameModel, PlayerView playerView) {
 
@@ -124,6 +125,7 @@ public class InitialGameScreen {
 
     /**
      * Return the StackPane of the InitialGameScreen.
+     * @return the stackpane of the InitialGameScreen.
      */
     public StackPane getStackScreen() {
         return stackScreen;
