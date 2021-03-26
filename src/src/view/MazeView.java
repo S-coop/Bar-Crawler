@@ -5,10 +5,6 @@ import javafx.scene.layout.Pane;
 import src.model.BackgroundModel;
 import src.model.EnemySpriteModel;
 import src.model.GameModel;
-import src.model.MonsterModel;
-
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 
