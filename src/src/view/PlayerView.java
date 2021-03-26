@@ -3,6 +3,9 @@ package src.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import src.model.Direction;
+import src.model.Walking;
+import src.model.Weapon;
 
 public class PlayerView {
     private Image sprite;
@@ -24,23 +27,90 @@ public class PlayerView {
     private final double topBoarder = 76 / 2;
     private final double leftBoarder = 76 / 2;
 
+    private Weapon weapon;
+    private Direction direction;
+    private String pathName1 = " ";
+    private String pathName2 = " ";
+    private String pathName3 = " ";
+    private String fileName1 = " ";
+    private String fileName2 = " ";
+    private String fileName3 = " ";
+    private String fileName4 = "_hit";
+    private String fileName;
+
+    private Walking[] walking = new Walking[4];
+    private Walking step;
+    private int walkingIdx;
+
     /**
      * Player visual data constructor
      * @param layer the layer the player belongs to
-     * @param sprite the player sprite to display
      * @param x the x location to start
      * @param y the y location to start
      * @param w the width of the game
      * @param h the height of the game
      */
-    public PlayerView(Pane layer, Image sprite, double x, double y, double w, double h) {
+    public PlayerView(Pane layer, double x, double y, double w, double h, Weapon weaponPick, Direction direction) {
+        this.weapon = weaponPick;
+        this.direction = direction;
+        walking[0] = Walking.CENTER;
+        walking[1] = Walking.LEFT;
+        walking[2] = Walking.CENTER;
+        walking[3] = Walking.RIGHT;
+        walkingIdx = 0;
+        step = walking[walkingIdx];
+
+        switch (weaponPick) {
+            case GUN:
+                pathName1 = "file:assets/alex_sprites/gun/";
+                fileName1 = "gun_";
+                break;
+            case SWORD:
+                pathName1 = "file:assets/alex_sprites/sword/";
+                fileName1 = "sword_";
+                break;
+            case BOTTLE:
+                pathName1 = "file:assets/alex_sprites/broken_bottle/";
+                fileName1 = "bottle_";
+                break;
+            default:
+                break;
+        }
+
+        switch (direction) {
+            case FRONT:
+                pathName2 = "facing_front/";
+                fileName2 = "front";
+                break;
+            case BACK:
+                pathName2 = "facing_back/";
+                fileName2 = "back";
+                break;
+            case RIGHT:
+                pathName2 = "facing_right/";
+                fileName2 = "right";
+                break;
+            case LEFT:
+                pathName2 = "facing_left/";
+                fileName2 = "left";
+                break;
+            default:
+                break;
+        }
+
+        pathName3 = "standing/";
+        fileName3 = "_standing";
+        fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png";
+        System.out.println(fileName);
+
         this.layer = layer;
-        this.sprite = sprite;
 
         this.x = x;
         this.y = y;
 
+        this.sprite = new Image(fileName);
         this.imageView = new ImageView(sprite);
+//        this.imageView = new ImageView("file:assets/enemies/bouncer.png");
         this.imageView.relocate(x, y);
 
         this.width = w;
@@ -54,6 +124,51 @@ public class PlayerView {
      */
     public void addToLayer() {
         this.layer.getChildren().add(this.imageView);
+    }
+
+    public void attackSprite(){
+        fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + fileName4 + ".png";
+
+        System.out.println(fileName);
+
+        this.sprite = new Image(fileName);
+        this.imageView.setImage(sprite);
+        if (weapon == Weapon.GUN) {
+            shoot();
+        }
+    }
+
+    public void shoot() {
+        System.out.println("shoot");
+        Image bullet = new Image("file:assets/alex_sprites/gun/bullet/bullet.png");
+        ImageView bulletView = new ImageView(bullet);
+        boolean hit = false;
+        double gunX = x;
+        double gunY = y;
+        bulletView.relocate(gunX, gunY);
+        double gunDX = 0;
+        double gunDY = 0;
+        switch (direction) {
+            case FRONT:
+                gunDY = -3;
+                break;
+            case BACK:
+                gunDY = 3;
+                break;
+            case RIGHT:
+                gunDX = 3;
+                break;
+            case LEFT:
+                gunDX = -3;
+                break;
+            default:
+                break;
+        }
+        for (int i = 0; i < 100; i ++) {
+            gunX += gunDX;
+            gunY += gunDY;
+            bulletView.relocate(gunDX, gunDY);
+        }
     }
 
     public Pane getLayer() {
@@ -110,6 +225,77 @@ public class PlayerView {
     public void setSprite(Image im) {
         this.imageView.setImage(im);
     }
+
+    public void changeDirection(Direction direction) {
+        if (direction == this.direction) {
+            this.direction = direction;
+            walkingIdx = (walkingIdx + 1) % walking.length;
+            step = walking[walkingIdx];
+            switch (step) {
+                case CENTER:
+                    pathName3 = "standing/";
+                    fileName3 = "standing";
+                    break;
+                case LEFT:
+                    pathName3 = "walking/left_step/";
+                    fileName3 = "walking_leftstep";
+                    break;
+                case RIGHT:
+                    pathName3 = "walking/right_step/";
+                    fileName3 = "walking_rightstep";
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            this.direction = direction;
+            step = walking[0];
+            pathName3 = "standing/";
+            fileName3 = "standing";
+            switch (direction) {
+                case FRONT:
+                    pathName2 = "facing_front/";
+                    fileName2 = "front_";
+                    break;
+                case BACK:
+                    pathName2 = "facing_back/";
+                    fileName2 = "back_";
+                    break;
+                case RIGHT:
+                    pathName2 = "facing_right/";
+                    fileName2 = "right_";
+                    break;
+                case LEFT:
+                    pathName2 = "facing_left/";
+                    fileName2 = "left_";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png";
+        System.out.println(fileName);
+        this.sprite = new Image(fileName);
+        this.imageView.setImage(sprite);
+
+    }
+
+    public void endStep(){
+        if (step != Walking.CENTER) {
+            walkingIdx = (walkingIdx + 1) % walking.length;
+            step = walking[walkingIdx];
+            pathName3 = "standing/";
+            fileName3 = "standing";
+        }
+        fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png";
+        System.out.println(fileName);
+        this.sprite = new Image(fileName);
+        this.imageView.setImage(sprite);
+    }
+
+
     public void move() {
         if (0 + leftBoarder <= x  + dx && x + dx < width - playerWidth - leftBoarder) {
             x += dx;
@@ -122,4 +308,5 @@ public class PlayerView {
     public void updateUI() {
         imageView.relocate(x, y);
     }
+
 }
