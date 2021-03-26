@@ -110,7 +110,6 @@ public class PlayerView {
 
         this.sprite = new Image(fileName);
         this.imageView = new ImageView(sprite);
-//        this.imageView = new ImageView("file:assets/enemies/bouncer.png");
         this.imageView.relocate(x, y);
 
         this.width = w;

@@ -41,7 +41,9 @@ public class MazeController {
                 //right door
                 if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
                     System.out.println("right door");
-                    if (mazeView.canMoveRight()) {
+                    boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
+                    if (mazeView.canMoveRight()
+                            && (noEnemies || mazeView.getRight().hasVisited())) {
                         RoomView newRoom = mazeView.moveRight();
                         newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
@@ -54,7 +56,9 @@ public class MazeController {
                 //left door
                 if (checkBounds(centerX, centerY, leftX, leftY, bufferLeft, bufferLeft)) {
                     System.out.println("left door");
-                    if (mazeView.canMoveLeft()) {
+                    boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
+                    if (mazeView.canMoveLeft()
+                            && (noEnemies || mazeView.getLeft().hasVisited())) {
                         RoomView newRoom = mazeView.moveLeft();
                         newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();
@@ -66,7 +70,8 @@ public class MazeController {
                 }
                 //top door
                 if (checkBounds(centerX, centerY, topX, topY, bufferTop, bufferTop)) {
-                    if (mazeView.canMoveUp()) {
+                    boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
+                    if (mazeView.canMoveUp() && (noEnemies || mazeView.getUp().hasVisited())) {
                         System.out.println("top door");
                         RoomView newRoom = mazeView.moveUp();
                         newRoom.setVisited(true);
@@ -75,7 +80,8 @@ public class MazeController {
                         primaryStage.show();
                         playerView.setX(bottomX);
                         playerView.setY(bottomY - bufferBottom - 50);
-                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4 && !atExit) {
+                    } else if (mazeView.getRow() == 0 && mazeView.getCol() == 4
+                            && !atExit && noEnemies) {
                         //display winScreen
                         System.out.println("yay");
                         atExit = true;
@@ -87,7 +93,8 @@ public class MazeController {
                 //bottom door
                 if (checkBounds(centerX, centerY, bottomX, bottomY, bufferBottom, bufferBottom)) {
                     System.out.println("bottom door");
-                    if (mazeView.canMoveDown()) {
+                    boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
+                    if (mazeView.canMoveDown() && (noEnemies || mazeView.getDown().hasVisited())) {
                         RoomView newRoom = mazeView.moveDown();
                         newRoom.setVisited(true);
                         Scene sc = mazeView.getCurrent().getScene();

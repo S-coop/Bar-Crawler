@@ -21,7 +21,7 @@ public class EnemySpriteModel {
             System.out.println("file:" + dir + "/" +  f.getName());
         }
         //allow for randomization of map
-//        Collections.shuffle(images);
+        Collections.shuffle(images);
         return images;
     }
 

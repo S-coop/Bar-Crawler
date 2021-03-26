@@ -52,6 +52,7 @@ public class RoomView {
      * @param gameModel player data (weapon, difficulty, etc)
      * @param background the background of the room
      * @param playerView the visual data of the player to display
+     * @param monsterViews the array of visual monsterviews to display
      */
     public RoomView(int width,
                     int height,
@@ -149,7 +150,10 @@ public class RoomView {
         for (MonsterView m : monsterViews) {
             monsterLayer.getChildren().add(m.getImageView());
         }
-        stackScreen.getChildren().addAll(background, borderPane, playerView.getLayer(), monsterLayer);
+        stackScreen.getChildren().addAll(background,
+                borderPane,
+                playerView.getLayer(),
+                monsterLayer);
 
         return new Scene(stackScreen, width, height);
     }
