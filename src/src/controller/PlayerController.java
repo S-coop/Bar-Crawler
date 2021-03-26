@@ -4,17 +4,24 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import src.controller.Main;
 import javafx.stage.Stage;
 import src.model.Direction;
+import src.view.MazeView;
+import src.view.MonsterView;
 import src.view.PlayerView;
+
+import java.util.ArrayList;
 
 public class PlayerController {
     private PlayerView player;
+    private MazeView maze;
     private Stage stage;
     private double dx = 1;
     private double dy = 1;
 
-    public PlayerController(Stage stage, PlayerView player) {
+    public PlayerController(Stage stage, PlayerView player, MazeView maze) {
+        this.maze = maze;
         this.stage = stage;
         this.player = player;
         double dx = 5;
@@ -54,7 +61,37 @@ public class PlayerController {
                         break;
                     case SPACE:
                         player.attackSprite();
-
+                        Direction direct = player.getDirection();
+                        ArrayList<MonsterView> monsterList = (maze.getCurrent().getMonsterViews());
+                        for (MonsterView monster : monsterList) {
+                            switch (direct) {
+                                case FRONT:
+                                    if ((player.getX() - monster.getX() < 10) && (player.getY() - monster.getY() < 50)) {
+                                        maze.damageMonster(monster);
+                                        System.out.println(player.getDx());
+                                        System.out.println(player.getX());
+                                        System.out.println(monster.getX());
+                                    }
+                                    break;
+                                case BACK:
+                                    if ((player.getX() - monster.getX() < 10) && (player.getY() - monster.getY() < 50)) {
+                                        maze.damageMonster(monster);
+                                    }
+                                    break;
+                                case RIGHT:
+                                    if ((player.getX() - monster.getX() < 30) && (player.getY() - monster.getY() < 70)) {
+                                        maze.damageMonster(monster);
+                                    }
+                                    break;
+                                case LEFT:
+                                    if ((player.getX() - monster.getX() < 30) && (player.getY() - monster.getY() < 70)) {
+                                        maze.damageMonster(monster);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         System.out.println("attack");
                         break;
                     default:

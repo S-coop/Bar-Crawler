@@ -92,7 +92,7 @@ public class Main extends Application {
             this.pV = playerView; //for testing purposes
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
             this.mV = maze;
-            PlayerController playerController = new PlayerController(mainWindow, playerView);
+            PlayerController playerController = new PlayerController(mainWindow, playerView, maze);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
 

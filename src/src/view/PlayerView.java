@@ -206,6 +206,14 @@ public class PlayerView {
         return dy;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Weapon getWeapon() {
+        return (this.weapon);
+    }
+
     public void setDy(double dy) {
         this.dy = dy;
     }

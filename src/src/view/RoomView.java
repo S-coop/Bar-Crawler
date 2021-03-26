@@ -157,6 +157,10 @@ public class RoomView {
         return visited;
     }
 
+    public PlayerView getPlayerView() {
+        return this.playerView;
+    }
+
     public void setVisited(boolean visited) {
         this.visited = visited;
     }

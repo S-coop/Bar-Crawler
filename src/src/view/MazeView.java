@@ -5,6 +5,7 @@ import javafx.scene.layout.Pane;
 import src.model.BackgroundModel;
 import src.model.EnemySpriteModel;
 import src.model.GameModel;
+import src.model.MonsterModel;
 
 import java.lang.reflect.Array;
 import java.sql.SQLOutput;
@@ -128,6 +129,30 @@ public class MazeView {
         this.row = 3;
         this.col = 1;
         current = maze[this.row][this.col];
+    }
+
+    public void damageMonster(MonsterView currentMonster) {
+        //MonsterView currentMonster = (getCurrent().getMonsterViews()).get(i);
+        switch (getCurrent().getPlayerView().getWeapon()) {
+            case GUN:
+                currentMonster.currentModel().setMonsterHP(currentMonster.currentModel().getMonsterHP() - 3);
+                System.out.println("you hit me for 3 health");
+                break;
+            case SWORD:
+                currentMonster.currentModel().setMonsterHP(currentMonster.currentModel().getMonsterHP() - 2);
+                System.out.println("you hit me for 2 health");
+                break;
+            case BOTTLE:
+                currentMonster.currentModel().setMonsterHP(currentMonster.currentModel().getMonsterHP() - 1);
+                System.out.println("you hit me for 1 health");
+                break;
+        }
+        if (currentMonster.currentModel().getMonsterHP() <= 0) {
+            //die method
+            //currentMonster.setSprite();
+            getCurrent().getMonsterViews().remove(currentMonster);  //remove from the monsterview
+            System.out.println("DEAD X_X");
+        }
     }
 
     public RoomView getCurrent() {
