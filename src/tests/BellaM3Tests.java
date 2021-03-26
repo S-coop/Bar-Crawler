@@ -43,8 +43,8 @@ public class BellaM3Tests extends ApplicationTest {
         pV.setY(rightY - bufferRight);
         System.out.println(pV.getX() + ", " + pV.getY());
         push(KeyCode.D);
-        assertEquals(pV.getCenterX(), 136, 10);
-        assertEquals(pV.getCenterY(), 457, 10);
+        assertEquals(pV.getCenterX(), 136, 20);
+        assertEquals(pV.getCenterY(), 457, 20);
     }
     //verify the left door works
     @Test
@@ -75,8 +75,8 @@ public class BellaM3Tests extends ApplicationTest {
         pV.setY(bottomY - bufferRight);
         System.out.println(pV.getX() + ", " + pV.getY());
         push(KeyCode.S);
-        assertEquals(pV.getCenterX(), 466, 10);
-        assertEquals(pV.getCenterY(), 329, 10);
+        assertEquals(pV.getCenterX(), 466, 20);
+        assertEquals(pV.getCenterY(), 329, 20);
     }
     //verify the left door works
     @Test
