@@ -73,18 +73,26 @@ public class Main extends Application {
             Weapon weapon = Weapon.SWORD;
 
             switch (weapons[(Integer) configScene.getWeaponIndex()]) {
-                case "Sword":
-                    playerImage = new Image("file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
-                    weapon = Weapon.SWORD;
-                    break;
-                case "Gun":
-                    playerImage = new Image("file:assets/alex_sprites/gun/facing_front/standing/gun_front_standing.png");
-                    weapon = Weapon.GUN;
-                    break;
-                case "Broken Bottle" :
-                    playerImage = new Image("file:assets/alex_sprites/broken_bottle/facing_front/standing/bottle_front_standing.png");
-                    weapon = Weapon.BOTTLE;
-                    break;
+            case "Sword":
+                playerImage = new Image(
+                        "file:assets/alex_sprites/sword/facing_front/"
+                                + "standing/sword_front_standing.png");
+                weapon = Weapon.SWORD;
+                break;
+            case "Gun":
+                playerImage = new Image(
+                        "file:assets/alex_sprites/gun/facing_front/"
+                                + "standing/gun_front_standing.png");
+                weapon = Weapon.GUN;
+                break;
+            case "Broken Bottle" :
+                playerImage = new Image(
+                        "file:assets/alex_sprites/broken_bottle/facing_front/"
+                                + "standing/bottle_front_standing.png");
+                weapon = Weapon.BOTTLE;
+                break;
+            default:
+                break;
             }
 
             PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,

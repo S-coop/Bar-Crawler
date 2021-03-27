@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import src.model.Direction;
+import src.model.PlayerModel;
 import src.model.Walking;
 import src.model.Weapon;
 
@@ -28,6 +29,7 @@ public class PlayerView {
     private final double leftBoarder = 76 / 2;
 
     private Weapon weapon;
+    private PlayerModel playerModel;
     private Direction direction;
     private String pathName1 = " ";
     private String pathName2 = " ";
@@ -51,6 +53,8 @@ public class PlayerView {
      * @param h the height of the game
      */
     public PlayerView(Pane layer, double x, double y, double w, double h, Weapon weaponPick, Direction direction) {
+        this.playerModel = new PlayerModel(15, weaponPick);
+
         this.weapon = weaponPick;
         this.direction = direction;
         walking[0] = Walking.CENTER;
@@ -216,6 +220,8 @@ public class PlayerView {
     public void setDy(double dy) {
         this.dy = dy;
     }
+
+    public PlayerModel getModel() { return (this.playerModel); }
 
     public double getCenterX() {
         return this.x + this.playerWidth / 2;

@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import src.view.MonsterView;
 import src.view.PlayerView;
 
+import java.sql.Timestamp;
+
 public class MonsterController {
     private PlayerView player;
     private Stage stage;
@@ -62,13 +64,18 @@ public class MonsterController {
             }
         });
 
-
-
+        Timestamp startTime = new Timestamp(System.currentTimeMillis());
+        Timestamp lastAttackTime = new Timestamp(System.currentTimeMillis());
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                player.move();
-                player.updateUI();
+                startTime = new Timestamp(System.currentTimeMillis());
+                if (startTime.getTime() - lastAttackTime.getTime() > 1,000) {
+                    monster.currentModel().attack(player, monster);
+                    lastAttackTime = startTime;
+                }
+                System.out.println(startTime);
+                System.out.println(lastAttackTime);
             }
         };
         timer.start();

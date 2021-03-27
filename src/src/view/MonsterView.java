@@ -12,7 +12,7 @@ import java.util.Random;
 public class MonsterView {
     private Image sprite;
     private ImageView imageView;
-    private MonsterModel monstermodel;
+    private MonsterModel0 monstermodel;
     private Pane layer;
 
     private double x;
@@ -101,7 +101,7 @@ public class MonsterView {
         return dy;
     }
 
-    public MonsterModel currentModel() {
+    public MonsterModel0 currentModel() {
         return (monstermodel);
     }
 

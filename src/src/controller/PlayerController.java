@@ -119,6 +119,16 @@ public class PlayerController {
         };
         timer.start();
 
+//        AnimationTimer timerEnemy = new AnimationTimer() {
+//            @Override
+//            public void handle(long now) {
+//                ArrayList<MonsterView> monsterList = (maze.getCurrent().getMonsterViews());
+//                for (MonsterView monster : monsterList) {
+//                    monster.currentModel().attack(player, monster);
+//                }
+//            }
+//        };
+//        timer.start();
     }
 
 }
