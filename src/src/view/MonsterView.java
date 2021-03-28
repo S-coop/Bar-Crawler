@@ -3,6 +3,7 @@ package src.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import src.model.MonsterModel0;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
 public class MonsterView {
     private Image sprite;
     private ImageView imageView;
-
+    private MonsterModel0 monstermodel;
     private Pane layer;
 
     private double x;
@@ -39,6 +40,7 @@ public class MonsterView {
      * @param h the height of the game
      */
     public MonsterView(Pane layer, Image sprite, double x, double y, double w, double h) {
+        this.monstermodel = new MonsterModel0(10, 10, 1);
         this.layer = layer;
         this.sprite = sprite;
 
@@ -96,6 +98,10 @@ public class MonsterView {
 
     public double getDy() {
         return dy;
+    }
+
+    public MonsterModel0 currentModel() {
+        return (monstermodel);
     }
 
     public void setDy(double dy) {

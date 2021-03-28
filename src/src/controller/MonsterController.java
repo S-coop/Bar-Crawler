@@ -1,11 +1,13 @@
 package src.controller;
 
-import javafx.animation.AnimationTimer;
+//import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import src.view.MonsterView;
 import src.view.PlayerView;
+
+//import java.sql.Timestamp;
 
 public class MonsterController {
     private PlayerView player;
@@ -62,16 +64,21 @@ public class MonsterController {
             }
         });
 
-
-
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                player.move();
-                player.updateUI();
-            }
-        };
-        timer.start();
+        //Timestamp startTime = new Timestamp(System.currentTimeMillis());
+        //Timestamp lastAttackTime = new Timestamp(System.currentTimeMillis());
+        //AnimationTimer timer = new AnimationTimer() {
+        //@Override
+        //public void handle(long now) {
+        //startTime = new Timestamp(System.currentTimeMillis());
+        //if (startTime.getTime() - lastAttackTime.getTime() > 1,000) {
+        //monster.currentModel().attack(player, monster);
+        //lastAttackTime = startTime;
+        //}
+        //System.out.println(startTime);
+        //System.out.println(lastAttackTime);
+        //}
+        //};
+        //timer.start();
 
     }
 

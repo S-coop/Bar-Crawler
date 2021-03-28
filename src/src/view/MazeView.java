@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MazeView {
+    private ArrayList<Integer> removal = new ArrayList<Integer>();
     private RoomView current;
     private RoomView[][] maze;
     private int width;
@@ -147,6 +148,43 @@ public class MazeView {
         current.setVisited(true);
     }
 
+    public void damageMonster(MonsterView currentMonster, int index) {
+        removal.clear();
+        //MonsterView currentMonster = (getCurrent().getMonsterViews()).get(i);
+        switch (getCurrent().getPlayerView().getWeapon()) {
+        case GUN:
+            currentMonster.currentModel().setMonsterHP(
+                    currentMonster.currentModel().getMonsterHP() - 3);
+            System.out.println("you hit me for 3 health");
+            break;
+        case SWORD:
+            currentMonster.currentModel().setMonsterHP(
+                    currentMonster.currentModel().getMonsterHP() - 2);
+            System.out.println("you hit me for 2 health");
+            break;
+        case BOTTLE:
+            currentMonster.currentModel().setMonsterHP(
+                    currentMonster.currentModel().getMonsterHP() - 1);
+            System.out.println("you hit me for 1 health");
+            break;
+        default:
+            break;
+        }
+        if (currentMonster.currentModel().getMonsterHP() <= 0) {
+            //die method
+            //currentMonster.setSprite();
+            Image ghosty = new Image("file:assets/deadenemy/transparentghost.png");
+            currentMonster.setSprite(ghosty);
+            currentMonster.updateUI();
+            removal.add(index);
+            //getCurrent().getMonsterViews().remove(currentMonster);  //remove from the monsterview
+            System.out.println("DEAD X_X");
+        }
+        for (int i : removal) {
+            getCurrent().getMonsterViews().remove(i);
+        }
+    }
+
     public RoomView getCurrent() {
         return this.current;
     }
@@ -209,6 +247,10 @@ public class MazeView {
 
     public int getCol() {
         return col;
+    }
+
+    public GameModel getGameModel() {
+        return gameModel;
     }
 
     public RoomView getRight() {

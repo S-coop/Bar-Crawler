@@ -4,10 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import src.model.GameModel;
-import src.view.EndScreen;
-import src.view.MazeView;
-import src.view.PlayerView;
-import src.view.RoomView;
+import src.view.*;
 
 public class MazeController {
 
@@ -37,6 +34,14 @@ public class MazeController {
             public void handle(long now) {
                 double centerX = playerView.getCenterX();
                 double centerY = playerView.getCenterY();
+
+                //checking if player has died
+                if (playerView.getModel().getPlayerHP() <= 0) {
+                    DieScreen dieScreen = new DieScreen(
+                            1920 / 2, 1080 / 2, mazeView.getGameModel());
+                    primaryStage.setScene(dieScreen.getEndScene());
+                    primaryStage.show();
+                }
 
                 //right door
                 if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
