@@ -3,7 +3,6 @@ package src.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import src.model.MonsterModel;
 import src.model.MonsterModel0;
 
 import java.util.ArrayList;

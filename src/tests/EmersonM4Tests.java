@@ -1,6 +1,6 @@
 package tests;
 
-import javafx.scene.input.KeyCode;
+
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
