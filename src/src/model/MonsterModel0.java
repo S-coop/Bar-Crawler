@@ -22,10 +22,8 @@ public class MonsterModel0 {
     }
 
     public void attack(PlayerView player, MonsterView monster) {
-        if ((player.getX() - monster.getX() < 5) && (player.getY() - monster.getY() < 5)) {
-            player.getModel().setPlayerHP(player.getModel().getPlayerHP() - .5);  //reduce HP
-            System.out.println("reduced your health");
-        }
+        player.getModel().setPlayerHP(player.getModel().getPlayerHP() - .5);  //reduce HP
+        System.out.println("reduced your health");
         if (player.getModel().getPlayerHP() <= 0) {
             System.out.println("You died D:");
         }

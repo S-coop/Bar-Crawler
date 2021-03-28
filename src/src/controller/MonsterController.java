@@ -1,84 +1,45 @@
 package src.controller;
 
-//import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
+import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
+import src.view.MazeView;
 import src.view.MonsterView;
 import src.view.PlayerView;
 
-//import java.sql.Timestamp;
 
 public class MonsterController {
     private PlayerView player;
     private Stage stage;
-    private MonsterView monster;
+    private MazeView maze;
     private double dx = 1;
     private double dy = 1;
 
-    public MonsterController(Stage stage, PlayerView player, MonsterView monster) {
+    public MonsterController(Stage stage, PlayerView player, MazeView maze) {
         this.stage = stage;
         this.player = player;
-        this.monster = monster;
+        this.maze = maze;
 
-        double dx = 5;
-        double dy = 5;
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+
+        final long[] startTime = {System.currentTimeMillis()};
+        final long[] lastAttackTime = {0};
+        AnimationTimer timer = new AnimationTimer() {
             @Override
-            public void handle(KeyEvent event) {
-                event.consume();
-                switch (event.getCode()) {
-                    case W:
-                        player.setDx(0);
-                        player.setDy(-dy);
-                        System.out.println("up");
-                        break;
-                    case S:
-                        player.setDx(0);
-                        player.setDy(dy);
-
-                        System.out.println("down");
-                        break;
-                    case A:
-                        player.setDx(-dx);
-                        player.setDy(0);
-
-                        System.out.println("left");
-                        break;
-                    case D:
-                        player.setDx(dx);
-                        player.setDy(0);
-
-                        System.out.println("right");
-                        break;
-                    default:
-                        break;
+            public void handle(long now) {
+                startTime[0] = System.currentTimeMillis();
+                for (MonsterView monster : maze.getCurrent().getMonsterViews()) {
+                    if (player.getModel().getPlayerHP() > 0
+                            && Math.abs(player.getCenterX() - monster.getCenterX()) < 30
+                            && Math.abs(player.getCenterY() - monster.getCenterY()) < 30
+                            && startTime[0] - lastAttackTime[0] > 1000) {
+                        monster.currentModel().attack(player, monster);
+                        System.out.println("attacked player!");
+                        lastAttackTime[0] = startTime[0];
+                    }
                 }
             }
-        });
-        stage.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                player.setDy(0);
-                player.setDx(0);
-            }
-        });
-
-        //Timestamp startTime = new Timestamp(System.currentTimeMillis());
-        //Timestamp lastAttackTime = new Timestamp(System.currentTimeMillis());
-        //AnimationTimer timer = new AnimationTimer() {
-        //@Override
-        //public void handle(long now) {
-        //startTime = new Timestamp(System.currentTimeMillis());
-        //if (startTime.getTime() - lastAttackTime.getTime() > 1,000) {
-        //monster.currentModel().attack(player, monster);
-        //lastAttackTime = startTime;
-        //}
-        //System.out.println(startTime);
-        //System.out.println(lastAttackTime);
-        //}
-        //};
-        //timer.start();
+        };
+        timer.start();
 
     }
 

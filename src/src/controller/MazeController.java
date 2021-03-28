@@ -35,14 +35,6 @@ public class MazeController {
                 double centerX = playerView.getCenterX();
                 double centerY = playerView.getCenterY();
 
-                //checking if player has died
-                if (playerView.getModel().getPlayerHP() <= 0) {
-                    DieScreen dieScreen = new DieScreen(
-                            1920 / 2, 1080 / 2, mazeView.getGameModel());
-                    primaryStage.setScene(dieScreen.getEndScene());
-                    primaryStage.show();
-                }
-
                 //right door
                 if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
                     System.out.println("right door");
