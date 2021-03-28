@@ -249,6 +249,10 @@ public class MazeView {
         return col;
     }
 
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
     public RoomView getRight() {
         return maze[row][col + 1];
     }

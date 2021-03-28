@@ -66,8 +66,10 @@ public class PlayerController {
                         MonsterView monster = monsterList.get(i);
                         switch (direct) {
                             case FRONT:
-                                if ((player.getX() - monster.getX() < 10)
-                                        && (player.getY() - monster.getY() < 50)) {
+                                if (((player.getX() - monster.getX() < 30)
+                                        && (player.getY() - monster.getY() < 60))
+                                        && ((monster.getX() - player.getX() < 30)
+                                        && (monster.getY() - player.getY() < 60))) {
                                     maze.damageMonster(monster, i);
                                     System.out.println(player.getDx());
                                     System.out.println(player.getX());
@@ -75,20 +77,26 @@ public class PlayerController {
                                 }
                                 break;
                             case BACK:
-                                if ((player.getX() - monster.getX() < 10)
-                                        && (player.getY() - monster.getY() < 50)) {
+                                if (((player.getX() - monster.getX() < 30)
+                                        && (player.getY() - monster.getY() < 60))
+                                        && ((monster.getX() - player.getX() < 30)
+                                        && (monster.getY() - player.getY() < 60))) {
                                     maze.damageMonster(monster, i);
                                 }
                                 break;
                             case RIGHT:
-                                if ((player.getX() - monster.getX() < 30)
-                                        && (player.getY() - monster.getY() < 70)) {
+                                if (((player.getX() - monster.getX() < 60)
+                                        && (player.getY() - monster.getY() < 30))
+                                        && ((monster.getX() - player.getX() < 60)
+                                        && (monster.getY() - player.getY() < 30))) {
                                     maze.damageMonster(monster, i);
                                 }
                                 break;
                             case LEFT:
-                                if ((player.getX() - monster.getX() < 30)
-                                        && (player.getY() - monster.getY() < 70)) {
+                                if (((player.getX() - monster.getX() < 60)
+                                        && (player.getY() - monster.getY() < 31))
+                                        && ((monster.getX() - player.getX() < 61)
+                                        && (monster.getY() - player.getY() < 30))) {
                                     maze.damageMonster(monster, i);
                                 }
                                 break;
