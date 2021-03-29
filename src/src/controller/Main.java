@@ -1,5 +1,6 @@
 package src.controller;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,10 +9,10 @@ import javafx.stage.Stage;
 import src.model.Direction;
 import src.model.GameModel;
 import src.view.ConfigurationScreenScene;
+import src.view.DieScreen;
 import src.view.MazeView;
 import src.view.PlayerView;
 import src.view.WelcomeScreen;
-import src.view.EndScreen;
 import src.model.Weapon;
 
 public class Main extends Application {
@@ -103,13 +104,25 @@ public class Main extends Application {
             PlayerController playerController = new PlayerController(mainWindow, playerView, maze);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
-
+            MonsterController monsterController
+                    = new MonsterController(mainWindow, playerView, maze);
             mainWindow.setScene(maze.getCurrent().getScene());
             mainWindow.show();
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    //checking if player has died
+                    if (playerView.getModel().getPlayerHP() <= 0) {
+                        goToDieScreen(configScene, this);
+                    }
+                }
+            };
+            timer.start();
         }
     }
 
-    private void goToEndScreen(ConfigurationScreenScene configScene) {
+    private void goToDieScreen(ConfigurationScreenScene configScene, AnimationTimer timer) {
+        timer.stop();
         if (configScene.validateUsernameString()) {
             gameModel.setUsername(configScene.getUsername());
             gameModel.setDifficulty(difficulties[
@@ -118,12 +131,13 @@ public class Main extends Application {
                     (Integer) configScene.getWeaponIndex()]);
             gameModel.setDifficultyIndex(
                     (Integer) configScene.getDifficultyIndex());
-            EndScreen endScreen = new EndScreen(
+            DieScreen screen = new DieScreen(
                     width, height, gameModel);
-            endScreen.getGoBackButton().setOnAction(actionEvent1 ->
-                    goToConfigScreen());
-            mainWindow.setTitle("YOU WIN!");
-            mainWindow.setScene(endScreen.getEndScene());
+            screen.getGoBackButton().setOnAction(actionEvent1 -> {
+                goToConfigScreen();
+            });
+            mainWindow.setTitle("YOU Lose! Sad!");
+            mainWindow.setScene(screen.getEndScene());
             mainWindow.show();
         }
     }
