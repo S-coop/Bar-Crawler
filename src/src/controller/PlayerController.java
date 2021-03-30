@@ -3,12 +3,10 @@ package src.controller;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import src.model.Direction;
 import src.view.MazeView;
 import src.view.MonsterView;
-
 import src.view.PlayerView;
 
 import java.util.ArrayList;
@@ -106,11 +104,6 @@ public class PlayerController {
                                 break;
                             }
                         }
-                        System.out.println("attack");
-                        break;
-                    case SPACE:
-                        player.attackSprite();
-
                         System.out.println("attack");
                         break;
                     default:
