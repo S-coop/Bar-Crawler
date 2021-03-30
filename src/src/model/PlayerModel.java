@@ -3,14 +3,14 @@ package src.model;
 public class PlayerModel {
 
     private double hp;
-    private String weapon;
+    private Weapon weapon;
 
     /**
      * Player stat and attribute data constructor
      * @param hp the starting health points of the player
      * @param weapon the player's chosen weapon
      */
-    public PlayerModel(double hp, String weapon) {
+    public PlayerModel(double hp, Weapon weapon) {
         this.hp = hp;
         this.weapon = weapon;
     }

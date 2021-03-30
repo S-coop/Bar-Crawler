@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import src.model.Direction;
+import src.model.PlayerModel;
 import src.model.Walking;
 import src.model.Weapon;
 
@@ -28,6 +29,7 @@ public class PlayerView {
     private final double leftBoarder = 76 / 2;
 
     private Weapon weapon;
+    private PlayerModel playerModel;
     private Direction direction;
     private String pathName1 = " ";
     private String pathName2 = " ";
@@ -49,8 +51,13 @@ public class PlayerView {
      * @param y the y location to start
      * @param w the width of the game
      * @param h the height of the game
+     * @param weaponPick the weapon the player selected
+     * @param direction the direction the player is currently facing
      */
-    public PlayerView(Pane layer, double x, double y, double w, double h, Weapon weaponPick, Direction direction) {
+    public PlayerView(Pane layer, double x, double y, double w,
+                      double h, Weapon weaponPick, Direction direction) {
+        this.playerModel = new PlayerModel(15, weaponPick);
+
         this.weapon = weaponPick;
         this.direction = direction;
         walking[0] = Walking.CENTER;
@@ -61,41 +68,41 @@ public class PlayerView {
         step = walking[walkingIdx];
 
         switch (weaponPick) {
-            case GUN:
-                pathName1 = "file:assets/alex_sprites/gun/";
-                fileName1 = "gun_";
-                break;
-            case SWORD:
-                pathName1 = "file:assets/alex_sprites/sword/";
-                fileName1 = "sword_";
-                break;
-            case BOTTLE:
-                pathName1 = "file:assets/alex_sprites/broken_bottle/";
-                fileName1 = "bottle_";
-                break;
-            default:
-                break;
+        case GUN:
+            pathName1 = "file:assets/alex_sprites/gun/";
+            fileName1 = "gun_";
+            break;
+        case SWORD:
+            pathName1 = "file:assets/alex_sprites/sword/";
+            fileName1 = "sword_";
+            break;
+        case BOTTLE:
+            pathName1 = "file:assets/alex_sprites/broken_bottle/";
+            fileName1 = "bottle_";
+            break;
+        default:
+            break;
         }
 
         switch (direction) {
-            case FRONT:
-                pathName2 = "facing_front/";
-                fileName2 = "front";
-                break;
-            case BACK:
-                pathName2 = "facing_back/";
-                fileName2 = "back";
-                break;
-            case RIGHT:
-                pathName2 = "facing_right/";
-                fileName2 = "right";
-                break;
-            case LEFT:
-                pathName2 = "facing_left/";
-                fileName2 = "left";
-                break;
-            default:
-                break;
+        case FRONT:
+            pathName2 = "facing_front/";
+            fileName2 = "front";
+            break;
+        case BACK:
+            pathName2 = "facing_back/";
+            fileName2 = "back";
+            break;
+        case RIGHT:
+            pathName2 = "facing_right/";
+            fileName2 = "right";
+            break;
+        case LEFT:
+            pathName2 = "facing_left/";
+            fileName2 = "left";
+            break;
+        default:
+            break;
         }
 
         pathName3 = "standing/";
@@ -125,8 +132,9 @@ public class PlayerView {
         this.layer.getChildren().add(this.imageView);
     }
 
-    public void attackSprite(){
-        fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + fileName4 + ".png";
+    public void attackSprite() {
+        fileName = pathName1 + pathName2 + pathName3
+                + fileName1 + fileName2 + fileName3 + fileName4 + ".png";
 
         System.out.println(fileName);
 
@@ -148,22 +156,22 @@ public class PlayerView {
         double gunDX = 0;
         double gunDY = 0;
         switch (direction) {
-            case FRONT:
-                gunDY = -3;
-                break;
-            case BACK:
-                gunDY = 3;
-                break;
-            case RIGHT:
-                gunDX = 3;
-                break;
-            case LEFT:
-                gunDX = -3;
-                break;
-            default:
-                break;
+        case FRONT:
+            gunDY = -3;
+            break;
+        case BACK:
+            gunDY = 3;
+            break;
+        case RIGHT:
+            gunDX = 3;
+            break;
+        case LEFT:
+            gunDX = -3;
+            break;
+        default:
+            break;
         }
-        for (int i = 0; i < 100; i ++) {
+        for (int i = 0; i < 100; i++) {
             gunX += gunDX;
             gunY += gunDY;
             bulletView.relocate(gunDX, gunDY);
@@ -205,8 +213,20 @@ public class PlayerView {
         return dy;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Weapon getWeapon() {
+        return (this.weapon);
+    }
+
     public void setDy(double dy) {
         this.dy = dy;
+    }
+
+    public PlayerModel getModel() {
+        return (this.playerModel);
     }
 
     public double getCenterX() {
@@ -231,20 +251,20 @@ public class PlayerView {
             walkingIdx = (walkingIdx + 1) % walking.length;
             step = walking[walkingIdx];
             switch (step) {
-                case CENTER:
-                    pathName3 = "standing/";
-                    fileName3 = "standing";
-                    break;
-                case LEFT:
-                    pathName3 = "walking/left_step/";
-                    fileName3 = "walking_leftstep";
-                    break;
-                case RIGHT:
-                    pathName3 = "walking/right_step/";
-                    fileName3 = "walking_rightstep";
-                    break;
-                default:
-                    break;
+            case CENTER:
+                pathName3 = "standing/";
+                fileName3 = "standing";
+                break;
+            case LEFT:
+                pathName3 = "walking/left_step/";
+                fileName3 = "walking_leftstep";
+                break;
+            case RIGHT:
+                pathName3 = "walking/right_step/";
+                fileName3 = "walking_rightstep";
+                break;
+            default:
+                break;
             }
         } else {
             this.direction = direction;
@@ -252,24 +272,24 @@ public class PlayerView {
             pathName3 = "standing/";
             fileName3 = "standing";
             switch (direction) {
-                case FRONT:
-                    pathName2 = "facing_front/";
-                    fileName2 = "front_";
-                    break;
-                case BACK:
-                    pathName2 = "facing_back/";
-                    fileName2 = "back_";
-                    break;
-                case RIGHT:
-                    pathName2 = "facing_right/";
-                    fileName2 = "right_";
-                    break;
-                case LEFT:
-                    pathName2 = "facing_left/";
-                    fileName2 = "left_";
-                    break;
-                default:
-                    break;
+            case FRONT:
+                pathName2 = "facing_front/";
+                fileName2 = "front_";
+                break;
+            case BACK:
+                pathName2 = "facing_back/";
+                fileName2 = "back_";
+                break;
+            case RIGHT:
+                pathName2 = "facing_right/";
+                fileName2 = "right_";
+                break;
+            case LEFT:
+                pathName2 = "facing_left/";
+                fileName2 = "left_";
+                break;
+            default:
+                break;
             }
         }
 
@@ -281,7 +301,7 @@ public class PlayerView {
 
     }
 
-    public void endStep(){
+    public void endStep() {
         if (step != Walking.CENTER) {
             walkingIdx = (walkingIdx + 1) % walking.length;
             step = walking[walkingIdx];

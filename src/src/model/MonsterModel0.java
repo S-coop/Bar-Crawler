@@ -1,23 +1,41 @@
 package src.model;
+import src.view.MonsterView;
+import src.view.PlayerView;
 
-public class MonsterModel0 extends MonsterModel {
+public class MonsterModel0 {
+
+    private double hp;
+    private double damage;
+    private double speed;
+
 
     /**
-     * Stat and attribute constructor for Monster0, uses parent constructor
+     * Monster stat and attribute data constructor
      * @param hp the starting health points of the monster
      * @param damage the monster's damage output
      * @param speed the monster's speed
      */
     public MonsterModel0(double hp, double damage, double speed) {
-        super(hp, damage, speed);
+        this.hp = hp;
+        this.damage = damage;
+        this.speed = speed;
     }
+
+    public void attack(PlayerView player, MonsterView monster) {
+        player.getModel().setPlayerHP(player.getModel().getPlayerHP() - .5);  //reduce HP
+        System.out.println("reduced your health");
+        if (player.getModel().getPlayerHP() <= 0) {
+            System.out.println("You died D:");
+        }
+    }
+
 
     /**
      * Getter for the monster's HP
      * @return the double value for the monster's HP
      */
     public double getMonsterHP() {
-        return super.getMonsterHP();
+        return this.hp;
     }
 
     /**
@@ -25,7 +43,7 @@ public class MonsterModel0 extends MonsterModel {
      * @param newHP the monster's new HP value
      */
     public void setMonsterHP(double newHP) {
-        super.setMonsterHP(newHP);
+        this.hp = newHP;
     }
 
     /**
@@ -33,7 +51,7 @@ public class MonsterModel0 extends MonsterModel {
      * @return damage of monster
      */
     public double getMonsterDamage() {
-        return super.getMonsterDamage();
+        return damage;
     }
 
     /**
@@ -41,7 +59,7 @@ public class MonsterModel0 extends MonsterModel {
      * @param damage new damage for monster
      */
     public void setMonsterDamage(double damage) {
-        super.setMonsterDamage(damage);
+        this.damage = damage;
     }
 
     /**
@@ -49,7 +67,7 @@ public class MonsterModel0 extends MonsterModel {
      * @return speed value of monster
      */
     public double getSpeed() {
-        return super.getSpeed();
+        return speed;
     }
 
     /**
@@ -57,6 +75,6 @@ public class MonsterModel0 extends MonsterModel {
      * @param speed new speed of monster
      */
     public void setSpeed(double speed) {
-        super.setSpeed(speed);
+        this.speed = speed;
     }
 }
