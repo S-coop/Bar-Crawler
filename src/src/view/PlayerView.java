@@ -328,4 +328,8 @@ public class PlayerView {
         imageView.relocate(x, y);
     }
 
+    public String getFileName() {
+        return(pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png");
+
+    }
 }
