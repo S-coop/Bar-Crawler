@@ -5,14 +5,8 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
-import src.model.PlayerModel;
-import src.view.MonsterView;
-import src.view.PlayerView;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
 
 
 public class BellaM4Tests extends ApplicationTest {
