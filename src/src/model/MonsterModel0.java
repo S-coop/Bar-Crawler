@@ -22,7 +22,7 @@ public class MonsterModel0 {
     }
 
     public void attack(PlayerView player, MonsterView monster) {
-        player.getModel().setPlayerHP(player.getModel().getPlayerHP() - .5);  //reduce HP
+        player.getModel().setPlayerHP(player.getModel().getPlayerHP() - 1);  //reduce HP
         System.out.println("reduced your health");
         if (player.getModel().getPlayerHP() <= 0) {
             System.out.println("You died D:");

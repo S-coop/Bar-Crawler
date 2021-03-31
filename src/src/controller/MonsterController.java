@@ -29,8 +29,8 @@ public class MonsterController {
                 startTime[0] = System.currentTimeMillis();
                 for (MonsterView monster : maze.getCurrent().getMonsterViews()) {
                     if (player.getModel().getPlayerHP() > 0
-                            && Math.abs(player.getCenterX() - monster.getCenterX()) < 30
-                            && Math.abs(player.getCenterY() - monster.getCenterY()) < 30
+                            && Math.abs(player.getCenterX() - monster.getCenterX()) < 55
+                            && Math.abs(player.getCenterY() - monster.getCenterY()) < 60
                             && startTime[0] - lastAttackTime[0] > 1000) {
                         monster.currentModel().attack(player, monster);
                         System.out.println("attacked player!");
