@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.assertNotNull;
+
 import src.controller.Main;
 import src.view.MonsterView;
 import src.view.PlayerView;
@@ -20,8 +22,13 @@ public class EthanM4Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-
-
+        PlayerView player = controller.getPlayerView();
+        ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
+        MonsterView prev = mV.get(0);
+        player.setX(467);
+        player.setY(462);
+        MonsterView after = mV.get(0);
+        assertTrue(after == prev);
     }
 
     @Test
