@@ -39,7 +39,7 @@ public class MazeController {
                 if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
                     System.out.println("right door");
                     boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
-                    if (mazeView.canMoveRight()
+                    if (mazeView.can  Right()
                             && (noEnemies || mazeView.getRight().hasVisited())) {
                         RoomView newRoom = mazeView.moveRight();
                         newRoom.setVisited(true);
