@@ -56,7 +56,7 @@ public class PlayerView {
      */
     public PlayerView(Pane layer, double x, double y, double w,
                       double h, Weapon weaponPick, Direction direction) {
-        this.playerModel = new PlayerModel(15, weaponPick);
+        this.playerModel = new PlayerModel(19, weaponPick);
 
         this.weapon = weaponPick;
         this.direction = direction;
