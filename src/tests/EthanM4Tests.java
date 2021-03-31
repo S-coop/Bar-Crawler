@@ -1,12 +1,15 @@
 package tests;
 
-import static org.junit.Assert.assertNotNull;
-
+import org.junit.Test;
+import javafx.stage.Stage;
+import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
 import src.view.MonsterView;
 import src.view.PlayerView;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertTrue;
 
 public class EthanM4Tests extends ApplicationTest {
     private Main controller;
