@@ -154,17 +154,17 @@ public class MazeView {
         switch (getCurrent().getPlayerView().getWeapon()) {
         case GUN:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 3);
+                    currentMonster.currentModel().getMonsterHP() - .3);
             System.out.println("you hit me for 3 health");
             break;
         case SWORD:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 2);
+                    currentMonster.currentModel().getMonsterHP() - .2);
             System.out.println("you hit me for 2 health");
             break;
         case BOTTLE:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 1);
+                    currentMonster.currentModel().getMonsterHP() - .1);
             System.out.println("you hit me for 1 health");
             break;
         default:

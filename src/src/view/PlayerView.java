@@ -1,8 +1,12 @@
 package src.view;
 
+import javafx.scene.Scene;
+import javafx.scene.SubScene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import src.model.Direction;
 import src.model.PlayerModel;
 import src.model.Walking;
@@ -11,6 +15,7 @@ import src.model.Weapon;
 public class PlayerView {
     private Image sprite;
     private ImageView imageView;
+    private SubScene subScene;
 
     private Pane layer;
 
@@ -56,7 +61,7 @@ public class PlayerView {
      */
     public PlayerView(Pane layer, double x, double y, double w,
                       double h, Weapon weaponPick, Direction direction) {
-        this.playerModel = new PlayerModel(19, weaponPick);
+        this.playerModel = new PlayerModel(1, weaponPick);
 
         this.weapon = weaponPick;
         this.direction = direction;
@@ -117,7 +122,14 @@ public class PlayerView {
 
         this.sprite = new Image(fileName);
         this.imageView = new ImageView(sprite);
+
+        VBox progBox = new VBox();
+        ProgressBar progressBar = new ProgressBar(this.getModel().getPlayerHP());
+        progBox.getChildren().addAll(progressBar);
+        this.subScene = new SubScene(progBox, 200, 100);
+
         this.imageView.relocate(x, y);
+        subScene.relocate(imageView.getX(), imageView.getY() - 50);
 
         this.width = w;
         this.height = h;
@@ -130,6 +142,7 @@ public class PlayerView {
      */
     public void addToLayer() {
         this.layer.getChildren().add(this.imageView);
+        this.layer.getChildren().add(this.subScene);
     }
 
     public void attackSprite() {
@@ -326,10 +339,15 @@ public class PlayerView {
 
     public void updateUI() {
         imageView.relocate(x, y);
+        subScene.relocate(imageView.getX(), imageView.getY() - 100);
     }
 
     public String getFileName() {
         return (pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png");
 
+    }
+
+    public PlayerModel getPlayerModel() {
+        return playerModel;
     }
 }

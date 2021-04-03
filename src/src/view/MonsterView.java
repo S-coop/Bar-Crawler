@@ -40,7 +40,7 @@ public class MonsterView {
      * @param h the height of the game
      */
     public MonsterView(Pane layer, Image sprite, double x, double y, double w, double h) {
-        this.monstermodel = new MonsterModel0(7, 10, 1);
+        this.monstermodel = new MonsterModel0(.3, .1, 1);
         this.layer = layer;
         this.sprite = sprite;
 
