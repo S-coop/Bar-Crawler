@@ -1,6 +1,5 @@
 package src.view;
 
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -49,6 +48,7 @@ public class PlayerView {
     private Walking step;
     private int walkingIdx;
 
+    private ProgressBar progressBar;
     /**
      * Player visual data constructor
      * @param layer the layer the player belongs to
@@ -124,7 +124,8 @@ public class PlayerView {
         this.imageView = new ImageView(sprite);
 
         VBox progBox = new VBox();
-        ProgressBar progressBar = new ProgressBar(this.getModel().getPlayerHP());
+        this.progressBar = new ProgressBar(
+                this.playerModel.getPlayerHP() / this.playerModel.getMaxHp());
         progBox.getChildren().addAll(progressBar);
         this.subScene = new SubScene(progBox, 200, 100);
 
@@ -142,7 +143,7 @@ public class PlayerView {
      */
     public void addToLayer() {
         this.layer.getChildren().add(this.imageView);
-        this.layer.getChildren().add(this.subScene);
+        this.layer.getChildren().add(this.subScene.getRoot());
     }
 
     public void attackSprite() {
@@ -349,5 +350,9 @@ public class PlayerView {
 
     public PlayerModel getPlayerModel() {
         return playerModel;
+    }
+
+    public ProgressBar getProgressBar() {
+        return this.progressBar;
     }
 }

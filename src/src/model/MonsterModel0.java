@@ -26,6 +26,9 @@ public class MonsterModel0 {
         System.out.println("reduced your health");
         if (player.getModel().getPlayerHP() <= 0) {
             System.out.println("You died D:");
+        } else {
+            player.getProgressBar()
+                    .setProgress(player.getModel().getPlayerHP() / player.getModel().getMaxHp());
         }
     }
 
