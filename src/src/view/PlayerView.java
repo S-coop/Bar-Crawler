@@ -56,7 +56,7 @@ public class PlayerView {
      */
     public PlayerView(Pane layer, double x, double y, double w,
                       double h, Weapon weaponPick, Direction direction) {
-        this.playerModel = new PlayerModel(15, weaponPick);
+        this.playerModel = new PlayerModel(19, weaponPick);
 
         this.weapon = weaponPick;
         this.direction = direction;
@@ -87,26 +87,26 @@ public class PlayerView {
         switch (direction) {
         case FRONT:
             pathName2 = "facing_front/";
-            fileName2 = "front";
+            fileName2 = "front_";
             break;
         case BACK:
             pathName2 = "facing_back/";
-            fileName2 = "back";
+            fileName2 = "back_";
             break;
         case RIGHT:
             pathName2 = "facing_right/";
-            fileName2 = "right";
+            fileName2 = "right_";
             break;
         case LEFT:
             pathName2 = "facing_left/";
-            fileName2 = "left";
+            fileName2 = "left_";
             break;
         default:
             break;
         }
 
         pathName3 = "standing/";
-        fileName3 = "_standing";
+        fileName3 = "standing";
         fileName = pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png";
         System.out.println(fileName);
 
@@ -328,4 +328,8 @@ public class PlayerView {
         imageView.relocate(x, y);
     }
 
+    public String getFileName() {
+        return (pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png");
+
+    }
 }
