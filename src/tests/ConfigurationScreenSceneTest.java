@@ -89,10 +89,10 @@ public class ConfigurationScreenSceneTest extends ApplicationTest {
     }
 
     @Test
-    public void selectBow() {
+    public void selectGun() {
         clickOn("Start");
         write("Scoops");
-        clickOn("Bow");
+        clickOn("Gun");
         clickOn("Let's go!");
         verifyThat("Bow", NodeMatchers.isNotNull());
     }
