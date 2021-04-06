@@ -23,7 +23,8 @@ public class BellaM4Tests extends ApplicationTest {
         write("Beebo");
         clickOn("Gun");
         clickOn("Let's go!");
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/gun/facing_front/standing/gun_front_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/gun/facing_front/standing/gun_front_standing.png");
     }
 
     @Test
@@ -32,7 +33,8 @@ public class BellaM4Tests extends ApplicationTest {
         write("Beebo");
         clickOn("Sword");
         clickOn("Let's go!");
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
     }
 
     @Test
@@ -41,7 +43,9 @@ public class BellaM4Tests extends ApplicationTest {
         write("Beebo");
         clickOn("Broken Bottle");
         clickOn("Let's go!");
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/broken_bottle/facing_front/standing/bottle_front_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/broken_bottle/"
+                        + "facing_front/standing/bottle_front_standing.png");
     }
 
     @Test
@@ -51,7 +55,8 @@ public class BellaM4Tests extends ApplicationTest {
         clickOn("Gun");
         clickOn("Let's go!");
         push(KeyCode.A);
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/gun/facing_left/standing/gun_left_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/gun/facing_left/standing/gun_left_standing.png");
     }
 
     @Test
@@ -61,7 +66,8 @@ public class BellaM4Tests extends ApplicationTest {
         clickOn("Gun");
         clickOn("Let's go!");
         push(KeyCode.D);
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/gun/facing_right/standing/gun_right_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/gun/facing_right/standing/gun_right_standing.png");
     }
 
     @Test
@@ -71,7 +77,8 @@ public class BellaM4Tests extends ApplicationTest {
         clickOn("Gun");
         clickOn("Let's go!");
         push(KeyCode.W);
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/gun/facing_back/standing/gun_back_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/gun/facing_back/standing/gun_back_standing.png");
     }
 
 }

@@ -72,7 +72,6 @@ public class PlayerController {
                                         && (monster.getY() - player.getY() < 60))) {
                                     maze.damageMonster(monster, i);
                                     System.out.println(player.getDx());
-                                    System.out.println(player.getX());
                                     System.out.println(monster.getX());
                                 }
                                 break;
