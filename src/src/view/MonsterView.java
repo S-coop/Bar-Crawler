@@ -13,7 +13,9 @@ public class MonsterView {
     private Image hitSprite;
     private ImageView imageView;
     private MonsterModel0 monstermodel;
-    private Pane layer = new Pane();
+    private Pane layer;
+    private Image knife = new Image("file:assets/inventory_items/knife.png");
+    private KnifeView knifeView = new KnifeView(knife);
 
     private double x;
     private double y;
@@ -209,4 +211,6 @@ public class MonsterView {
     public void stopHit() {
         imageView.setImage(standingSprite);
     }
+
+    public KnifeView getKnifeView() {return this.knifeView;}
 }
