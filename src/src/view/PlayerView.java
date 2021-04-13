@@ -1,8 +1,11 @@
 package src.view;
 
+import javafx.scene.SubScene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import src.model.Direction;
 import src.model.PlayerModel;
 import src.model.Walking;
@@ -11,6 +14,7 @@ import src.model.Weapon;
 public class PlayerView {
     private Image sprite;
     private ImageView imageView;
+    private SubScene subScene;
 
     private Pane layer;
 
@@ -29,6 +33,7 @@ public class PlayerView {
     private final double leftBoarder = 76 / 2;
 
     private Weapon weapon;
+    private Weapon originalWeapon;
     private PlayerModel playerModel;
     private Direction direction;
     private String pathName1 = " ";
@@ -44,6 +49,7 @@ public class PlayerView {
     private Walking step;
     private int walkingIdx;
 
+    private ProgressBar progressBar;
     /**
      * Player visual data constructor
      * @param layer the layer the player belongs to
@@ -56,9 +62,11 @@ public class PlayerView {
      */
     public PlayerView(Pane layer, double x, double y, double w,
                       double h, Weapon weaponPick, Direction direction) {
-        this.playerModel = new PlayerModel(19, weaponPick);
+        this.playerModel = new PlayerModel(1, weaponPick, 5, 5);
 
         this.weapon = weaponPick;
+        this.originalWeapon = this.weapon;
+
         this.direction = direction;
         walking[0] = Walking.CENTER;
         walking[1] = Walking.LEFT;
@@ -117,7 +125,15 @@ public class PlayerView {
 
         this.sprite = new Image(fileName);
         this.imageView = new ImageView(sprite);
+
+        VBox progBox = new VBox();
+        this.progressBar = new ProgressBar(
+                this.playerModel.getPlayerHP() / this.playerModel.getMaxHp());
+        progBox.getChildren().addAll(progressBar);
+        this.subScene = new SubScene(progBox, 200, 100);
+
         this.imageView.relocate(x, y);
+        subScene.relocate(imageView.getX(), imageView.getY() - 50);
 
         this.width = w;
         this.height = h;
@@ -130,6 +146,7 @@ public class PlayerView {
      */
     public void addToLayer() {
         this.layer.getChildren().add(this.imageView);
+        this.layer.getChildren().add(this.subScene.getRoot());
     }
 
     public void attackSprite() {
@@ -326,10 +343,32 @@ public class PlayerView {
 
     public void updateUI() {
         imageView.relocate(x, y);
+        subScene.relocate(imageView.getX(), imageView.getY() - 100);
     }
 
     public String getFileName() {
         return (pathName1 + pathName2 + pathName3 + fileName1 + fileName2 + fileName3 + ".png");
 
     }
+
+    public PlayerModel getPlayerModel() {
+        return playerModel;
+    }
+
+    public ProgressBar getProgressBar() {
+        return this.progressBar;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setOriginalWeapon(Weapon weapon) {
+        this.originalWeapon = weapon;
+    }
+
+    public Weapon getOriginalWeapon() {
+        return this.originalWeapon;
+    }
 }
+
