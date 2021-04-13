@@ -1,16 +1,12 @@
 package tests;
 
 
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
-import src.view.MonsterView;
-import src.view.RoomView;
-import src.view.MazeView;
-
-import java.util.ArrayList;
-
+import src.view.*;
 import static org.junit.Assert.*;
 
 public class EmersonM5Tests extends ApplicationTest {
@@ -21,42 +17,29 @@ public class EmersonM5Tests extends ApplicationTest {
         controller.start(primaryStage);
         primaryStage.show();
     }
-
     @Test
-    public void testMonstersPlaced() {
+    public void testInventoryItemAtCorrectLocation() {
+        HealthPotionView healthyBoy = new HealthPotionView(
+                new Image("file:assets/inventory_items/health.png"));
+
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
-        assertTrue(mV.size() >= 1);
+        InventoryView inventoryView = controller.getInventoryView();
+        inventoryView.addToInventory(healthyBoy);
+        assertEquals(inventoryView.getItem(0), (healthyBoy));
     }
 
     @Test
-    public void testNextRoomMonsterPlaced() {
+    public void testInventoryRemove() {
+        HealthPotionView healthyBoy = new HealthPotionView(
+                new Image("file:assets/inventory_items/health.png"));
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        ArrayList<MonsterView> mV = controller.getMazeView().moveUp().getMonsterViews();
-        assertTrue(mV.size() >= 1);
-    }
-
-    @Test
-    public void testRoomView() {
-
-        clickOn("Start");
-        write("username");
-        clickOn("Let's go!");
-        RoomView mV = controller.getMazeView().getCurrent();
-        assertNotNull(mV);
-    }
-
-    @Test
-    public void testMazeView() {
-
-        clickOn("Start");
-        write("username");
-        clickOn("Let's go!");
-        MazeView mV = controller.getMazeView();
-        assertNotNull(mV);
+        InventoryView inventoryView = controller.getInventoryView();
+        inventoryView.addToInventory(healthyBoy);
+        inventoryView.removeFromInventory(0);
+        assertEquals(inventoryView.getItem(0), (null));
     }
 }
