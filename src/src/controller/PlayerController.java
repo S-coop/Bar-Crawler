@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import src.model.Direction;
-import src.model.HealthPotion;
 import src.model.Weapon;
 import src.view.AttackPotionView;
 import src.view.HealthPotionView;
@@ -25,7 +24,10 @@ public class PlayerController {
     private double dx = 1;
     private double dy = 1;
     private InventoryView inventoryView;
-    public PlayerController(Stage stage, PlayerView player, MazeView maze, InventoryView inventoryView) {
+    public PlayerController(Stage stage,
+                            PlayerView player,
+                            MazeView maze,
+                            InventoryView inventoryView) {
         this.maze = maze;
         this.stage = stage;
         this.player = player;

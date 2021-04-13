@@ -15,6 +15,8 @@ public class PlayerModel {
      * Player stat and attribute data constructor
      * @param hp the starting health points of the player
      * @param weapon the player's chosen weapon
+     * @param dx x velocity
+     * @param dy y velocity
      */
     public PlayerModel(double hp, Weapon weapon, double dx, double dy) {
         this.hp = hp;

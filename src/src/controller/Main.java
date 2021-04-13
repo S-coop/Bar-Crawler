@@ -99,7 +99,8 @@ public class Main extends Application {
             InventoryView inventoryView = new InventoryView(inventoryImage);
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
             this.mV = maze;
-            PlayerController playerController = new PlayerController(mainWindow, playerView, maze, inventoryView);
+            PlayerController playerController =
+                    new PlayerController(mainWindow, playerView, maze, inventoryView);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
             MonsterController monsterController

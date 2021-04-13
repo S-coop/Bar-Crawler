@@ -29,6 +29,7 @@ public class MazeView {
      * @param cols number of cols in a maze.
      * @param gameModel the gamemodel with game data.
      * @param playerView the visual player data.
+     * @param inventoryView the visual inventory object.
      */
     public MazeView(int width,
                     int height,
@@ -59,7 +60,8 @@ public class MazeView {
         BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
-        RoomView rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        RoomView rm = new RoomView(
+                width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[0][0] = rm;
 
         monsters = MonsterView.generateMonsterViews(
@@ -189,23 +191,26 @@ public class MazeView {
             Random random = new Random();
             int i = random.nextInt(3);
             switch (i) {
-                case (0) :
-                    //health
-                    HealthPotionView healthPotion = new HealthPotionView(new Image("file:assets/inventory_items/health.png"));
-                    inventoryView.addToInventory(healthPotion);
-                    break;
-                case (1) :
-                    //speed
-                    SpeedPotionView speedPotion = new SpeedPotionView(new Image("file:assets/inventory_items/speed.png"));
-                    inventoryView.addToInventory(speedPotion);
-                    break;
-                case (2) :
-                    //attack
-                    AttackPotionView attackPotionView = new AttackPotionView(new Image("file:assets/inventory_items/attack.png"));
-                    inventoryView.addToInventory(attackPotionView);
-                    break;
-                default:
-                    break;
+            case (0) :
+                //health
+                HealthPotionView healthPotion = new HealthPotionView(
+                        new Image("file:assets/inventory_items/health.png"));
+                inventoryView.addToInventory(healthPotion);
+                break;
+            case (1) :
+                //speed
+                SpeedPotionView speedPotion = new SpeedPotionView(
+                        new Image("file:assets/inventory_items/speed.png"));
+                inventoryView.addToInventory(speedPotion);
+                break;
+            case (2) :
+                //attack
+                AttackPotionView attackPotionView = new AttackPotionView(
+                        new Image("file:assets/inventory_items/attack.png"));
+                inventoryView.addToInventory(attackPotionView);
+                break;
+            default:
+                break;
             }
         }
         for (int i : removal) {

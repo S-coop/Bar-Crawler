@@ -51,7 +51,13 @@ public class MonsterView {
      * @param w the width of the game
      * @param h the height of the game
      */
-    public MonsterView(Pane layer, Image standingSprite, Image hitSprite, double x, double y, double w, double h) {
+    public MonsterView(Pane layer,
+                       Image standingSprite,
+                       Image hitSprite,
+                       double x,
+                       double y,
+                       double w,
+                       double h) {
         this.monstermodel = new MonsterModel0(.3, .1, 1);
         this.layer = layer;
         this.standingSprite = standingSprite;
@@ -176,27 +182,31 @@ public class MonsterView {
             int sprite = rand.nextInt(3);
             System.out.println(sprite);
             switch (sprite) {
-                case 0:
-                    monster = new MonsterView(layer, new Image("file:assets/enemies/standing/drunkguy.png"),
-                            new Image("file:assets/enemies/hit/drunkguy_hit.png"),
-                            x, y, width, height);
-                    break;
-                case 1:
-                    monster = new MonsterView(layer, new Image("file:assets/enemies/standing/biker.png"),
-                            new Image("file:assets/enemies/hit/biker_hit.png"),
-                            x, y, width, height);
-                    break;
-                case 2:
-                    System.out.println("bouncer");
-                    monster = new MonsterView(layer, new Image("file:assets/enemies/standing/bouncer.png"),
-                            new Image("file:assets/enemies/hit/bouncer_hit.png"),
-                            x, y, width, height);
-                    break;
-                default:
-                    monster = new MonsterView(layer, new Image("file:assets/enemies/standing/drunkguy.png"),
-                            new Image("file:assets/enemies/hit/drunkguy_hit.png"),
-                            x, y, width, height);
-                    break;
+            case 0:
+                monster = new MonsterView(layer,
+                        new Image("file:assets/enemies/standing/drunkguy.png"),
+                        new Image("file:assets/enemies/hit/drunkguy_hit.png"),
+                        x, y, width, height);
+                break;
+            case 1:
+                monster = new MonsterView(layer,
+                        new Image("file:assets/enemies/standing/biker.png"),
+                        new Image("file:assets/enemies/hit/biker_hit.png"),
+                        x, y, width, height);
+                break;
+            case 2:
+                System.out.println("bouncer");
+                monster = new MonsterView(layer,
+                        new Image("file:assets/enemies/standing/bouncer.png"),
+                        new Image("file:assets/enemies/hit/bouncer_hit.png"),
+                        x, y, width, height);
+                break;
+            default:
+                monster = new MonsterView(layer,
+                        new Image("file:assets/enemies/standing/drunkguy.png"),
+                        new Image("file:assets/enemies/hit/drunkguy_hit.png"),
+                        x, y, width, height);
+                break;
             }
             monsters.add(monster);
         }
@@ -212,5 +222,7 @@ public class MonsterView {
         imageView.setImage(standingSprite);
     }
 
-    public KnifeView getKnifeView() {return this.knifeView;}
+    public KnifeView getKnifeView() {
+        return this.knifeView;
+    }
 }

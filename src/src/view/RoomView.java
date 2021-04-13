@@ -54,6 +54,7 @@ public class RoomView {
      * @param background the background of the room
      * @param playerView the visual data of the player to display
      * @param monsterViews the array of visual monsterviews to display
+     * @param inventoryView the visual inventory
      */
     public RoomView(int width,
                     int height,
@@ -82,7 +83,8 @@ public class RoomView {
                     String backgroundLocation,
                     PlayerView playerView,
                     ArrayList<MonsterView> monsterViews, InventoryView inventoryView) {
-        this(width, height, gameModel, new Image(backgroundLocation), playerView, monsterViews, inventoryView);
+        this(width, height, gameModel,
+                new Image(backgroundLocation), playerView, monsterViews, inventoryView);
     }
 
 

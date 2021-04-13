@@ -2,13 +2,11 @@ package src.view;
 
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public abstract class ItemView {
 
-    abstract public Image getItemImage();
+    public abstract Image getItemImage();
 
-    abstract public String getType();
+    public abstract String getType();
 
-//    abstract void useItem();
 }
