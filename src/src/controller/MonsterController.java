@@ -47,21 +47,16 @@ public class MonsterController {
                             && (Math.abs(player.getCenterX() - monster.getCenterX()) > 20
                             || Math.abs(player.getCenterY() - monster.getCenterY()) > 20)
                             && startMoveTime[0] - lastMoveTime[0] > 40) {
-                        Random rand = new Random();
-                        if (player.getCenterX() - monster.getCenterX() > 20) {
-                            monster.setDx(10);
-                        } else if (player.getCenterX() - monster.getCenterX() < 20) {
-                            monster.setDx(-10);
-                        } else {
-                            monster.setDx(0);
-                        }
-                        if (player.getCenterY() - monster.getCenterY() > 20) {
-                            monster.setDy(10);
-                        } else if (player.getCenterY() - monster.getCenterY() < 20) {
-                            monster.setDy(-10);
-                        } else {
-                            monster.setDy(0);
-                        }
+                        
+                        double xDelta = (monster.getX() - player.getX()) * -1;
+                        double yDelta = (monster.getY() - player.getY()) * -1;
+                        double len = Math.sqrt(xDelta * xDelta + yDelta * yDelta);
+
+                        double scalingConstant = 10;
+                        xDelta /= len;
+                        yDelta /= len;
+                        monster.setDx(xDelta * scalingConstant);
+                        monster.setDy(yDelta * scalingConstant);
                         monster.move();
                         monster.updateUI();
                         lastMoveTime[0] = startMoveTime[0];
