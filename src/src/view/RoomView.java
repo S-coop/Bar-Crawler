@@ -44,6 +44,7 @@ public class RoomView {
     private boolean visited;
 
     private ArrayList<MonsterView> monsterViews;
+    private InventoryView inventoryView;
 
     /**
      * initialize the variables for the Room screen.
@@ -59,7 +60,7 @@ public class RoomView {
                     GameModel gameModel,
                     Image background,
                     PlayerView playerView,
-                    ArrayList<MonsterView> monsterViews) {
+                    ArrayList<MonsterView> monsterViews, InventoryView inventoryView) {
         //if we want to keep the 4 directional door buttons then instantiate them here
         this.width = width;
         this.height = height;
@@ -72,6 +73,7 @@ public class RoomView {
         this.visited = false;
 
         this.monsterViews = monsterViews;
+        this.inventoryView = inventoryView;
     }
 
     public RoomView(int width,
@@ -79,8 +81,8 @@ public class RoomView {
                     GameModel gameModel,
                     String backgroundLocation,
                     PlayerView playerView,
-                    ArrayList<MonsterView> monsterViews) {
-        this(width, height, gameModel, new Image(backgroundLocation), playerView, monsterViews);
+                    ArrayList<MonsterView> monsterViews, InventoryView inventoryView) {
+        this(width, height, gameModel, new Image(backgroundLocation), playerView, monsterViews, inventoryView);
     }
 
 
@@ -134,7 +136,8 @@ public class RoomView {
         HBox bottomBar = new HBox();
         Region bottomSpace = new Region();
         HBox.setHgrow(bottomSpace, Priority.ALWAYS);
-        bottomBar.getChildren().addAll(bottomSpace, weaponText);
+        StackPane inventoryBox = inventoryView.getStack();
+        bottomBar.getChildren().addAll(inventoryBox, bottomSpace, weaponText);
         bottomBar.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(bottomBar);
         newScreen.getChildren().addAll(
@@ -142,6 +145,8 @@ public class RoomView {
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon())
         );
+
+
 
         StackPane stackScreen = new StackPane();
 
@@ -151,9 +156,10 @@ public class RoomView {
             monsterLayer.getChildren().add(m.getImageView());
         }
         stackScreen.getChildren().addAll(background,
-                borderPane,
                 playerView.getLayer(),
-                monsterLayer);
+                monsterLayer,
+                borderPane);
+
 
         return new Scene(stackScreen, width, height);
     }

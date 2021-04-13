@@ -4,7 +4,7 @@ public class PlayerModel {
 
     private double hp;
     private Weapon weapon;
-
+    private double maxHp;
     /**
      * Player stat and attribute data constructor
      * @param hp the starting health points of the player
@@ -12,6 +12,7 @@ public class PlayerModel {
      */
     public PlayerModel(double hp, Weapon weapon) {
         this.hp = hp;
+        this.maxHp = hp;
         this.weapon = weapon;
     }
 
@@ -29,6 +30,10 @@ public class PlayerModel {
      */
     public void setPlayerHP(double newHP) {
         this.hp = newHP;
+    }
+
+    public double getMaxHp() {
+        return this.maxHp;
     }
 }
 

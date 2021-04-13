@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import src.model.Direction;
+import src.view.InventoryView;
 import src.view.MazeView;
 import src.view.MonsterView;
 import src.view.PlayerView;
@@ -18,7 +19,7 @@ public class PlayerController {
     private double dx = 1;
     private double dy = 1;
 
-    public PlayerController(Stage stage, PlayerView player, MazeView maze) {
+    public PlayerController(Stage stage, PlayerView player, MazeView maze, InventoryView inventoryView) {
         this.maze = maze;
         this.stage = stage;
         this.player = player;
@@ -70,9 +71,8 @@ public class PlayerController {
                                         && (player.getY() - monster.getY() < 60))
                                         && ((monster.getX() - player.getX() < 30)
                                         && (monster.getY() - player.getY() < 60))) {
-                                    maze.damageMonster(monster, i);
+                                    maze.damageMonster(monster, i, inventoryView);
                                     System.out.println(player.getDx());
-                                    System.out.println(player.getX());
                                     System.out.println(monster.getX());
                                 }
                                 break;
@@ -81,7 +81,7 @@ public class PlayerController {
                                         && (player.getY() - monster.getY() < 60))
                                         && ((monster.getX() - player.getX() < 30)
                                         && (monster.getY() - player.getY() < 60))) {
-                                    maze.damageMonster(monster, i);
+                                    maze.damageMonster(monster, i, inventoryView);
                                 }
                                 break;
                             case RIGHT:
@@ -89,7 +89,7 @@ public class PlayerController {
                                         && (player.getY() - monster.getY() < 30))
                                         && ((monster.getX() - player.getX() < 60)
                                         && (monster.getY() - player.getY() < 30))) {
-                                    maze.damageMonster(monster, i);
+                                    maze.damageMonster(monster, i, inventoryView);
                                 }
                                 break;
                             case LEFT:
@@ -97,7 +97,7 @@ public class PlayerController {
                                         && (player.getY() - monster.getY() < 31))
                                         && ((monster.getX() - player.getX() < 61)
                                         && (monster.getY() - player.getY() < 30))) {
-                                    maze.damageMonster(monster, i);
+                                    maze.damageMonster(monster, i, inventoryView);
                                 }
                                 break;
                             default:
