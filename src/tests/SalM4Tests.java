@@ -31,7 +31,7 @@ public class SalM4Tests extends ApplicationTest {
     }
 
     @Test
-    public void testInitialInventoryEmpty() {
+    public void testPlayerHealthInitialized() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");

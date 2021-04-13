@@ -27,7 +27,7 @@ public class SalM5Tests extends ApplicationTest {
     }
 
     @Test
-    public void testPlayerHealthInitialized() {
+    public void testInitialInventoryEmpty() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
