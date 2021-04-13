@@ -6,7 +6,6 @@ import src.view.MazeView;
 import src.view.MonsterView;
 import src.view.PlayerView;
 
-import java.util.Random;
 
 
 public class MonsterController {
@@ -47,7 +46,7 @@ public class MonsterController {
                             && (Math.abs(player.getCenterX() - monster.getCenterX()) > 20
                             || Math.abs(player.getCenterY() - monster.getCenterY()) > 20)
                             && startMoveTime[0] - lastMoveTime[0] > 40) {
-                        
+
                         double xDelta = (monster.getX() - player.getX()) * -1;
                         double yDelta = (monster.getY() - player.getY()) * -1;
                         double len = Math.sqrt(xDelta * xDelta + yDelta * yDelta);
