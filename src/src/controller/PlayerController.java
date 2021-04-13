@@ -184,7 +184,10 @@ public class PlayerController {
                 System.out.println("ATTACK");
                 ((AttackPotionView) itemView).useItem(player);
             }
-            inventoryView.removeFromInventory(index);
+
+            if (!itemView.getType().equals("knife") {
+                inventoryView.removeFromInventory(index);
+            }
         }
     }
 }
