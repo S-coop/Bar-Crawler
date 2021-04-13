@@ -3,6 +3,7 @@ package src.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import src.model.HealthPotion;
+import src.model.PlayerModel;
 
 public class HealthPotionView extends ItemView {
     protected Image itemImage;
@@ -12,19 +13,26 @@ public class HealthPotionView extends ItemView {
     public HealthPotionView(Image itemImage) {
         this.itemImage = itemImage;
         imageView = new ImageView(this.itemImage);
-        healthPotion = new HealthPotion(5);
+        healthPotion = new HealthPotion(.15);
     }
     @Override
-    Image getItemImage() {
+    public Image getItemImage() {
         return itemImage;
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "health";
     }
 
     public HealthPotion getHealthPotion() {
         return healthPotion;
+    }
+
+    public void useItem(PlayerView playerView) {
+        playerView.getModel().setPlayerHP(Math.min(playerView.getModel().getPlayerHP() + healthPotion.getHeals(), playerView.getModel().getMaxHp()));
+        playerView.getProgressBar()
+                .setProgress(playerView.getModel().getPlayerHP() / playerView.getModel().getMaxHp());
+
     }
 }

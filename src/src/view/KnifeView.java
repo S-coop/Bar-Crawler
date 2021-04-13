@@ -13,12 +13,13 @@ public class KnifeView extends ItemView {
         imageView = new ImageView(this.itemImage);
     }
     @Override
-    Image getItemImage() {
+    public Image getItemImage() {
         return itemImage;
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "knife";
     }
+
 }
