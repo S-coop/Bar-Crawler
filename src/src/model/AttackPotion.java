@@ -10,8 +10,8 @@ public class AttackPotion {
      * @param duration the duration of the effect
      */
     public AttackPotion(double mult, int duration) {
-        this.mult = 2;
-        this.duration = 30;
+        this.mult = mult;
+        this.duration = duration;
     }
 
     /**

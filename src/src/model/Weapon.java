@@ -1,5 +1,5 @@
 package src.model;
 
 public enum Weapon {
-    SWORD, GUN, BOTTLE;
+    SWORD, GUN, BOTTLE, KNIFE;
 }
