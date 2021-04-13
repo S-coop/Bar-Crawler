@@ -5,14 +5,10 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
-import src.model.PlayerModel;
-import src.view.MonsterView;
-
-import java.util.ArrayList;
-
+import src.view.InventoryView;
 import static org.junit.Assert.*;
 
-public class SalM4Tests extends ApplicationTest {
+public class SalM5Tests extends ApplicationTest {
     private Main controller;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,21 +18,23 @@ public class SalM4Tests extends ApplicationTest {
     }
 
     @Test
-    public void testMonstersHealthInitialized() {
+    public void testInventoryNotNull() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
-        assertTrue(mV.get(0).currentModel().getMonsterHP() != 0);
+        InventoryView inventoryView = controller.getInventoryView();
+        assertTrue(inventoryView != null);
     }
 
     @Test
-    public void testInitialInventoryEmpty() {
+    public void testPlayerHealthInitialized() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        PlayerModel pm = controller.getPlayerView().getModel();
-        assertTrue(pm.getPlayerHP() != 0);
+        InventoryView inventoryView = controller.getInventoryView();
+        for (int i = 0; i < 4; i++) {
+            assertTrue(inventoryView.getItem(i) == null);
+        }
     }
 
 }
