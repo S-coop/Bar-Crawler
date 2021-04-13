@@ -151,13 +151,11 @@ public class MonsterView {
     }
 
     public void move() {
-        if (movable) {
-            if (0 + LEFT_BOARDER <= x + dx && x + dx < width - PLAYER_WIDTH - LEFT_BOARDER) {
-                x += dx;
-            }
-            if (0 + TOP_BOARDER <= y + dy && y + dy < height - PLAYER_HEIGHT - TOP_BOARDER) {
-                y += dy;
-            }
+        if (0 + LEFT_BOARDER <= x + dx && x + dx < width - PLAYER_WIDTH - LEFT_BOARDER) {
+            x += dx;
+        }
+        if (0 + TOP_BOARDER <= y + dy && y + dy < height - PLAYER_HEIGHT - TOP_BOARDER) {
+            y += dy;
         }
     }
 

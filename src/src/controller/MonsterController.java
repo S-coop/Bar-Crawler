@@ -6,6 +6,8 @@ import src.view.MazeView;
 import src.view.MonsterView;
 import src.view.PlayerView;
 
+import java.util.Random;
+
 
 public class MonsterController {
     private PlayerView player;
@@ -23,10 +25,13 @@ public class MonsterController {
 
         final long[] startTime = {System.currentTimeMillis()};
         final long[] lastAttackTime = {0};
+        final long[] startMoveTime = {0};
+        final long[] lastMoveTime = {0};
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 startTime[0] = System.currentTimeMillis();
+                startMoveTime[0] = System.currentTimeMillis();
                 for (MonsterView monster : maze.getCurrent().getMonsterViews()) {
                     monster.stopHit();
                     if (player.getModel().getPlayerHP() > 0
@@ -37,6 +42,29 @@ public class MonsterController {
                         monster.hit();
                         System.out.println("attacked player!");
                         lastAttackTime[0] = startTime[0];
+                    } else if (Math.abs(player.getCenterX() - monster.getCenterX()) < 200
+                            && Math.abs(player.getCenterY() - monster.getCenterY()) < 200
+                            && (Math.abs(player.getCenterX() - monster.getCenterX()) > 20
+                            || Math.abs(player.getCenterY() - monster.getCenterY()) > 20)
+                            && startMoveTime[0] - lastMoveTime[0] > 40) {
+                        Random rand = new Random();
+                        if (player.getCenterX() - monster.getCenterX() > 20) {
+                            monster.setDx(10);
+                        } else if (player.getCenterX() - monster.getCenterX() < 20) {
+                            monster.setDx(-10);
+                        } else {
+                            monster.setDx(0);
+                        }
+                        if (player.getCenterY() - monster.getCenterY() > 20) {
+                            monster.setDy(10);
+                        } else if (player.getCenterY() - monster.getCenterY() < 20) {
+                            monster.setDy(-10);
+                        } else {
+                            monster.setDy(0);
+                        }
+                        monster.move();
+                        monster.updateUI();
+                        lastMoveTime[0] = startMoveTime[0];
                     }
                 }
             }
