@@ -185,7 +185,7 @@ public class PlayerController {
                 ((AttackPotionView) itemView).useItem(player);
             }
 
-            if (!itemView.getType().equals("knife") {
+            if (!itemView.getType().equals("knife")) {
                 inventoryView.removeFromInventory(index);
             }
         }

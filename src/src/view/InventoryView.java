@@ -27,7 +27,9 @@ public class InventoryView {
     private GridPane gridPane = new GridPane();
     private Insets margin = new Insets(10.0);
     private boolean availableSlots[] = {true, true, true, true};
-    private ItemView items[] = {null,null,null,null};
+    private ItemView items[] = {null, null, null, null};
+    private ImageView itemImages[] = {null, null, null, null};
+
     public InventoryView(Image inventoryImage) {
         this.inventoryImage = inventoryImage;
         imageView = new ImageView(inventoryImage);
@@ -44,7 +46,7 @@ public class InventoryView {
     public void addToInventory(ItemView itemView) {
         if (currentSize < INVENTORYCAP) {
             switch (itemView.getType()) {
-                case ("knife") :
+                case ("knife"):
                     if (!haveKnife) {
                         haveKnife = true;
                         System.out.println("add to inventory");
@@ -58,7 +60,7 @@ public class InventoryView {
                         gridPane.setMargin(itemImageView, margin);
                     }
                     break;
-                case ("health") :
+                case ("health"):
                     if (!haveHealthPotion) {
                         haveHealthPotion = true;
                         System.out.println("add to inventory");
@@ -68,11 +70,12 @@ public class InventoryView {
                         currentSize++;
                         int slot = findFirstAvailableSlot();
                         gridPane.add(itemImageView, slot, 0);
+                        itemImages[slot] = itemImageView;
                         takeAvailableSlot(slot, itemView);
                         gridPane.setMargin(itemImageView, margin);
                     }
                     break;
-                case ("speed") :
+                case ("speed"):
                     if (!haveSpeedPotion) {
                         haveSpeedPotion = true;
                         System.out.println("add to inventory");
@@ -82,11 +85,12 @@ public class InventoryView {
                         currentSize++;
                         int slot = findFirstAvailableSlot();
                         gridPane.add(itemImageView, slot, 0);
+                        itemImages[slot] = itemImageView;
                         takeAvailableSlot(slot, itemView);
                         gridPane.setMargin(itemImageView, margin);
                     }
                     break;
-                case ("attack") :
+                case ("attack"):
                     if (!haveAttackPotion) {
                         haveAttackPotion = true;
                         System.out.println("add to inventory");
@@ -96,6 +100,7 @@ public class InventoryView {
                         currentSize++;
                         int slot = findFirstAvailableSlot();
                         gridPane.add(itemImageView, slot, 0);
+                        itemImages[slot] = itemImageView;
                         takeAvailableSlot(slot, itemView);
                         gridPane.setMargin(itemImageView, margin);
                     }
@@ -125,30 +130,45 @@ public class InventoryView {
     }
 
     public void printItems() {
-        for (ItemView item:
-             items) {
+        for (ItemView item :
+                items) {
             System.out.println(item);
         }
     }
 
     public void removeFromInventory(int index) {
-        GridPane gp = new GridPane();
+//        GridPane gp = new GridPane();
 //        gridPane.add(itemImageView, slot, 0);
 
 //        gridPane.setMargin(itemImageView, margin);
-        for (int i = 0; i < currentSize; i++) {
-            if (i == index) {
-                ImageView iv = new ImageView(new Image("file:assets/inventory_items/blank.png"));
-                gp.add(iv, index, 0);
-                gp.setMargin(iv, margin);
-            } else {
-                ImageView iv = new ImageView(items[i].getItemImage());
-                gp.add(iv, i, 0);
-                gp.setMargin(iv, margin);
-            }
+//        for (int i = 0; i < currentSize; i++) {
+//            if (i == index) {
+//                ImageView iv = new ImageView(new Image("file:assets/inventory_items/blank.png"));
+//                gp.add(iv, index, 0);
+//                gp.setMargin(iv, margin);
+//            } else {
+//                ImageView iv = new ImageView(items[i].getItemImage());
+//                gp.add(iv, i, 0);
+//                gp.setMargin(iv, margin);
+//            }
+//        }
+//        gridPane = gp;
+//        gridPane.getChildren().remove(itemImages[index]);
+        itemImages[index].setImage(new Image("file:assets/inventory_items/blank.png"));
+        switch (items[index].getType()) {
+            case ("health"):
+                haveHealthPotion = false;
+                break;
+            case ("speed"):
+                haveSpeedPotion = false;
+                break;
+            case ("attack"):
+                haveAttackPotion = false;
+                break;
+            default:
+                break;
         }
-        gridPane = gp;
+        currentSize--;
         items[index] = null;
     }
-
 }
