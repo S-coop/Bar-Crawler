@@ -29,6 +29,7 @@ public class MazeView {
      * @param cols number of cols in a maze.
      * @param gameModel the gamemodel with game data.
      * @param playerView the visual player data.
+     * @param inventoryView the visual inventory object.
      */
     public MazeView(int width,
                     int height,
@@ -59,7 +60,8 @@ public class MazeView {
         BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
-        RoomView rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        RoomView rm = new RoomView(
+                width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[0][0] = rm;
 
         monsters = MonsterView.generateMonsterViews(
@@ -150,21 +152,27 @@ public class MazeView {
     public void damageMonster(MonsterView currentMonster, int index, InventoryView inventoryView) {
         removal.clear();
         //MonsterView currentMonster = (getCurrent().getMonsterViews()).get(i);
+        double damageMultiplier = getCurrent().getPlayerView().getModel().getDamageMultiplier();
         switch (getCurrent().getPlayerView().getWeapon()) {
         case GUN:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - .3);
+                    currentMonster.currentModel().getMonsterHP() - .3 * damageMultiplier);
             System.out.println("you hit me for 3 health");
             break;
         case SWORD:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - .2);
+                    currentMonster.currentModel().getMonsterHP() - .2 * damageMultiplier);
             System.out.println("you hit me for 2 health");
             break;
         case BOTTLE:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - .1);
+                    currentMonster.currentModel().getMonsterHP() - .1 * damageMultiplier);
             System.out.println("you hit me for 1 health");
+            break;
+        case KNIFE:
+            currentMonster.currentModel().setMonsterHP(
+                    currentMonster.currentModel().getMonsterHP() - .7 * damageMultiplier);
+            System.out.println("you hit me for 7 health");
             break;
         default:
             break;
@@ -181,25 +189,28 @@ public class MazeView {
             inventoryView.addToInventory(currentMonster.getKnifeView());
             //random potion rate
             Random random = new Random();
-            int i = random.nextInt(10);
+            int i = random.nextInt(3);
             switch (i) {
-                case (1) :
-                    //health
-                    HealthPotionView healthPotion = new HealthPotionView(new Image("file:assets/inventory_items/health.png"));
-                    inventoryView.addToInventory(healthPotion);
-                    break;
-                case (2) :
-                    //speed
-                    SpeedPotionView speedPotion = new SpeedPotionView(new Image("file:assets/inventory_items/speed.png"));
-                    inventoryView.addToInventory(speedPotion);
-                    break;
-                case (3) :
-                    //attack
-                    AttackPotionView attackPotionView = new AttackPotionView(new Image("file:assets/inventory_items/attack.png"));
-                    inventoryView.addToInventory(attackPotionView);
-                    break;
-                default:
-                    break;
+            case (0) :
+                //health
+                HealthPotionView healthPotion = new HealthPotionView(
+                        new Image("file:assets/inventory_items/health.png"));
+                inventoryView.addToInventory(healthPotion);
+                break;
+            case (1) :
+                //speed
+                SpeedPotionView speedPotion = new SpeedPotionView(
+                        new Image("file:assets/inventory_items/speed.png"));
+                inventoryView.addToInventory(speedPotion);
+                break;
+            case (2) :
+                //attack
+                AttackPotionView attackPotionView = new AttackPotionView(
+                        new Image("file:assets/inventory_items/attack.png"));
+                inventoryView.addToInventory(attackPotionView);
+                break;
+            default:
+                break;
             }
         }
         for (int i : removal) {

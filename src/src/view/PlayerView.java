@@ -33,6 +33,7 @@ public class PlayerView {
     private final double leftBoarder = 76 / 2;
 
     private Weapon weapon;
+    private Weapon originalWeapon;
     private PlayerModel playerModel;
     private Direction direction;
     private String pathName1 = " ";
@@ -61,9 +62,11 @@ public class PlayerView {
      */
     public PlayerView(Pane layer, double x, double y, double w,
                       double h, Weapon weaponPick, Direction direction) {
-        this.playerModel = new PlayerModel(1, weaponPick);
+        this.playerModel = new PlayerModel(1, weaponPick, 5, 5);
 
         this.weapon = weaponPick;
+        this.originalWeapon = this.weapon;
+
         this.direction = direction;
         walking[0] = Walking.CENTER;
         walking[1] = Walking.LEFT;
@@ -355,4 +358,17 @@ public class PlayerView {
     public ProgressBar getProgressBar() {
         return this.progressBar;
     }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setOriginalWeapon(Weapon weapon) {
+        this.originalWeapon = weapon;
+    }
+
+    public Weapon getOriginalWeapon() {
+        return this.originalWeapon;
+    }
 }
+

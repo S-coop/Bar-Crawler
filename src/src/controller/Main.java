@@ -20,6 +20,7 @@ public class Main extends Application {
     private final String[] weapons = {"Sword", "Gun", "Broken Bottle"};
     private PlayerView pV;
     private MazeView mV;
+    private InventoryView iV;
 
 
     @Override
@@ -99,7 +100,9 @@ public class Main extends Application {
             InventoryView inventoryView = new InventoryView(inventoryImage);
             MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
             this.mV = maze;
-            PlayerController playerController = new PlayerController(mainWindow, playerView, maze, inventoryView);
+            this.iV = inventoryView;
+            PlayerController playerController =
+                    new PlayerController(mainWindow, playerView, maze, inventoryView);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
             MonsterController monsterController
@@ -146,6 +149,9 @@ public class Main extends Application {
 
     public MazeView getMazeView() {
         return this.mV;
+    }
+    public InventoryView getInventoryView() {
+        return this.iV;
     }
     /**
      * Main method.
