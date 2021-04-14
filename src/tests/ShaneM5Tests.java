@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
 import src.view.HealthPotionView;
-import src.view.InventoryView;
 import src.view.PlayerView;
 
 import static org.junit.Assert.*;
