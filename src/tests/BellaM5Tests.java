@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
 import src.view.AttackPotionView;
+import src.view.HealthPotionView;
+import src.view.InventoryView;
 
 import static org.junit.Assert.*;
 
@@ -43,4 +45,17 @@ public class BellaM5Tests extends ApplicationTest {
         assertTrue(multiplier != 1.0);
     }
 
+    @Test
+    public void testInventoryRemove() {
+        clickOn("Start");
+        write("username");
+        clickOn("Let's go!");
+
+        HealthPotionView healthyBoy = new HealthPotionView(
+                new Image("file:assets/inventory_items/health.png"));
+        InventoryView inventoryView = controller.getInventoryView();
+        inventoryView.addToInventoryCodeOnly(healthyBoy);
+        inventoryView.removeFromInventory(0);
+        assertEquals(inventoryView.getItem(0), (null));
+    }
 }

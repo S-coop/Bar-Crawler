@@ -134,6 +134,9 @@ public class InventoryView {
     }
 
     public void removeFromInventory(int index) {
+        if (currentSize == 0) {
+            return;
+        }
         itemImages[index].setImage(new Image("file:assets/inventory_items/blank.png"));
         switch (items[index].getType()) {
         case ("health"):
@@ -150,5 +153,69 @@ public class InventoryView {
         }
         currentSize--;
         items[index] = null;
+    }
+    public int getCurrentSize() {
+        return currentSize;
+    }
+
+    public void addToInventoryCodeOnly(ItemView itemView) {
+        if (currentSize < inventorycap) {
+            switch (itemView.getType()) {
+            case ("knife"):
+                if (!haveKnife) {
+                    haveKnife = true;
+                    System.out.println("add to inventory");
+                    ImageView itemImageView = new ImageView(itemView.getItemImage());
+                    VBox vBox = new VBox();
+                    vBox.getChildren().add(itemImageView);
+                    currentSize++;
+                    int slot = findFirstAvailableSlot();
+                    takeAvailableSlot(slot, itemView);
+                }
+                break;
+            case ("health"):
+                if (!haveHealthPotion) {
+                    haveHealthPotion = true;
+                    System.out.println("add to inventory");
+                    ImageView itemImageView = new ImageView(itemView.getItemImage());
+                    VBox vBox = new VBox();
+                    vBox.getChildren().add(itemImageView);
+                    currentSize++;
+                    int slot = findFirstAvailableSlot();
+                    itemImages[slot] = itemImageView;
+                    takeAvailableSlot(slot, itemView);
+                }
+                break;
+            case ("speed"):
+                if (!haveSpeedPotion) {
+                    haveSpeedPotion = true;
+                    System.out.println("add to inventory");
+                    ImageView itemImageView = new ImageView(itemView.getItemImage());
+                    VBox vBox = new VBox();
+                    vBox.getChildren().add(itemImageView);
+                    currentSize++;
+                    int slot = findFirstAvailableSlot();
+                    itemImages[slot] = itemImageView;
+                    takeAvailableSlot(slot, itemView);
+                }
+                break;
+            case ("attack"):
+                if (!haveAttackPotion) {
+                    haveAttackPotion = true;
+                    System.out.println("add to inventory");
+                    ImageView itemImageView = new ImageView(itemView.getItemImage());
+                    VBox vBox = new VBox();
+                    vBox.getChildren().add(itemImageView);
+                    currentSize++;
+                    int slot = findFirstAvailableSlot();
+                    itemImages[slot] = itemImageView;
+                    takeAvailableSlot(slot, itemView);
+                }
+                break;
+            default:
+                System.out.println("oopsie!!!!");
+                break;
+            }
+        }
     }
 }
