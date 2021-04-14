@@ -21,6 +21,9 @@ public class ShaneM5Tests extends ApplicationTest {
         primaryStage.show();
     }
 
+    /**
+     * JUnit for testing using health potion at full health at full health
+     */
     @Test
     public void addHealthFull() {
         clickOn("Start");
@@ -37,6 +40,9 @@ public class ShaneM5Tests extends ApplicationTest {
         assertTrue(prevHP == postHP);
     }
 
+    /**
+     * JUnit for testing using health potion at full health at not full health
+     */
     @Test
     public void addHealthNotFull() {
         clickOn("Start");
