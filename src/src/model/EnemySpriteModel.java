@@ -4,14 +4,16 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class EnemySpriteModel {
     private ArrayList<Image> forwardNeutralSprites;
+    private ArrayList<Image> forwardHitSprites;
 
     public EnemySpriteModel() {
-        forwardNeutralSprites = generateArrayList("assets/enemies");
+        forwardNeutralSprites = generateArrayList("assets/enemies/standing");
+        forwardHitSprites = generateArrayList("assets/enemies/hit");
     }
+
 
     public ArrayList<Image> generateArrayList(String dir) {
         ArrayList<Image> images = new ArrayList<>();
@@ -21,7 +23,7 @@ public class EnemySpriteModel {
             System.out.println("file:" + dir + "/" +  f.getName());
         }
         //allow for randomization of map
-        Collections.shuffle(images);
+        //Collections.shuffle(images);
         return images;
     }
 
@@ -29,4 +31,7 @@ public class EnemySpriteModel {
         return forwardNeutralSprites;
     }
 
+    public ArrayList<Image> getForwardHitSprites() {
+        return forwardHitSprites;
+    }
 }

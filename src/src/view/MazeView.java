@@ -2,9 +2,8 @@ package src.view;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import src.model.BackgroundModel;
-import src.model.EnemySpriteModel;
-import src.model.GameModel;
+import src.model.*;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,13 +29,14 @@ public class MazeView {
      * @param cols number of cols in a maze.
      * @param gameModel the gamemodel with game data.
      * @param playerView the visual player data.
+     * @param inventoryView the visual inventory object.
      */
     public MazeView(int width,
                     int height,
                     int rows,
                     int cols,
                     GameModel gameModel,
-                    PlayerView playerView) {
+                    PlayerView playerView, InventoryView inventoryView) {
 
         this.width = width;
         this.height = height;
@@ -55,36 +55,37 @@ public class MazeView {
         ArrayList<MonsterView> monsters =
                 MonsterView.generateMonsterViews(
                         rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                        layer, esm.getForwardNeutralSprites());
+                        layer);
 
         BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
-        RoomView rm = new RoomView(width, height, gameModel, im, playerView, monsters);
+        RoomView rm = new RoomView(
+                width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[0][0] = rm;
 
         monsters = MonsterView.generateMonsterViews(
                 rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                layer, esm.getForwardNeutralSprites());
+                layer);
 
         im = bgModel.getTopRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[0][cols - 1] = rm;
 
         monsters = MonsterView.generateMonsterViews(
                 rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                layer, esm.getForwardNeutralSprites());
+                layer);
 
         im = bgModel.getBottomRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[rows - 1][cols - 1] = rm;
 
         monsters = MonsterView.generateMonsterViews(
                 rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                layer, esm.getForwardNeutralSprites());
+                layer);
 
         im = bgModel.getBottomLeftBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
         maze[rows - 1][0] = rm;
 
 
@@ -92,18 +93,18 @@ public class MazeView {
         for (int c = 1; c < cols - 1; c++) {
             monsters = MonsterView.generateMonsterViews(
                     rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                    layer, esm.getForwardNeutralSprites());
+                    layer);
             Image leftImage = bgModel.getTopBackgrounds().get(c - 1);
             RoomView leftRoom = new RoomView(width,
-                    height, gameModel, leftImage, playerView, monsters);
+                    height, gameModel, leftImage, playerView, monsters, inventoryView);
             maze[0][c] = leftRoom;
 
             monsters = MonsterView.generateMonsterViews(
                     rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                    layer, esm.getForwardNeutralSprites());
+                    layer);
             Image rightImage = bgModel.getBottomBackgrounds().get(c - 1);
             RoomView rightRoom = new RoomView(width,
-                    height, gameModel, rightImage, playerView, monsters);
+                    height, gameModel, rightImage, playerView, monsters, inventoryView);
             maze[rows - 1][c] = rightRoom;
 
         }
@@ -112,18 +113,18 @@ public class MazeView {
         for (int r = 1; r < rows - 1; r++) {
             monsters = MonsterView.generateMonsterViews(
                     rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                    layer, esm.getForwardNeutralSprites());
+                    layer);
             Image topImage = bgModel.getLeftSideBackgrounds().get(r - 1);
             RoomView topRoom = new RoomView(width,
-                    height, gameModel, topImage, playerView, monsters);
+                    height, gameModel, topImage, playerView, monsters, inventoryView);
             maze[r][0] = topRoom;
 
             monsters = MonsterView.generateMonsterViews(
                     rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                    layer, esm.getForwardNeutralSprites());
+                    layer);
             Image bottomImage = bgModel.getRightSideBackgrounds().get(r - 1);
             RoomView bottomRoom = new RoomView(width,
-                    height, gameModel, bottomImage, playerView, monsters);
+                    height, gameModel, bottomImage, playerView, monsters, inventoryView);
             maze[r][cols - 1] = bottomRoom;
 
         }
@@ -134,10 +135,10 @@ public class MazeView {
             for (int c = 1; c <= cols - 2; c++) {
                 monsters = MonsterView.generateMonsterViews(
                         rng.nextInt(maxEnemies - minEnemies) + minEnemies,
-                        layer, esm.getForwardNeutralSprites());
+                        layer);
                 Image bg = bgModel.getMiddleBackgrounds().get(backgroundIndex);
                 RoomView room = new RoomView(width,
-                        height, gameModel, bg, playerView, monsters);
+                        height, gameModel, bg, playerView, monsters, inventoryView);
                 maze[r][c] = room;
                 backgroundIndex++;
             }
@@ -148,24 +149,30 @@ public class MazeView {
         current.setVisited(true);
     }
 
-    public void damageMonster(MonsterView currentMonster, int index) {
+    public void damageMonster(MonsterView currentMonster, int index, InventoryView inventoryView) {
         removal.clear();
         //MonsterView currentMonster = (getCurrent().getMonsterViews()).get(i);
+        double damageMultiplier = getCurrent().getPlayerView().getModel().getDamageMultiplier();
         switch (getCurrent().getPlayerView().getWeapon()) {
         case GUN:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 3);
+                    currentMonster.currentModel().getMonsterHP() - .3 * damageMultiplier);
             System.out.println("you hit me for 3 health");
             break;
         case SWORD:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 2);
+                    currentMonster.currentModel().getMonsterHP() - .2 * damageMultiplier);
             System.out.println("you hit me for 2 health");
             break;
         case BOTTLE:
             currentMonster.currentModel().setMonsterHP(
-                    currentMonster.currentModel().getMonsterHP() - 1);
+                    currentMonster.currentModel().getMonsterHP() - .1 * damageMultiplier);
             System.out.println("you hit me for 1 health");
+            break;
+        case KNIFE:
+            currentMonster.currentModel().setMonsterHP(
+                    currentMonster.currentModel().getMonsterHP() - .7 * damageMultiplier);
+            System.out.println("you hit me for 7 health");
             break;
         default:
             break;
@@ -179,6 +186,32 @@ public class MazeView {
             removal.add(index);
             //getCurrent().getMonsterViews().remove(currentMonster);  //remove from the monsterview
             System.out.println("DEAD X_X");
+            inventoryView.addToInventory(currentMonster.getKnifeView());
+            //random potion rate
+            Random random = new Random();
+            int i = random.nextInt(3);
+            switch (i) {
+            case (0) :
+                //health
+                HealthPotionView healthPotion = new HealthPotionView(
+                        new Image("file:assets/inventory_items/health.png"));
+                inventoryView.addToInventory(healthPotion);
+                break;
+            case (1) :
+                //speed
+                SpeedPotionView speedPotion = new SpeedPotionView(
+                        new Image("file:assets/inventory_items/speed.png"));
+                inventoryView.addToInventory(speedPotion);
+                break;
+            case (2) :
+                //attack
+                AttackPotionView attackPotionView = new AttackPotionView(
+                        new Image("file:assets/inventory_items/attack.png"));
+                inventoryView.addToInventory(attackPotionView);
+                break;
+            default:
+                break;
+            }
         }
         for (int i : removal) {
             getCurrent().getMonsterViews().remove(i);

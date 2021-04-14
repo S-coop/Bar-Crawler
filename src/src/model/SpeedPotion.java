@@ -10,8 +10,8 @@ public class SpeedPotion {
      * @param duration the duration of the speed potion.
      */
     public SpeedPotion(double mult, int duration) {
-        this.mult = 2.5;
-        this.duration = 30;
+        this.mult = mult;
+        this.duration = duration;
     }
 
     /**

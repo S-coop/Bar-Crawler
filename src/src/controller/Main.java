@@ -8,11 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import src.model.Direction;
 import src.model.GameModel;
-import src.view.ConfigurationScreenScene;
-import src.view.DieScreen;
-import src.view.MazeView;
-import src.view.PlayerView;
-import src.view.WelcomeScreen;
+import src.view.*;
 import src.model.Weapon;
 
 public class Main extends Application {
@@ -24,6 +20,7 @@ public class Main extends Application {
     private final String[] weapons = {"Sword", "Gun", "Broken Bottle"};
     private PlayerView pV;
     private MazeView mV;
+    private InventoryView iV;
 
 
     @Override
@@ -99,9 +96,13 @@ public class Main extends Application {
             PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,
                     (double) height / 2, width, height, weapon, Direction.FRONT);
             this.pV = playerView; //for testing purposes
-            MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView);
+            Image inventoryImage = new Image("file:assets/inventory.png");
+            InventoryView inventoryView = new InventoryView(inventoryImage);
+            MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
             this.mV = maze;
-            PlayerController playerController = new PlayerController(mainWindow, playerView, maze);
+            this.iV = inventoryView;
+            PlayerController playerController =
+                    new PlayerController(mainWindow, playerView, maze, inventoryView);
             MazeController mazeController =
                     new MazeController(mainWindow, maze, playerView, gameModel);
             MonsterController monsterController
@@ -148,6 +149,9 @@ public class Main extends Application {
 
     public MazeView getMazeView() {
         return this.mV;
+    }
+    public InventoryView getInventoryView() {
+        return this.iV;
     }
     /**
      * Main method.
