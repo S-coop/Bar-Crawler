@@ -26,7 +26,7 @@ public class EmersonM5Tests extends ApplicationTest {
         write("username");
         clickOn("Let's go!");
         InventoryView inventoryView = controller.getInventoryView();
-        inventoryView.addToInventory(healthyBoy);
+        inventoryView.addToInventoryCodeOnly(healthyBoy);
         assertEquals(inventoryView.getItem(0), (healthyBoy));
     }
 
@@ -38,7 +38,7 @@ public class EmersonM5Tests extends ApplicationTest {
         write("username");
         clickOn("Let's go!");
         InventoryView inventoryView = controller.getInventoryView();
-        inventoryView.addToInventory(healthyBoy);
+        inventoryView.addToInventoryCodeOnly(healthyBoy);
         inventoryView.removeFromInventory(0);
         assertEquals(inventoryView.getItem(0), (null));
     }
