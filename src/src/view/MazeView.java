@@ -68,8 +68,15 @@ public class MazeView {
                 rng.nextInt(maxEnemies - minEnemies) + minEnemies,
                 layer);
 
+        //FINAL ROOM MONSTER WEE WOO
+        MonsterView finalBoss = new MonsterView(layer,
+                new Image("file:assets/enemies/standing/steven_deepfried.jpg"),
+                new Image("file:assets/enemies/hit/bouncer_hit.png"),
+                50, 50, true);
+        ArrayList<MonsterView> monsters2 = new ArrayList<>();
+        monsters2.add(finalBoss);
         im = bgModel.getTopRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters2, inventoryView);
         maze[0][cols - 1] = rm;
 
         monsters = MonsterView.generateMonsterViews(
