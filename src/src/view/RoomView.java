@@ -46,6 +46,9 @@ public class RoomView {
     private ArrayList<MonsterView> monsterViews;
     private InventoryView inventoryView;
 
+    private Pane monsterLayer;
+    private boolean isLocked;
+    private boolean challengeActivated;
     /**
      * initialize the variables for the Room screen.
      * @param width width of screen
@@ -72,9 +75,9 @@ public class RoomView {
         this.background = background;
         this.playerView = playerView;
         this.visited = false;
-
         this.monsterViews = monsterViews;
         this.inventoryView = inventoryView;
+        this.isLocked = false;
     }
 
     public RoomView(int width,
@@ -153,19 +156,20 @@ public class RoomView {
         StackPane stackScreen = new StackPane();
 
         // generate layer of monsters
-        Pane monsterLayer = new Pane();
+        this.monsterLayer = new Pane();
         for (MonsterView m : monsterViews) {
-            monsterLayer.getChildren().add(m.getImageView());
+            this.monsterLayer.getChildren().add(m.getImageView());
         }
         stackScreen.getChildren().addAll(background,
                 playerView.getLayer(),
-                monsterLayer,
+                this.monsterLayer,
                 borderPane);
 
 
         return new Scene(stackScreen, width, height);
     }
     public boolean hasVisited() {
+
         return visited;
     }
 
@@ -183,6 +187,30 @@ public class RoomView {
 
     public void setMonsterViews(ArrayList<MonsterView> monsterViews) {
         this.monsterViews = monsterViews;
+    }
+
+    public Pane getMonsterLayer() {
+        return this.monsterLayer;
+    }
+
+    public void lockDoors() {
+        isLocked = true;
+    }
+
+    public void unlockDoors() {
+        isLocked = false;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public boolean isChallengeActivated() {
+        return challengeActivated;
+    }
+
+    public void setChallengeActivated(boolean b) {
+        this.challengeActivated = b;
     }
 }
 

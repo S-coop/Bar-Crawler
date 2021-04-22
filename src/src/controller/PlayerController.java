@@ -3,6 +3,7 @@ package src.controller;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import src.model.Direction;
 import src.model.Weapon;
@@ -13,6 +14,7 @@ import src.view.ItemView;
 import src.view.MazeView;
 import src.view.MonsterView;
 import src.view.PlayerView;
+import src.view.RoomView;
 import src.view.SpeedPotionView;
 
 import java.util.ArrayList;
@@ -43,36 +45,48 @@ public class PlayerController {
                     player.changeDirection(Direction.BACK);
                     player.setDx(0);
                     player.setDy(-player.getModel().getDy());
-
                     System.out.println("up");
                     break;
                 case S:
                     player.changeDirection(Direction.FRONT);
                     player.setDx(0);
                     player.setDy(player.getModel().getDy());
-
                     System.out.println("down");
                     break;
                 case A:
                     player.changeDirection(Direction.LEFT);
                     player.setDx(-player.getModel().getDx());
                     player.setDy(0);
-
                     System.out.println("left");
                     break;
                 case D:
                     player.changeDirection(Direction.RIGHT);
                     player.setDx(player.getModel().getDx());
                     player.setDy(0);
-
                     System.out.println("right");
+                    break;
+                case C: //CHALLENGE ROOM ACCEPTANCE
+                    int r = maze.getRow();
+                    int c = maze.getCol();
+                    int nr = maze.getNumRows();
+                    int nc = maze.getNumCols();
+                    if ((r == 0 && c == 0) || (r == nr - 1 && c == 0)
+                        || (r == nr - 1 && c == nc - 1)) {
+                        RoomView curr = maze.getCurrent();
+                        if (!curr.isChallengeActivated()) {
+                            Pane layer = new Pane();
+                            curr.setMonsterViews(
+                                    MonsterView.generateMonsterViews(10, curr.getMonsterLayer()));
+                            curr.setChallengeActivated(true);
+                            curr.lockDoors(); //NO ESCAPE FROM CHALLENGE ROOM
+                        }
+                    }
                     break;
                 case SPACE:
                     player.getModel().incrementNumberAttacks();
                     player.attackSprite();
                     Direction direct = player.getDirection();
                     ArrayList<MonsterView> monsterList = (maze.getCurrent().getMonsterViews());
-                    //for (MonsterView monster : monsterList) {
                     for (int i = 0; i < monsterList.size(); i++) {
                         MonsterView monster = monsterList.get(i);
                         switch (direct) {

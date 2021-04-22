@@ -35,6 +35,23 @@ public class MazeController {
                 double centerX = playerView.getCenterX();
                 double centerY = playerView.getCenterY();
 
+                //CHALLENGE ROOM UNLOCK LOGIC
+                int r = mazeView.getRow();
+                int c = mazeView.getCol();
+                int nr = mazeView.getNumRows();
+                int nc = mazeView.getNumCols();
+                if ((r == 0 && c == 0)
+                        || (r == nr - 1 && c == 0)
+                        || (r == nr - 1 && c == nc - 1)) {
+                    //KILLED ALL MONSTERS
+                    if (mazeView.getCurrent().getMonsterViews().size() == 0) {
+                        mazeView.getCurrent().unlockDoors();
+                        playerView.getModel().setPlayerHP(playerView.getModel().getMaxHp());
+                        playerView.getProgressBar().setProgress(
+                                playerView.getModel().getPlayerHP());
+
+                    }
+                }
                 //right door
                 if (checkBounds(centerX, centerY, rightX, rightY, bufferRight, bufferRight)) {
                     System.out.println("right door");
@@ -69,6 +86,12 @@ public class MazeController {
                 if (checkBounds(centerX, centerY, topX, topY, bufferTop, bufferTop)) {
                     boolean noEnemies = mazeView.getCurrent().getMonsterViews().size() == 0;
                     if (mazeView.canMoveUp() && (noEnemies || mazeView.getUp().hasVisited())) {
+                        if (noEnemies) {
+                            System.out.println("THERE WERE NO ENEMIES");
+                        }
+                        if (mazeView.getUp().hasVisited()) {
+                            System.out.println("ROOM WAS VISITED");
+                        }
                         System.out.println("top door");
                         RoomView newRoom = mazeView.moveUp();
                         newRoom.setVisited(true);
