@@ -68,6 +68,7 @@ public class PlayerController {
                     System.out.println("right");
                     break;
                 case SPACE:
+                    player.getModel().incrementNumberAttacks();
                     player.attackSprite();
                     Direction direct = player.getDirection();
                     ArrayList<MonsterView> monsterList = (maze.getCurrent().getMonsterViews());
@@ -167,6 +168,7 @@ public class PlayerController {
         ItemView itemView = inventoryView.getItem(index);
         inventoryView.printItems();
         if (itemView != null) {
+            player.getModel().incrementNumberPotionsUsed();
             if (itemView.getType().equals("knife")) {
                 System.out.println("KNIFE");
                 if (player.getWeapon() != Weapon.KNIFE) {

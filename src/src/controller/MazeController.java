@@ -82,7 +82,12 @@ public class MazeController {
                         //display winScreen
                         System.out.println("yay");
                         atExit = true;
-                        EndScreen endScreen = new EndScreen(1920 / 2, 1080 / 2, gameModel);
+                        EndScreen endScreen =
+                                new EndScreen(1920 / 2,
+                                        1080 / 2,
+                                        gameModel,
+                                        playerView.getModel());
+
                         primaryStage.setScene(endScreen.getEndScene());
                         primaryStage.show();
                     }
