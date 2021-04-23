@@ -78,6 +78,8 @@ public class RoomView {
         this.monsterViews = monsterViews;
         this.inventoryView = inventoryView;
         this.isLocked = false;
+
+        this.monsterLayer = new Pane();
     }
 
     public RoomView(int width,

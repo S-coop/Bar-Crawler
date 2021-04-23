@@ -81,7 +81,6 @@ public class MonsterView {
                        Image hitSprite,
                        double x,
                        double y,
-
                        boolean isFinalBoss) {
         this(layer, standingSprite, hitSprite, x, y, 1980 / 2, 1080 / 2);
         if (isFinalBoss) {
