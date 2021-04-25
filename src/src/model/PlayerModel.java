@@ -11,6 +11,9 @@ public class PlayerModel {
     private double originalDx;
     private double originalDy;
     private double damageMultiplier;
+
+    private int numberAttacks;
+    private int numberPotionsUsed;
     /**
      * Player stat and attribute data constructor
      * @param hp the starting health points of the player
@@ -86,6 +89,22 @@ public class PlayerModel {
     }
     public double getDamageMultiplier() {
         return this.damageMultiplier;
+    }
+
+    public int getNumberAttacks() {
+        return numberAttacks;
+    }
+
+    public int getNumberPotionsUsed() {
+        return numberPotionsUsed;
+    }
+
+    public void incrementNumberAttacks() {
+        numberAttacks++;
+    }
+
+    public void incrementNumberPotionsUsed() {
+        numberPotionsUsed++;
     }
 }
 
