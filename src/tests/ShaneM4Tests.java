@@ -28,6 +28,7 @@ public class ShaneM4Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
         MonsterView monster = mV.get(0);
         PlayerView player = controller.getPlayerView();
@@ -44,13 +45,14 @@ public class ShaneM4Tests extends ApplicationTest {
         write("username");
         clickOn("Gun");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
         MonsterView monster = mV.get(0);
         PlayerView player = controller.getPlayerView();
         player.setX(monster.getX());
         player.setY(monster.getY());
-        monster.currentModel().setMonsterHP(1.0);
         Image alive = monster.getImageView().getImage();
+        monster.currentModel().setMonsterHP(0.0);
         press(KeyCode.SPACE);
         assertTrue(alive != monster.getImageView().getImage());
     }

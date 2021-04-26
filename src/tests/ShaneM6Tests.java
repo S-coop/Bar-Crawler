@@ -27,7 +27,7 @@ public class ShaneM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-
+        push(KeyCode.TAB);
         //Traverse to boss room
         controller.getMazeView().moveUp();
         controller.getMazeView().moveUp();
@@ -55,7 +55,7 @@ public class ShaneM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-
+        push(KeyCode.TAB);
         //Traverse to boss room
         controller.getMazeView().moveUp();
         controller.getMazeView().moveUp();
@@ -87,6 +87,7 @@ public class ShaneM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         controller.getMazeView().moveUp();
         controller.getMazeView().moveUp();
         controller.getMazeView().moveUp();
@@ -108,6 +109,7 @@ public class ShaneM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         controller.getMazeView().moveDown();
         controller.getMazeView().moveLeft();
         push(KeyCode.C);
