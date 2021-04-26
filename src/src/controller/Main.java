@@ -25,6 +25,7 @@ public class Main extends Application {
     private PlayerView pV;
     private MazeView mV;
     private InventoryView iV;
+    private HowToPlayScreen playScreen;
 
 
     @Override
@@ -61,7 +62,7 @@ public class Main extends Application {
 
     private void goToInitialScreen(ConfigurationScreenScene configScene) {
         //show How to Play
-        HowToPlayScreen playScreen = new HowToPlayScreen(width, height, gameModel, getPlayerView());
+        playScreen = new HowToPlayScreen(width, height, gameModel, getPlayerView());
         mainWindow.setScene(playScreen.getHowToPlayScreen());
         mainWindow.addEventHandler(KeyEvent.KEY_PRESSED, event->{
             if (event.getCode() == KeyCode.TAB) {
@@ -173,5 +174,9 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public HowToPlayScreen getPlayScreen() {
+        return playScreen;
     }
 }
