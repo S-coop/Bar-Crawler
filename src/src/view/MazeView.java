@@ -71,8 +71,8 @@ public class MazeView {
 
         //FINAL ROOM MONSTER WEE WOO
         MonsterView finalBoss = new MonsterView(layer,
-                new Image("file:assets/enemies/standing/steven_deepfried.jpg"),
-                new Image("file:assets/enemies/hit/bouncer_hit.png"),
+                new Image("file:assets/FinalBoss.gif"),
+                new Image("file:assets/FinalBoss.gif"),
                 50, 50, true);
 
         ArrayList<MonsterView> monsters2 = new ArrayList<>();
