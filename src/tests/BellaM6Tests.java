@@ -34,7 +34,8 @@ public class BellaM6Tests extends ApplicationTest {
         write("username");
         clickOn("Let's go!");
         press(KeyCode.TAB);
-        assertEquals(controller.getPlayerView().getFileName(), "file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
     }
 
 }

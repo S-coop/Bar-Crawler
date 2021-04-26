@@ -2,10 +2,8 @@ package src.controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -64,7 +62,7 @@ public class Main extends Application {
         //show How to Play
         playScreen = new HowToPlayScreen(width, height, gameModel, getPlayerView());
         mainWindow.setScene(playScreen.getHowToPlayScreen());
-        mainWindow.addEventHandler(KeyEvent.KEY_PRESSED, event->{
+        mainWindow.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
                 if (configScene.validateUsernameString()) {
                     gameModel.setUsername(configScene.getUsername());
@@ -81,26 +79,26 @@ public class Main extends Application {
                     Weapon weapon = Weapon.SWORD;
 
                     switch (weapons[(Integer) configScene.getWeaponIndex()]) {
-                        case "Sword":
-                            playerImage = new Image(
-                                    "file:assets/alex_sprites/sword/facing_front/"
-                                            + "standing/sword_front_standing.png");
-                            weapon = Weapon.SWORD;
-                            break;
-                        case "Gun":
-                            playerImage = new Image(
-                                    "file:assets/alex_sprites/gun/facing_front/"
-                                            + "standing/gun_front_standing.png");
-                            weapon = Weapon.GUN;
-                            break;
-                        case "Broken Bottle" :
-                            playerImage = new Image(
-                                    "file:assets/alex_sprites/broken_bottle/facing_front/"
-                                            + "standing/bottle_front_standing.png");
-                            weapon = Weapon.BOTTLE;
-                            break;
-                        default:
-                            break;
+                    case "Sword":
+                        playerImage = new Image(
+                                "file:assets/alex_sprites/sword/facing_front/"
+                                        + "standing/sword_front_standing.png");
+                        weapon = Weapon.SWORD;
+                        break;
+                    case "Gun":
+                        playerImage = new Image(
+                                "file:assets/alex_sprites/gun/facing_front/"
+                                        + "standing/gun_front_standing.png");
+                        weapon = Weapon.GUN;
+                        break;
+                    case "Broken Bottle" :
+                        playerImage = new Image(
+                                "file:assets/alex_sprites/broken_bottle/facing_front/"
+                                        + "standing/bottle_front_standing.png");
+                        weapon = Weapon.BOTTLE;
+                        break;
+                    default:
+                        break;
                     }
 
                     PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,
@@ -108,7 +106,8 @@ public class Main extends Application {
                     this.pV = playerView; //for testing purposes
                     Image inventoryImage = new Image("file:assets/inventory.png");
                     InventoryView inventoryView = new InventoryView(inventoryImage);
-                    MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
+                    MazeView maze =
+                            new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
                     this.mV = maze;
                     this.iV = inventoryView;
                     PlayerController playerController =
