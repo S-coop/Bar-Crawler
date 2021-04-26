@@ -23,6 +23,7 @@ public class SalM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         controller.getMazeView().moveDown();
         controller.getMazeView().moveLeft();
         System.out.println("size: "
@@ -35,6 +36,7 @@ public class SalM6Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         controller.getMazeView().moveDown();
         controller.getMazeView().moveLeft();
         push(KeyCode.C);

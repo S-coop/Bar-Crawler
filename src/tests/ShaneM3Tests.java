@@ -29,6 +29,7 @@ public class ShaneM3Tests extends ApplicationTest {
         clickOn("Start");
         write("Scoops");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         assertNotNull(controller.getPlayerView());
     }
 
@@ -37,6 +38,7 @@ public class ShaneM3Tests extends ApplicationTest {
         clickOn("Start");
         write("Scoops");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         assertNotNull(controller.getPlayerView().getImageView());
     }
 
@@ -45,6 +47,7 @@ public class ShaneM3Tests extends ApplicationTest {
         clickOn("Start");
         write("Scoops");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerView player = controller.getPlayerView();
         player.setX(rightX - bufferRight); //set location to known right door
         player.setY(rightY - bufferRight);
@@ -57,6 +60,7 @@ public class ShaneM3Tests extends ApplicationTest {
         clickOn("Start");
         write("Scoops");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerView player = controller.getPlayerView();
         player.setX(rightX - bufferRight); //set location to known right door
         player.setY(rightY - bufferRight);

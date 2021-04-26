@@ -1,6 +1,7 @@
 package tests;
 
 
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -26,6 +27,7 @@ public class SalM4Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
         assertTrue(mV.get(0).currentModel().getMonsterHP() != 0);
     }
@@ -35,6 +37,7 @@ public class SalM4Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerModel pm = controller.getPlayerView().getModel();
         assertTrue(pm.getPlayerHP() != 0);
     }

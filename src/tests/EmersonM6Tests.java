@@ -1,7 +1,6 @@
 package tests;
 
 
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class ShaneM4Tests extends ApplicationTest {
+public class EmersonM6Tests extends ApplicationTest {
     private Main controller;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,11 +23,16 @@ public class ShaneM4Tests extends ApplicationTest {
     }
 
     @Test
-    public void testMonstersCanBeDamaged() {
+    public void testPlayerDamagesBoss() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        push(KeyCode.TAB);
+        controller.getMazeView().moveUp();
+        controller.getMazeView().moveUp();
+        controller.getMazeView().moveUp();
+        controller.getMazeView().moveRight();
+        controller.getMazeView().moveRight();
+        controller.getMazeView().moveRight();           //moves to final boss room
         ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
         MonsterView monster = mV.get(0);
         PlayerView player = controller.getPlayerView();
@@ -40,21 +44,15 @@ public class ShaneM4Tests extends ApplicationTest {
     }
 
     @Test
-    public void testMonsterSpriteChangeOnDeath() {
+    public void testPlayerNoRoomChangeInChallenge() {
         clickOn("Start");
         write("username");
-        clickOn("Gun");
         clickOn("Let's go!");
-        push(KeyCode.TAB);
-        ArrayList<MonsterView> mV = controller.getMazeView().getCurrent().getMonsterViews();
-        MonsterView monster = mV.get(0);
-        PlayerView player = controller.getPlayerView();
-        player.setX(monster.getX());
-        player.setY(monster.getY());
-        Image alive = monster.getImageView().getImage();
-        monster.currentModel().setMonsterHP(0.0);
-        press(KeyCode.SPACE);
-        assertTrue(alive != monster.getImageView().getImage());
+        controller.getMazeView().moveDown();
+        controller.getMazeView().moveLeft();
+        push(KeyCode.C);
+        assertTrue(!controller.getMazeView().canMoveDown() && !controller.getMazeView().canMoveUp()
+                && !controller.getMazeView().canMoveLeft()
+                && !controller.getMazeView().canMoveRight());
     }
-
 }

@@ -2,6 +2,7 @@ package tests;
 
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -28,6 +29,7 @@ public class ShaneM5Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         HealthPotionView healthyBoy = new HealthPotionView(
                 new Image("file:assets/inventory_items/health.png"));
         //InventoryView inventoryView = controller.getInventoryView();
@@ -36,6 +38,8 @@ public class ShaneM5Tests extends ApplicationTest {
         double prevHP = player.getModel().getPlayerHP();
         healthyBoy.useItem(player);
         double postHP = player.getModel().getPlayerHP();
+        System.out.println("previous: " + prevHP);
+        System.out.println("post: " + postHP);
         assertTrue(prevHP == postHP);
     }
 
@@ -47,6 +51,7 @@ public class ShaneM5Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         HealthPotionView healthyBoy = new HealthPotionView(
                 new Image("file:assets/inventory_items/health.png"));
         //InventoryView inventoryView = controller.getInventoryView();

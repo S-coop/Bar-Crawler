@@ -1,5 +1,6 @@
 package tests;
 
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -21,6 +22,7 @@ public class SalM3Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerView pV = controller.getPlayerView();
         pV.setX(100);
         pV.setY(100);
@@ -33,6 +35,7 @@ public class SalM3Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerView pV = controller.getPlayerView();
         pV.setX(100); //set location to known value
         pV.setY(100);
@@ -49,6 +52,7 @@ public class SalM3Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        push(KeyCode.TAB);
         PlayerView pV = controller.getPlayerView();
         pV.setX(100); //set location to known value
         pV.setY(100);

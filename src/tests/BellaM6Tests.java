@@ -1,16 +1,18 @@
 package tests;
 
-
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import src.controller.Main;
-import src.view.InventoryView;
+import src.view.PlayerView;
 import static org.junit.Assert.*;
 
-public class SalM5Tests extends ApplicationTest {
+
+public class BellaM6Tests extends ApplicationTest {
     private Main controller;
+    private PlayerView playerView;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         controller = new Main();
@@ -19,25 +21,21 @@ public class SalM5Tests extends ApplicationTest {
     }
 
     @Test
-    public void testInventoryNotNull() {
+    public void testHowToPlayScreenAppears() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        push(KeyCode.TAB);
-        InventoryView inventoryView = controller.getInventoryView();
-        assertTrue(inventoryView != null);
+        assertEquals(controller.getPlayScreen().getFileName(), "file:assets/HowToPlay.png");
     }
 
     @Test
-    public void testInitialInventoryEmpty() {
+    public void testHowToPlayScreenTab() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
-        push(KeyCode.TAB);
-        InventoryView inventoryView = controller.getInventoryView();
-        for (int i = 0; i < 4; i++) {
-            assertTrue(inventoryView.getItem(i) == null);
-        }
+        press(KeyCode.TAB);
+        assertEquals(controller.getPlayerView().getFileName(),
+                "file:assets/alex_sprites/sword/facing_front/standing/sword_front_standing.png");
     }
 
 }

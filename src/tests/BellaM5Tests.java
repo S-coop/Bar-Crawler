@@ -2,6 +2,7 @@ package tests;
 
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -36,6 +37,7 @@ public class BellaM5Tests extends ApplicationTest {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
+        press(KeyCode.TAB);
 
         AttackPotionView hp = new AttackPotionView(
                 new Image("file:assets/inventory_items/health.png"));

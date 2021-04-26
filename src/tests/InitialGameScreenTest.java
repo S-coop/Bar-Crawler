@@ -13,6 +13,7 @@ public class InitialGameScreenTest extends ApplicationTest {
         Main controller = new Main();
         controller.start(primaryStage);
     }
+
     @Test
     public void testPlay1() {
         clickOn("Start");
