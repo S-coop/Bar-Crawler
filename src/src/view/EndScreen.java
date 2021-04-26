@@ -114,7 +114,7 @@ public class EndScreen {
                 new Text("username: " + gameModel.getUsername()),
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon()),
-                new Text("health points remaining: " + 0),
+                new Text("health points remaining: " + (int) (Math.round(playerModel.getPlayerHP() * 100))),
                 new Text("number of attacks dealt: "
                         + playerModel.getNumberAttacks()),  //player has died :(
                 new Text("number of potions used: " + playerModel.getNumberPotionsUsed())
