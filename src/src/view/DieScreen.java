@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import src.model.GameModel;
+import src.model.PlayerModel;
 
 
 public class DieScreen {
@@ -27,7 +28,7 @@ public class DieScreen {
     private GameModel gameModel;
     private int width;
     private int height;
-
+    private PlayerModel playerModel;
     //call with this
     //DieScreen DieScreen = new DieScreen(1920 / 2, 1080 / 2, gameModel);
     //primaryStage.setScene(endScreen.getEndScene());
@@ -39,8 +40,9 @@ public class DieScreen {
      * @param width width of the window
      * @param height height of the window
      * @param gameModel the game model containing player data
+     * @param playerModel playerModel of the player
      */
-    public DieScreen(int width, int height, GameModel gameModel) {
+    public DieScreen(int width, int height, GameModel gameModel, PlayerModel playerModel) {
         this.width = width;
         this.height = height;
         //ability to return to previous scene:
@@ -51,11 +53,13 @@ public class DieScreen {
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
+        this.playerModel = playerModel;
 
     }
 
     /**
      * Return the initialGameScene.
+     *
      * @return the initialGameScene.
      */
     public Scene getEndScene() {
@@ -112,10 +116,14 @@ public class DieScreen {
         newScreen.getChildren().addAll(
                 new Text("username: " + gameModel.getUsername()),
                 new Text("difficulty: " + gameModel.getDifficulty()),
-                new Text("weapon: " + gameModel.getWeapon())
+                new Text("weapon: " + gameModel.getWeapon()),
+                new Text("health points remaining: " + 0),
+                new Text("number of attacks dealt: "
+                        + playerModel.getNumberAttacks()),  //player has died :(
+                new Text("number of potions used: " + playerModel.getNumberPotionsUsed())
         );
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane);
+        stackScreen.getChildren().addAll(background, borderPane, newScreen);
 
         return new Scene(stackScreen, width, height);
     }

@@ -58,7 +58,7 @@ public class MonsterView {
                        double y,
                        double w,
                        double h) {
-        this.monstermodel = new MonsterModel0(.3, .1, 1);
+        this.monstermodel = new MonsterModel0(.3, .05, 1);
         this.layer = layer;
         this.standingSprite = standingSprite;
         this.hitSprite = hitSprite;
@@ -74,6 +74,19 @@ public class MonsterView {
 
         this.movable = false;
         addToLayer();
+    }
+
+    public MonsterView(Pane layer,
+                       Image standingSprite,
+                       Image hitSprite,
+                       double x,
+                       double y,
+                       boolean isFinalBoss) {
+        this(layer, standingSprite, hitSprite, x, y, 1980 / 2, 1080 / 2);
+        if (isFinalBoss) {
+            this.monstermodel = new MonsterModel0(1, .2, 1.5);
+
+        }
     }
 
     /**
@@ -151,13 +164,11 @@ public class MonsterView {
     }
 
     public void move() {
-        if (movable) {
-            if (0 + LEFT_BOARDER <= x + dx && x + dx < width - PLAYER_WIDTH - LEFT_BOARDER) {
-                x += dx;
-            }
-            if (0 + TOP_BOARDER <= y + dy && y + dy < height - PLAYER_HEIGHT - TOP_BOARDER) {
-                y += dy;
-            }
+        if (0 + LEFT_BOARDER <= x + dx && x + dx < width - PLAYER_WIDTH - LEFT_BOARDER) {
+            x += dx;
+        }
+        if (0 + TOP_BOARDER <= y + dy && y + dy < height - PLAYER_HEIGHT - TOP_BOARDER) {
+            y += dy;
         }
     }
 
