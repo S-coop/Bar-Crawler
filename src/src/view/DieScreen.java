@@ -113,7 +113,9 @@ public class DieScreen {
         bottomBar.getChildren().addAll(goBack, bottomSpace, weaponText);
         bottomBar.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(bottomBar);
-        newScreen.getChildren().addAll(
+
+        VBox textHolder = new VBox();
+        textHolder.getChildren().addAll(
                 new Text("username: " + gameModel.getUsername()),
                 new Text("difficulty: " + gameModel.getDifficulty()),
                 new Text("weapon: " + gameModel.getWeapon()),
@@ -122,8 +124,11 @@ public class DieScreen {
                         + playerModel.getNumberAttacks()),  //player has died :(
                 new Text("number of potions used: " + playerModel.getNumberPotionsUsed())
         );
+
+        StackPane layerTextOnBackground = new StackPane();
+        layerTextOnBackground.getChildren().addAll(background, textHolder);
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane, newScreen);
+        stackScreen.getChildren().addAll(layerTextOnBackground, borderPane);
 
         return new Scene(stackScreen, width, height);
     }
