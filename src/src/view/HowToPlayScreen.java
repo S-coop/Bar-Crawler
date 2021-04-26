@@ -29,4 +29,8 @@ public class HowToPlayScreen {
 
         return new Scene(background);
     }
+
+    public String getFileName() {
+        return "file:assets/HowToPlay.png";
+    }
 }
