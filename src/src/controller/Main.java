@@ -2,8 +2,12 @@ package src.controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import src.model.Direction;
@@ -56,70 +60,77 @@ public class Main extends Application {
     }
 
     private void goToInitialScreen(ConfigurationScreenScene configScene) {
-        if (configScene.validateUsernameString()) {
-            gameModel.setUsername(configScene.getUsername());
-            gameModel.setDifficulty(difficulties[
-                    (Integer) configScene.getDifficultyIndex()]);
-            gameModel.setWeapon(weapons[
-                    (Integer) configScene.getWeaponIndex()]);
-            gameModel.setDifficultyIndex(
-                    (Integer) configScene.getDifficultyIndex());
+        //show How to Play
+        HowToPlayScreen playScreen = new HowToPlayScreen(width, height, gameModel, getPlayerView());
+        mainWindow.setScene(playScreen.getHowToPlayScreen());
+        mainWindow.addEventHandler(KeyEvent.KEY_PRESSED, event->{
+            if (event.getCode() == KeyCode.TAB) {
+                if (configScene.validateUsernameString()) {
+                    gameModel.setUsername(configScene.getUsername());
+                    gameModel.setDifficulty(difficulties[
+                            (Integer) configScene.getDifficultyIndex()]);
+                    gameModel.setWeapon(weapons[
+                            (Integer) configScene.getWeaponIndex()]);
+                    gameModel.setDifficultyIndex(
+                            (Integer) configScene.getDifficultyIndex());
 
-            Pane playerLayer = new Pane();
-            //starting sprites
-            Image playerImage = new Image("file:assets/AlexFWD.png");
-            Weapon weapon = Weapon.SWORD;
+                    Pane playerLayer = new Pane();
+                    //starting sprites
+                    Image playerImage = new Image("file:assets/AlexFWD.png");
+                    Weapon weapon = Weapon.SWORD;
 
-            switch (weapons[(Integer) configScene.getWeaponIndex()]) {
-            case "Sword":
-                playerImage = new Image(
-                        "file:assets/alex_sprites/sword/facing_front/"
-                                + "standing/sword_front_standing.png");
-                weapon = Weapon.SWORD;
-                break;
-            case "Gun":
-                playerImage = new Image(
-                        "file:assets/alex_sprites/gun/facing_front/"
-                                + "standing/gun_front_standing.png");
-                weapon = Weapon.GUN;
-                break;
-            case "Broken Bottle" :
-                playerImage = new Image(
-                        "file:assets/alex_sprites/broken_bottle/facing_front/"
-                                + "standing/bottle_front_standing.png");
-                weapon = Weapon.BOTTLE;
-                break;
-            default:
-                break;
-            }
-
-            PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,
-                    (double) height / 2, width, height, weapon, Direction.FRONT);
-            this.pV = playerView; //for testing purposes
-            Image inventoryImage = new Image("file:assets/inventory.png");
-            InventoryView inventoryView = new InventoryView(inventoryImage);
-            MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
-            this.mV = maze;
-            this.iV = inventoryView;
-            PlayerController playerController =
-                    new PlayerController(mainWindow, playerView, maze, inventoryView);
-            MazeController mazeController =
-                    new MazeController(mainWindow, maze, playerView, gameModel);
-            MonsterController monsterController
-                    = new MonsterController(mainWindow, playerView, maze);
-            mainWindow.setScene(maze.getCurrent().getScene());
-            mainWindow.show();
-            AnimationTimer timer = new AnimationTimer() {
-                @Override
-                public void handle(long now) {
-                    //checking if player has died
-                    if (playerView.getModel().getPlayerHP() <= 0) {
-                        goToDieScreen(configScene, this);
+                    switch (weapons[(Integer) configScene.getWeaponIndex()]) {
+                        case "Sword":
+                            playerImage = new Image(
+                                    "file:assets/alex_sprites/sword/facing_front/"
+                                            + "standing/sword_front_standing.png");
+                            weapon = Weapon.SWORD;
+                            break;
+                        case "Gun":
+                            playerImage = new Image(
+                                    "file:assets/alex_sprites/gun/facing_front/"
+                                            + "standing/gun_front_standing.png");
+                            weapon = Weapon.GUN;
+                            break;
+                        case "Broken Bottle" :
+                            playerImage = new Image(
+                                    "file:assets/alex_sprites/broken_bottle/facing_front/"
+                                            + "standing/bottle_front_standing.png");
+                            weapon = Weapon.BOTTLE;
+                            break;
+                        default:
+                            break;
                     }
+
+                    PlayerView playerView = new PlayerView(playerLayer, (double) width / 2,
+                            (double) height / 2, width, height, weapon, Direction.FRONT);
+                    this.pV = playerView; //for testing purposes
+                    Image inventoryImage = new Image("file:assets/inventory.png");
+                    InventoryView inventoryView = new InventoryView(inventoryImage);
+                    MazeView maze = new MazeView(width, height, 5, 5, gameModel, playerView, inventoryView);
+                    this.mV = maze;
+                    this.iV = inventoryView;
+                    PlayerController playerController =
+                            new PlayerController(mainWindow, playerView, maze, inventoryView);
+                    MazeController mazeController =
+                            new MazeController(mainWindow, maze, playerView, gameModel);
+                    MonsterController monsterController
+                            = new MonsterController(mainWindow, playerView, maze);
+                    mainWindow.setScene(maze.getCurrent().getScene());
+                    mainWindow.show();
+                    AnimationTimer timer = new AnimationTimer() {
+                        @Override
+                        public void handle(long now) {
+                            //checking if player has died
+                            if (playerView.getModel().getPlayerHP() <= 0) {
+                                goToDieScreen(configScene, this);
+                            }
+                        }
+                    };
+                    timer.start();
                 }
-            };
-            timer.start();
-        }
+            }
+        });
     }
 
     private void goToDieScreen(ConfigurationScreenScene configScene, AnimationTimer timer) {
