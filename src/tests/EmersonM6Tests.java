@@ -52,6 +52,7 @@ public class EmersonM6Tests extends ApplicationTest {
         controller.getMazeView().moveLeft();
         push(KeyCode.C);
         assertTrue(!controller.getMazeView().canMoveDown() && !controller.getMazeView().canMoveUp()
-                && !controller.getMazeView().canMoveLeft() && !controller.getMazeView().canMoveRight());
+                && !controller.getMazeView().canMoveLeft()
+                && !controller.getMazeView().canMoveRight());
     }
 }
