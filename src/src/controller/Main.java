@@ -112,8 +112,17 @@ public class Main extends Application {
                     this.iV = inventoryView;
                     PlayerController playerController =
                             new PlayerController(mainWindow, playerView, maze, inventoryView);
-                    MazeController mazeController =
-                            new MazeController(mainWindow, maze, playerView, gameModel);
+                    EndScreen endScreen =
+                    new EndScreen(1920 / 2,
+                            1080 / 2,
+                            gameModel,
+                            playerView.getModel());
+            endScreen.getGoBackButton().setOnAction(actionEvent1 -> {
+                goToConfigScreen();
+            });
+            MazeController mazeController =
+                    new MazeController(mainWindow, maze, playerView, gameModel, endScreen);
+            
                     MonsterController monsterController
                             = new MonsterController(mainWindow, playerView, maze);
                     mainWindow.setScene(maze.getCurrent().getScene());
