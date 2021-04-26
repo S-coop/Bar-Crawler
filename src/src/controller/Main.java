@@ -132,8 +132,11 @@ public class Main extends Application {
                     (Integer) configScene.getWeaponIndex()]);
             gameModel.setDifficultyIndex(
                     (Integer) configScene.getDifficultyIndex());
+
             DieScreen screen = new DieScreen(
-                    width, height, gameModel);
+                    width, height, gameModel, pV.getModel());
+
+
             screen.getGoBackButton().setOnAction(actionEvent1 -> {
                 goToConfigScreen();
             });

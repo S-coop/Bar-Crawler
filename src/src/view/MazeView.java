@@ -57,19 +57,28 @@ public class MazeView {
                         rng.nextInt(maxEnemies - minEnemies) + minEnemies,
                         layer);
 
+        ArrayList<MonsterView> noMonsters = new ArrayList<>();
         BackgroundModel bgModel = new BackgroundModel(2);
         // corners
         Image im = bgModel.getTopLeftBackground();
         RoomView rm = new RoomView(
-                width, height, gameModel, im, playerView, monsters, inventoryView);
+                width, height, gameModel, im, playerView, noMonsters, inventoryView);
         maze[0][0] = rm;
 
         monsters = MonsterView.generateMonsterViews(
                 rng.nextInt(maxEnemies - minEnemies) + minEnemies,
                 layer);
 
+        //FINAL ROOM MONSTER WEE WOO
+        MonsterView finalBoss = new MonsterView(layer,
+                new Image("file:assets/enemies/standing/steven_deepfried.jpg"),
+                new Image("file:assets/enemies/hit/bouncer_hit.png"),
+                50, 50, true);
+
+        ArrayList<MonsterView> monsters2 = new ArrayList<>();
+        monsters2.add(finalBoss);
         im = bgModel.getTopRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        rm = new RoomView(width, height, gameModel, im, playerView, monsters2, inventoryView);
         maze[0][cols - 1] = rm;
 
         monsters = MonsterView.generateMonsterViews(
@@ -77,7 +86,7 @@ public class MazeView {
                 layer);
 
         im = bgModel.getBottomRightBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        rm = new RoomView(width, height, gameModel, im, playerView, noMonsters, inventoryView);
         maze[rows - 1][cols - 1] = rm;
 
         monsters = MonsterView.generateMonsterViews(
@@ -85,7 +94,7 @@ public class MazeView {
                 layer);
 
         im = bgModel.getBottomLeftBackground();
-        rm = new RoomView(width, height, gameModel, im, playerView, monsters, inventoryView);
+        rm = new RoomView(width, height, gameModel, im, playerView, noMonsters, inventoryView);
         maze[rows - 1][0] = rm;
 
 
@@ -223,16 +232,16 @@ public class MazeView {
     }
 
     public boolean canMoveRight() {
-        return col + 1 < cols;
+        return !current.isLocked() && col + 1 < cols;
     }
     public boolean canMoveLeft() {
-        return col - 1 >= 0;
+        return !current.isLocked() && col - 1 >= 0;
     }
     public boolean canMoveUp() {
-        return row - 1 >= 0;
+        return !current.isLocked() && row - 1 >= 0;
     }
     public boolean canMoveDown() {
-        return row + 1 < rows;
+        return !current.isLocked() && row + 1 < rows;
     }
     public RoomView moveRight() {
         // System.out.println("(" + row + "," + col + ")");
@@ -300,4 +309,11 @@ public class MazeView {
         return maze[row + 1][col];
     }
 
+    public int getNumRows() {
+        return rows;
+    }
+
+    public int getNumCols() {
+        return cols;
+    }
 }

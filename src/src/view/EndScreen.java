@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import src.model.GameModel;
+import src.model.PlayerModel;
 
 
 public class EndScreen {
@@ -27,6 +28,7 @@ public class EndScreen {
     private GameModel gameModel;
     private int width;
     private int height;
+    private PlayerModel playerModel;
 
     /**
      * Initialize all the variables needed to make an exit screen.
@@ -34,8 +36,9 @@ public class EndScreen {
      * @param width width of the window
      * @param height height of the window
      * @param gameModel the game model containing player data
+     * @param playerModel playerModel of the player
      */
-    public EndScreen(int width, int height, GameModel gameModel) {
+    public EndScreen(int width, int height, GameModel gameModel, PlayerModel playerModel) {
         this.width = width;
         this.height = height;
         //ability to return to previous scene:
@@ -46,6 +49,7 @@ public class EndScreen {
         this.money = moneyConstant / (gameModel.getDifficultyIndex() + 1);
 
         this.gameModel = gameModel;
+        this.playerModel = playerModel;
 
     }
 
@@ -107,10 +111,14 @@ public class EndScreen {
         newScreen.getChildren().addAll(
                 new Text("username: " + gameModel.getUsername()),
                 new Text("difficulty: " + gameModel.getDifficulty()),
-                new Text("weapon: " + gameModel.getWeapon())
+                new Text("weapon: " + gameModel.getWeapon()),
+                new Text("health points remaining: "
+                        + (int) (Math.round(playerModel.getPlayerHP() * 100))),
+                new Text("number of attacks dealt: " + playerModel.getNumberAttacks()),
+                new Text("number of potions used: " + playerModel.getNumberPotionsUsed())
         );
         StackPane stackScreen = new StackPane();
-        stackScreen.getChildren().addAll(background, borderPane);
+        stackScreen.getChildren().addAll(background, borderPane, newScreen);
 
         return new Scene(stackScreen, width, height);
     }

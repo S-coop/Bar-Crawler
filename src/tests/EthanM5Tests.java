@@ -1,3 +1,4 @@
+
 package tests;
 
 
@@ -9,7 +10,7 @@ import src.controller.Main;
 import src.view.*;
 import static org.junit.Assert.*;
 
-public class EmersonM5Tests extends ApplicationTest {
+public class EthanM5Tests extends ApplicationTest {
     private Main controller;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -18,7 +19,7 @@ public class EmersonM5Tests extends ApplicationTest {
         primaryStage.show();
     }
     @Test
-    public void testInventoryItemAtCorrectLocation() {
+    public void testAddDuplicateInventory() {
         HealthPotionView healthyBoy = new HealthPotionView(
                 new Image("file:assets/inventory_items/health.png"));
 
@@ -27,19 +28,19 @@ public class EmersonM5Tests extends ApplicationTest {
         clickOn("Let's go!");
         InventoryView inventoryView = controller.getInventoryView();
         inventoryView.addToInventoryCodeOnly(healthyBoy);
-        assertEquals(inventoryView.getItem(0), (healthyBoy));
+        inventoryView.addToInventoryCodeOnly(healthyBoy);
+
+        assertEquals(inventoryView.getCurrentSize(), 1);
+
     }
 
     @Test
-    public void testInventoryRemove() {
-        HealthPotionView healthyBoy = new HealthPotionView(
-                new Image("file:assets/inventory_items/health.png"));
+    public void testEmptyInventoryRemove() {
         clickOn("Start");
         write("username");
         clickOn("Let's go!");
         InventoryView inventoryView = controller.getInventoryView();
-        inventoryView.addToInventoryCodeOnly(healthyBoy);
         inventoryView.removeFromInventory(0);
-        assertEquals(inventoryView.getItem(0), (null));
+        assertEquals(inventoryView.getCurrentSize(), 0);
     }
 }
